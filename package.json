@@ -22,7 +22,9 @@
   "license": "MIT",
   "dependencies": {
     "mocha": "^2.4.5",
+    "path": "^0.12.7",
     "pegjs": "^0.10.0",
+    "solc": "^0.4.20",
     "yargs": "^4.6.0"
   },
   "devDependencies": {
