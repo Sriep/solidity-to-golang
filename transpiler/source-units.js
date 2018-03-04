@@ -1,85 +1,36 @@
-const path = require("path");
-const assert = require('assert');
-const history = require('./history.js');
+'use strict';
+const assert = require("assert");
+const gc = require("./gc.js");
+const history = require("./history.js");
+const sourceElements = require("./source-elements.js");
 
 module.exports = {
 
-    compileToGoToFile: function(ast, outputFile) {
-        let data = this.compileToGo(ast);
-        if(outputFile == null ||  outputFile ==='') {
-            //ouput to stdout,
-            return console.log(data)
-        }
-        let fs = require('fs');
-        fs.writeFile(path.resolve(outputFile), data, function(err) {
-            if(err) {
-                return console.log(err);
-            }
-
-            console.log("The file was saved!");
-        });
-    },
-
-    compileToGo: function(ast) {
-        let output = this.codeProgram(ast);
-
-        console.log(JSON.stringify(ast, null, 2));
-        return output;
-    },
-
-    codeProgram: function(node) {
-        if(node === undefined) {
-            console.log("undefined");
-            return;
-        }
-        if(node instanceof Array) {
-            console.log("Not a program");
-            console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
-            return;
-        }
-        if (node.type === "Program") {
-            console.log("Found valid solidity program");
-            let gcCode = "package main\n\n";
-            newGoCode =  this.codeSourceUnitsArray(node.body);
-            if (newGoCode !== undefined) {
-                gcCode += newGoCode;
-                gcCode += "\nfunc main() {\n}\n";
-                return gcCode;
-            }
-        } else {
-            console.log("Not a program");
-            console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
-        }
-    },
-
-    codeSourceUnitsArray: function(node) {
+    code: function(node) {
         if (node instanceof Array) {
             console.log("Source units array found.");
             let goCode = "";
             for (let item of node) {
                 console.log("Contract type item-" + item);
-                newGoCode = this.codeSourceUnit(item, history);
-                if (newGoCode === undefined) {
-                    console.log("Failed compulation");
-                    return;
-                }
-                goCode += newGoCode;
+                goCode += this.codeUnit(item, history);
+                assert(goCode !== undefined);
             }
             return goCode
         } else {
             console.log("No source units array found.");
             console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
+            throw(new Error("No source units array found."));
         }
     },
 
-    codeSourceUnit: function(node, history) {
+    codeUnit: function(node, history) {
         if(node === undefined) {
             console.log("Undefined source unit");
-            return;
+            throw (new Error("Use of undefined source unit"));
         }
         if(node instanceof Array) {
             console.log("Unexpeted array instead of source unit");
-            return;
+            throw (new Error("Unexpeted array instead of source unit"));
         }
         console.log("Source unit-" + node.type + ' start-' + node.start + ' end-' + node.end);
         switch (node.type) {
@@ -93,13 +44,11 @@ module.exports = {
                 return this.codeLibrary(node, history);
             case "InportStatement":
                 console.log("Inport command not supported. Flatten code first.");
-                console.log("Will try ignoring the inport stament.");
                 console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
-                return;
+                throw (new Error("Inport command not supported. Flatten code first."));
             default:
                 console.log("unexpected type- " + node.type + " start-" + node.start);
-                console.log("Will try ignoring.");
-                return;
+                throw (new Error("Unrecognised source unit found."));
         }
     },
 
@@ -130,7 +79,7 @@ module.exports = {
         console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
         if (node.name === undefined ||  node.name === "") {
             console.log("No contract name");
-            return;
+            throw (new Error("No contarct name"));
         }
 
         let goCode = "\n";
@@ -146,9 +95,9 @@ module.exports = {
         }
         history.addContract(node);
 
-        //Body gets done here.
-
-        goCode += "}\n\n";
+        goCode += sourceElements.code(node.body, history, gc.SrcUnitContract);
+        goCode += "\n}\n";
+        assert(goCode !== undefined);
         return goCode;
     },
 
@@ -158,7 +107,7 @@ module.exports = {
         console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
         if (node.name === undefined ||  node.name === "") {
             console.log("No interface name");
-            return;
+            throw (new Error("No interface name"));
         }
 
         let goCode = "\n";
@@ -166,9 +115,9 @@ module.exports = {
 
         history.addInterface(node);
 
-        //Body gets done here.
-
-        goCode += "}\n\n";
+        goCode += sourceElements.code(node.body, history, gc.SrcUnitInterface);
+        goCode += "\n}\n";
+        assert(goCode !== undefined);
         return goCode;
     },
 
@@ -177,8 +126,7 @@ module.exports = {
         assert(!(node instanceof Array));
         console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
         if (node.name === undefined ||  node.name === "") {
-            console.log("No interface name");
-            return;
+            throw (new Error("No library name"));
         }
 
         let goCode = "\n";
@@ -186,9 +134,9 @@ module.exports = {
 
         history.addLibrary(node);
 
-        //Body gets done here.
-
-        goCode += "}\n\n";
+        goCode += sourceElements.code(node.body, history, gc.SrcUnitLibrary);
+        goCode += "\n}\n";
+        assert(goCode !== undefined);
         return goCode;
     }
 
