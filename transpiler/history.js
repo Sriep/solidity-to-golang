@@ -1,4 +1,5 @@
 const assert = require("assert");
+const dic = require("./soltogo-dictionary");
 
 module.exports = {
 
@@ -11,16 +12,32 @@ module.exports = {
     sourceUnits: new Map(),
     emptyContract: {
         type: "contract",
-        declarations: new Map(),
+        varDec: new Map(),
+        typeDec: new Map(),
         bases: []
     },
     emptyInterface: {
         type: "interface",
-        declarations: new Map()
+        varDec: new Map(),
+        typeDec: new Map()
     },
     emptyLibrary: {
         type: "contract",
-        declarations: new Map()
+        varDec: new Map(),
+        typeDec: new Map()
+    },
+
+    expandType: function(typeName, parent) {
+        if (dic.valueTypes.has(typeName)) {
+            return dic.valueTypes.get(typeName);
+        } else {
+            assert(this.sourceUnits.has(parent));
+            if (this.sourceUnits.get(parent).has(typeName)) {
+                return this.sourceUnits.get(parent).get(typeName);
+            } else {
+                throw(new Error("used unfimilar type " + typeName + " in " + parent));
+            }
+        }
     },
 
     validInheritance: function(bases) {
@@ -82,11 +99,11 @@ module.exports = {
             console.log("state variable identifier " + name + " shadows previous declaration");
         }
 
-        assert(this.sourceUnits.get(name).declarations);
-        if (this.sourceUnits.get(name).declarations.has(node.name)) {
+        assert(this.sourceUnits.get(name).varDec);
+        if (this.sourceUnits.get(name).varDec.has(node.name)) {
             throw(new Error("state variable identifier " + name + " already used in " + name));
         }
-        this.sourceUnits.get(name).declarations.set(node.name, node);
+        this.sourceUnits.get(name).varDec.set(node.name, node);
         this.identifiersInSU.add(node.name);
     }
 };

@@ -1,37 +1,33 @@
 'use strict';
 const assert = require("assert");
-const dic = require("./soltogo-dictionary");
-
 
 module.exports = {
     defaultArraySize: 10,
 
-    code: function(node, history, name) {
+    code: function(node, history, parent) {
         assert(node);
         assert(!(node instanceof Array));
 
-        if (node.literal.literal.type === "MappingExpression") {
-            return "\t// mapping expressions not implemented";
-        }
-
+        let tags = " `";
         let goCode = "\t";
-        goCode +=  node.name;
-        goCode += this.arrayPart(node.literal.array_parts);
-        goCode += " " + dic.valueTypes.get(node.literal.literal);
-        goCode += this.tags(node);
-        history.addStateVariable(node, name);
-
-        return goCode;
-    },
-
-    tags: function(node) {
-        let tag = " ";
-        if (node.is_constant) {
-            if (node.value ===  null)
-                throw(new Error("Uninitialized constant variable " + node.name));
-            tag += "`is-constant:\"true\"`";
+        if (node.is_constant)
+            tags += "is-constant:\"\" ";
+        if (node.literal.literal.type === "MappingExpression") {
+            goCode += " map [";
+            tags += "type-from:\"" + node.literal.literal.from.literal +"\"";
+            goCode += history.expandType(node.literal.literal.from.literal, parent);
+            goCode += "] ";
+            tags += " type-to:\"" + node.literal.literal.to.literal +"\"";
+            goCode += history.expandType(node.literal.literal.to.literal, parent);
+        } else {
+            goCode +=  node.name;
+            tags += "type:\"" + node.literal.literal +"\"";
+            goCode += " " + this.arrayPart(node.literal.array_parts);
+            goCode += history.expandType(node.literal.literal, parent);
         }
-        return tag;
+        goCode += tags + "`\n";
+        history.addStateVariable(node, parent);
+        return goCode;
     },
 
     arrayPart: function(dimensions) {

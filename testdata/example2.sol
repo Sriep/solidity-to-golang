@@ -52,7 +52,7 @@ contract APRInflationToken is StandardToken, Ownable {
     }
 
     uint numCampaigns;
-    mapping (uint => Campaign) campaigns;
+    //mapping (uint => Campaign) campaigns;
     //events
     event NewRequest(uint);
 
