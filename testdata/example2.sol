@@ -47,12 +47,12 @@ contract APRInflationToken is StandardToken, Ownable {
         address beneficiary;
         uint fundingGoal;
         uint numFunders;
-        uint amount;
+        uint amount2;
         mapping (uint => Funder) funders;
     }
 
     uint numCampaigns;
-    //mapping (uint => Campaign) campaigns;
+    mapping (uint => Campaign) campaigns;
     //events
     event NewRequest(uint);
 

@@ -27,13 +27,28 @@ module.exports = {
         typeDec: new Map()
     },
 
+    addType: function(newType, parent, goCode) {
+        assert(parent && this.sourceUnits.has(parent));
+
+        if (dic.valueTypes.has(newType))
+            throw(new Error(newType + " already defined basic type"));
+
+        if (!this.sourceUnits.get(parent).typeDec.has(newType)) {
+            goCode = goCode.replace(/\t/g,"");
+            goCode = goCode.replace(/\n/g,"");
+            this.sourceUnits.get(parent).typeDec.set(newType, goCode);
+        } else {
+            throw(new Error( newType + " already declared in " + parent));
+        }
+    },
+
     expandType: function(typeName, parent) {
         if (dic.valueTypes.has(typeName)) {
             return dic.valueTypes.get(typeName);
         } else {
             assert(this.sourceUnits.has(parent));
-            if (this.sourceUnits.get(parent).has(typeName)) {
-                return this.sourceUnits.get(parent).get(typeName);
+            if (this.sourceUnits.get(parent).typeDec.has(typeName)) {
+                return this.sourceUnits.get(parent).typeDec.get(typeName);
             } else {
                 throw(new Error("used unfimilar type " + typeName + " in " + parent));
             }
@@ -88,9 +103,9 @@ module.exports = {
         this.identifiersSU.add(node.name);
     },
 
-    addStateVariable: function(node, name) {
-        if (!this.sourceUnits.has(name))
-            throw(new Error("can not find source unit " + name));
+    addStateVariable: function(node, parent) {
+        if (!this.sourceUnits.has(parent))
+            throw(new Error("can not find source unit " + parent));
 
         if (this.identifiersSU.has(node.name)) {
             throw(new Error("state variable identifier " + name + " already used for storage unit."));
@@ -99,11 +114,11 @@ module.exports = {
             console.log("state variable identifier " + name + " shadows previous declaration");
         }
 
-        assert(this.sourceUnits.get(name).varDec);
-        if (this.sourceUnits.get(name).varDec.has(node.name)) {
-            throw(new Error("state variable identifier " + name + " already used in " + name));
+        assert(this.sourceUnits.get(parent).varDec);
+        if (this.sourceUnits.get(parent).varDec.has(node.name)) {
+            throw(new Error("state variable identifier " + node.name + " already used in " + parent));
         }
-        this.sourceUnits.get(name).varDec.set(node.name, node);
+        this.sourceUnits.get(parent).varDec.set(node.name, node);
         this.identifiersInSU.add(node.name);
     }
 };

@@ -8,26 +8,26 @@ module.exports = {
         assert(node);
         assert(!(node instanceof Array));
 
-        let tags = " `";
+        //let tags = " `";
         let goCode = "\t";
-        if (node.is_constant)
-            tags += "is-constant:\"\" ";
+        //if (node.is_constant)
+            //tags += "is-constant:\"\" ";
         if (node.literal.literal.type === "MappingExpression") {
-            goCode += " map [";
-            tags += "type-from:\"" + node.literal.literal.from.literal +"\"";
+            goCode += node.name + " map [";
+           // tags += "type-from:\"" + node.literal.literal.from.literal +"\"";
             goCode += history.expandType(node.literal.literal.from.literal, parent);
             goCode += "] ";
-            tags += " type-to:\"" + node.literal.literal.to.literal +"\"";
+            //tags += " type-to:\"" + node.literal.literal.to.literal +"\" ";
             goCode += history.expandType(node.literal.literal.to.literal, parent);
         } else {
             goCode +=  node.name;
-            tags += "type:\"" + node.literal.literal +"\"";
+            //tags += "type:\"" + node.literal.literal +"\" ";
             goCode += " " + this.arrayPart(node.literal.array_parts);
             goCode += history.expandType(node.literal.literal, parent);
         }
-        goCode += tags + "`\n";
+        //goCode += tags + "location:\"storage\"`";
         history.addStateVariable(node, parent);
-        return goCode;
+        return goCode + "\n";
     },
 
     arrayPart: function(dimensions) {
