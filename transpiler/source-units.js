@@ -95,7 +95,7 @@ module.exports = {
         }
         history.addContract(node);
 
-        goCode += sourceElements.code(node.body, history, gc.SrcUnitContract);
+        goCode += sourceElements.code(node.body, history, gc.SrcUnitContract, node.name);
         goCode += "\n}\n";
         assert(goCode !== undefined);
         return goCode;
@@ -115,7 +115,7 @@ module.exports = {
 
         history.addInterface(node);
 
-        goCode += sourceElements.code(node.body, history, gc.SrcUnitInterface);
+        goCode += sourceElements.code(node.body, history, gc.SrcUnitInterface, node.name);
         goCode += "\n}\n";
         assert(goCode !== undefined);
         return goCode;
@@ -134,7 +134,7 @@ module.exports = {
 
         history.addLibrary(node);
 
-        goCode += sourceElements.code(node.body, history, gc.SrcUnitLibrary);
+        goCode += sourceElements.code(node.body, history, gc.SrcUnitLibrary, node.name);
         goCode += "\n}\n";
         assert(goCode !== undefined);
         return goCode;

@@ -13,32 +13,32 @@ module.exports = {
 
 
 
-    code: function(nodeArray, history, unitType) {
+    code: function(nodeArray, history, unitType, name) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
         let goCode = "";
         for (let node of nodeArray) {
-            goCode += this.codeElement(node, history, unitType) + "\n";
+            goCode += this.codeElement(node, history, unitType, name) + "\n";
             console.log("Added elemnet code now\n" + goCode );
             assert(goCode !== undefined, "coding element");
         }
         return goCode;
     },
 
-    codeElement: function(node, history, unitType) {
+    codeElement: function(node, history, unitType, name) {
         assert(node, "missing node");
         assert(!(node instanceof Array), "unexpected node array");
 
         switch (node.type) {
         case "StateVariableDeclaration":
             if (unitType === gc.SrcUnitContract || unitType === gc.SrcUnitLibrary) {
-                return stateVariableDeclare.code(node, history, unitType);
+                return stateVariableDeclare.code(node, history,  name);
             } else {
                 throw (new Error(unitType + " cannot have state variables declarations"));
             }
         case "EnumDeclaration":
             if (unitType === gc.SrcUnitContract || unitType === gc.SrcUnitLibrary) {
-                return enumDeclare.code(node, history, unitType);
+                return enumDeclare.code(node, history,  name);
             } else {
                 throw (new Error(unitType + " cannot have enum declaraions"));
             }
@@ -46,13 +46,13 @@ module.exports = {
             if (unitType === gc.SrcUnitContract
                 || unitType === gc.SrcUnitLibrary
                 || unitType === gc.SrcUnitInterface) {
-                return eventDeclare.code(node, history, unitType);
+                return eventDeclare.code(node, history,  name);
             } else {
                 throw (new Error(unitType + " cannot have event declarations"));
             }
         case "StructDeclaration":
             if (unitType === gc.SrcUnitContract || unitType === gc.SrcUnitLibrary) {
-                return structDeclare.code(node, history, unitType);
+                return structDeclare.code(node, history,  name);
             } else {
                 throw (new Error(unitType + " cannot have struct declarations"));
             }
@@ -60,7 +60,7 @@ module.exports = {
             if (unitType === gc.SrcUnitContract
                 || unitType === gc.SrcUnitLibrary
                 || unitType === gc.SrcUnitInterface) {
-                return modifierDeclare.code(node, history, unitType);
+                return modifierDeclare.code(node, history,  name);
             } else {
                 throw (new Error(unitType + " cannot have modifier declarations"));
             }
@@ -68,7 +68,7 @@ module.exports = {
             if (unitType === gc.SrcUnitContract
                 || unitType === gc.SrcUnitLibrary
                 || unitType === gc.SrcUnitInterface) {
-                return functionDeclare.code(node, history, unitType);
+                return functionDeclare.code(node, history,  name);
             } else {
                 throw (new Error(unitType + " cannot have function declarations"));
             }
@@ -76,7 +76,7 @@ module.exports = {
             if (unitType === gc.SrcUnitContract
                 || unitType === gc.SrcUnitLibrary
                 || unitType === gc.SrcUnitInterface) {
-                return usingDeclare.code(node, history, unitType);
+                return usingDeclare.code(node, history,  name);
             } else {
                 throw (new Error(unitType + " cannot have using statments"));
             }
