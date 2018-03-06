@@ -33,9 +33,9 @@ contract APRInflationToken is StandardToken, Ownable {
     mapping(address => uint) public balances;
 
     //enum
-    //enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
-    //ActionChoices choice;
-    //ActionChoices constant defaultChoice = ActionChoices.GoStraight;
+    enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+    ActionChoices choice;
+    ActionChoices constant defaultChoice = ActionChoices.GoStraight;
 
     // Defines a new type with two fields.
     struct Funder {

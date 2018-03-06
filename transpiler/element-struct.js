@@ -15,6 +15,8 @@ module.exports = {
 
         // Type declarations we just store the declaration code for use later.
         history.addType(node.name, parent, goCode);
-        return "";
+
+        console.log("Declared structure" + node.name +"\n" + goCode);
+        return "//Declared structure" + node.name +"\n";
     }
 };
