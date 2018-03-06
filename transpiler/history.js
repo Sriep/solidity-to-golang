@@ -10,47 +10,17 @@ module.exports = {
     identifiersInSU: new Set(),
 
     sourceUnits: new Map(),
-    emptyContract: {
-        type: "contract",
-        varDec: new Map(),
-        typeDec: new Map(),
-        bases: []
-    },
-    emptyInterface: {
-        type: "interface",
-        varDec: new Map(),
-        typeDec: new Map()
-    },
-    emptyLibrary: {
-        type: "contract",
-        varDec: new Map(),
-        typeDec: new Map()
-    },
-
-    addType: function(newType, parent, goCode) {
-        assert(parent && this.sourceUnits.has(parent));
-
-        if (dic.valueTypes.has(newType))
-            throw(new Error(newType + " already defined basic type"));
-
-        if (!this.sourceUnits.get(parent).typeDec.has(newType)) {
-            goCode = goCode.replace(/\t/g,"");
-            goCode = goCode.replace(/\n/g,"");
-            this.sourceUnits.get(parent).typeDec.set(newType, goCode);
-        } else {
-            throw(new Error( newType + " already declared in " + parent));
-        }
-    },
 
     expandType: function(typeName, parent) {
         if (dic.valueTypes.has(typeName)) {
             return dic.valueTypes.get(typeName);
         } else {
             assert(this.sourceUnits.has(parent));
-            if (this.sourceUnits.get(parent).typeDec.has(typeName)) {
-                return this.sourceUnits.get(parent).typeDec.get(typeName);
+            if (this.sourceUnits.get(parent).identifiers.has(typeName)) {
+                let typeNode = this.sourceUnits.get(parent).identifiers.get(typeName);
+                return typeNode.name + "_" + parent;
             } else {
-                throw(new Error("used unfimilar type " + typeName + " in " + parent));
+                throw(new Error("used unknown type " + typeName + " in " + parent));
             }
         }
     },
@@ -62,8 +32,7 @@ module.exports = {
                 let nextBase = this.sourceUnits.get(bases[i].name);
                 if (nextBase.type !== "contract" && nextBase.type !== "interface")
                     throw( new Error("Base is not a contract or an interface"));
-                for ( let j in nextBase.bases) {
-                    let baseBase = nextBase.bases[j];
+                for ( let baseBase of nextBase.bases) {
                     for ( let k = i+1 ; k < bases.length ; k++ ) {
                         if (baseBase === bases[k].name) {
                             throw( new Error("Linearization of inheritance graph impossible"));
@@ -82,8 +51,14 @@ module.exports = {
         if (this.sourceUnits.has(node.name))
             throw(new Error("Contract identifier " + node.name + " already used"));
 
-        this.sourceUnits.set(node.name, this.emptyContract);
+        this.sourceUnits.set(node.name, {});
+        this.sourceUnits.get(node.name).type = "contract";
+        this.sourceUnits.get(node.name).identifiers = new Map();
+        this.sourceUnits.get(node.name).bases = [];
         for ( let i = 0 ; i < node.is.length ; i++ ) {
+            let a = this.sourceUnits.get(node.name);
+            let b = this.sourceUnits.get(node.name).bases;
+            assert( a && b);
             this.sourceUnits.get(node.name).bases.push(node.is[i].name);
         }
         this.identifiersSU.add(node.name);
@@ -103,22 +78,23 @@ module.exports = {
         this.identifiersSU.add(node.name);
     },
 
-    addStateVariable: function(node, parent) {
-        if (!this.sourceUnits.has(parent))
-            throw(new Error("can not find source unit " + parent));
+    addIdentifier: function(node, parent) {
+        assert(parent && this.sourceUnits.has(parent));
+        assert(this.sourceUnits.get(parent).identifiers);
 
-        if (this.identifiersSU.has(node.name)) {
-            throw(new Error("state variable identifier " + name + " already used for storage unit."));
+        if (dic.valueTypes.has(node.name))
+            throw(new Error(node,name + " already defined basic type"));
+        if (this.identifiersSU.has(node.name) && node.name !== parent) {
+            throw(new Error("identifier " + node.name + " already used for storage unit."));
         }
         if (this.identifiersInSU.has(node.name)) {
-            console.log("state variable identifier " + name + " shadows previous declaration");
+            console.log("identifier " + node.name + " shadows previous declaration");
         }
 
-        assert(this.sourceUnits.get(parent).varDec);
-        if (this.sourceUnits.get(parent).varDec.has(node.name)) {
-            throw(new Error("state variable identifier " + node.name + " already used in " + parent));
+        if (this.sourceUnits.get(parent).identifiers.has(node.name)) {
+            throw(new Error("identifier " + node.name + " already declared in " + parent));
         }
-        this.sourceUnits.get(parent).varDec.set(node.name, node);
+        this.sourceUnits.get(parent).identifiers.set(node.name, node);
         this.identifiersInSU.add(node.name);
-    }
+    },
 };

@@ -7,15 +7,18 @@ pragma solidity ^0.4.19;
 
 
 contract StandardToken {
-
+    uint xx;
 }
 
 contract Ownable {
 
 }
 
-contract APRInflationToken is StandardToken, Ownable {
+contract A is StandardToken, Ownable {
 
+}
+
+contract APRInflationToken is StandardToken, Ownable {
 
     // State varables
     uint256 public startDate;
@@ -66,6 +69,10 @@ contract APRInflationToken is StandardToken, Ownable {
         require(now >= (startDate + (day * dailyAdjust)));
         _;
     }
+
+    function reveal()    public   canAdjustDaily;
+
+
 
     /**
      * @dev Adjusts all the necessary calculations in constructor

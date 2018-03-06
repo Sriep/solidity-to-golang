@@ -6,6 +6,10 @@ const sourceElements = require("./source-elements.js");
 
 module.exports = {
 
+    structName: function(name) {
+        return name + "_S";
+    },
+
     code: function(node) {
         if (node instanceof Array) {
             console.log("Source units array found.");
@@ -43,7 +47,7 @@ module.exports = {
             case "LibraryStatement":
                 return this.codeLibrary(node, history);
             case "InportStatement":
-                console.log("Inport command not supported. Flatten code first.");
+                console.log("Import command not supported. Flatten code first.");
                 console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
                 throw (new Error("Inport command not supported. Flatten code first."));
             default:
@@ -83,21 +87,32 @@ module.exports = {
         }
 
         let goCode = "\n";
-        goCode += "type " + node.name + " struct {\n";
-
+        goCode += "\n\\***************** " + node.name + " start struct declarations " + " *****************\n";
+        goCode += "type " + this.structName(node.name) + " struct {\n";
         if (node.is instanceof Array) {
             if (!history.validInheritance(node.is))
                 return;
             for (let base of node.is) {
                 console.log("derived from-" + base.name);
-                goCode += "\t" + base.name + "\n";
+                goCode += "\t" + this.structName(base.name) + "\n";
             }
         }
-        history.addContract(node);
 
-        goCode += sourceElements.code(node.body, history, gc.SrcUnitContract, node.name);
+        history.addContract(node);
+        goCode += sourceElements.codeBody(node.body, history, "contract", node.name);
         goCode += "\n}\n";
-        assert(goCode !== undefined);
+
+        goCode += "\n\\***************** " + node.name + " start interface declarations " + " *****************\n";
+        goCode += "type " + node.name + " interface {\n";
+        for (let base of node.is) {
+            goCode += "\t" + base.name + "\n";
+        }
+        goCode += sourceElements.codeInterface(node.body, history, "contract", node.name);
+        goCode += "\n}\n";
+
+        goCode += "\n\\***************** " + node.name + " start external declarations " + " *****************\n";
+        goCode += sourceElements.codeExternal(node.body, history, "contract", node.name);
+        goCode += "\n\\***************** " + node.name + " end external declarations " + " *****************\n\n";
         return goCode;
     },
 
@@ -115,7 +130,7 @@ module.exports = {
 
         history.addInterface(node);
 
-        goCode += sourceElements.code(node.body, history, gc.SrcUnitInterface, node.name);
+        goCode += sourceElements.codeBody(node.body, history, gc.SrcUnitInterface, node.name);
         goCode += "\n}\n";
         assert(goCode !== undefined);
         return goCode;
@@ -134,7 +149,7 @@ module.exports = {
 
         history.addLibrary(node);
 
-        goCode += sourceElements.code(node.body, history, gc.SrcUnitLibrary, node.name);
+        goCode += sourceElements.codeBody(node.body, history, gc.SrcUnitLibrary, node.name);
         goCode += "\n}\n";
         assert(goCode !== undefined);
         return goCode;

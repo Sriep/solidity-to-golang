@@ -2,15 +2,11 @@
 const assert = require("assert");
 
 module.exports = {
-    code: function(node, history, parent) {
-        assert(node);
-        assert(!(node instanceof Array));
+    codeExternal: function(node, history, parent) {
+        return "";
+    },
 
-
-        history.addType(node.name, parent, "int");
-        // todo implement enumeration items
-
-        console.log("Declared enumeration" + node.name);
-        return "//Declared enumeration" + node.name + "\n";
+    codeInterface: function(node, history, parent) {
+        return "";
     }
 };
