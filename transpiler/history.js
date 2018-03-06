@@ -18,7 +18,11 @@ module.exports = {
             assert(this.sourceUnits.has(parent));
             if (this.sourceUnits.get(parent).identifiers.has(typeName)) {
                 let typeNode = this.sourceUnits.get(parent).identifiers.get(typeName);
-                return typeNode.name + "_" + parent;
+                if (typeNode.type === "EnumDeclaration") {
+                    return "int";
+                } else {
+                    return typeNode.name + "_" + parent;
+                }
             } else {
                 throw(new Error("used unknown type " + typeName + " in " + parent));
             }

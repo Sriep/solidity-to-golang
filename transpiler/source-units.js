@@ -87,7 +87,7 @@ module.exports = {
         }
 
         let goCode = "\n";
-        goCode += "\n\\***************** " + node.name + " start struct declarations " + " *****************\n";
+        goCode += "\n//***************** " + node.name + " start struct declarations " + " *****************\n";
         goCode += "type " + this.structName(node.name) + " struct {\n";
         if (node.is instanceof Array) {
             if (!history.validInheritance(node.is))
@@ -102,7 +102,7 @@ module.exports = {
         goCode += sourceElements.codeBody(node.body, history, "contract", node.name);
         goCode += "\n}\n";
 
-        goCode += "\n\\***************** " + node.name + " start interface declarations " + " *****************\n";
+        goCode += "\n//***************** " + node.name + " start interface declarations " + " *****************\n";
         goCode += "type " + node.name + " interface {\n";
         for (let base of node.is) {
             goCode += "\t" + base.name + "\n";
@@ -110,9 +110,9 @@ module.exports = {
         goCode += sourceElements.codeInterface(node.body, history, "contract", node.name);
         goCode += "\n}\n";
 
-        goCode += "\n\\***************** " + node.name + " start external declarations " + " *****************\n";
+        goCode += "\n//***************** " + node.name + " start external declarations " + " *****************\n";
         goCode += sourceElements.codeExternal(node.body, history, "contract", node.name);
-        goCode += "\n\\***************** " + node.name + " end external declarations " + " *****************\n\n";
+        goCode += "\n//***************** " + node.name + " end external declarations " + " *****************\n\n";
         return goCode;
     },
 

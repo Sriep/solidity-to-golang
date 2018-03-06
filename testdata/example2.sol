@@ -22,9 +22,9 @@ contract APRInflationToken is StandardToken, Ownable {
 
     // State varables
     uint256 public startDate;
-    uint256 public dailyAdjust = 1;
+    uint256 private dailyAdjust = 1;
     uint constant data = 5;
-    uint[] dataArray;
+    uint[] internal dataArray;
     uint[2**20] m_aLotOfIntegers;
     // Note that the following is not a pair of dynamic arrays but a
     // dynamic array of pairs (i.e. of fixed size arrays of length two).
@@ -55,7 +55,7 @@ contract APRInflationToken is StandardToken, Ownable {
     }
 
     uint numCampaigns;
-    mapping (uint => Campaign) campaigns;
+    //mapping (uint => Campaign) campaigns;
     //events
     event NewRequest(uint);
 

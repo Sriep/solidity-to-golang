@@ -4,19 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/test/default.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Add Interface in Go code.">
+    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/testdata/example2.sol" afterPath="$PROJECT_DIR$/testdata/example2.sol" />
       <change beforePath="$PROJECT_DIR$/transpiler/element-enum.js" afterPath="$PROJECT_DIR$/transpiler/element-enum.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-event.js" afterPath="$PROJECT_DIR$/transpiler/element-event.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-function.js" afterPath="$PROJECT_DIR$/transpiler/element-function.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-modifier.js" afterPath="$PROJECT_DIR$/transpiler/element-modifier.js" />
       <change beforePath="$PROJECT_DIR$/transpiler/element-state-variable.js" afterPath="$PROJECT_DIR$/transpiler/element-state-variable.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-struct.js" afterPath="$PROJECT_DIR$/transpiler/element-struct.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-using.js" afterPath="$PROJECT_DIR$/transpiler/element-using.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/gc.js" afterPath="$PROJECT_DIR$/transpiler/gc.js" />
       <change beforePath="$PROJECT_DIR$/transpiler/history.js" afterPath="$PROJECT_DIR$/transpiler/history.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/source-elements.js" afterPath="$PROJECT_DIR$/transpiler/source-elements.js" />
       <change beforePath="$PROJECT_DIR$/transpiler/source-units.js" afterPath="$PROJECT_DIR$/transpiler/source-units.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +20,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.39037758">
+    <splitter split-orientation="horizontal" split-proportion="0.543849">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="soltogo-dictionary.js" pinned="false" current-in-tab="false">
@@ -43,8 +36,8 @@
           <file leaf-file-name="source-elements.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/transpiler/source-elements.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="332">
-                  <caret line="102" column="50" lean-forward="false" selection-start-line="102" selection-start-column="37" selection-end-line="102" selection-end-column="50" />
+                <state relative-caret-position="255">
+                  <caret line="39" column="30" lean-forward="true" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
                   <folding />
                 </state>
               </provider>
@@ -80,11 +73,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="element-state-variable.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="element-state-variable.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/transpiler/element-state-variable.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+                <state relative-caret-position="255">
+                  <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
                   <folding />
                 </state>
               </provider>
@@ -93,7 +86,7 @@
           <file leaf-file-name="element-struct.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/transpiler/element-struct.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
+                <state relative-caret-position="145">
                   <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
                   <folding />
                 </state>
@@ -110,7 +103,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="element-using.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="element-using.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/transpiler/element-using.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="170">
@@ -127,18 +120,18 @@
           <file leaf-file-name="history.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/transpiler/history.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="206">
-                  <caret line="19" column="86" lean-forward="false" selection-start-line="19" selection-start-column="86" selection-end-line="19" selection-end-column="86" />
+                <state relative-caret-position="299">
+                  <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="debugOut.go" pinned="false" current-in-tab="false">
+          <file leaf-file-name="debugOut.go" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/output/debugOut.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="627">
-                  <caret line="85" column="9" lean-forward="true" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
+                <state relative-caret-position="359">
+                  <caret line="111" column="19" lean-forward="false" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
@@ -148,7 +141,7 @@
             <entry file="file://$PROJECT_DIR$/transpiler/element-enum.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="17">
-                  <caret line="1" column="6" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+                  <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -177,14 +170,14 @@
           <file leaf-file-name="example2.sol" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/testdata/example2.sol">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
-                  <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+                <state relative-caret-position="289">
+                  <caret line="29" column="7" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="element-event.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="element-event.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/transpiler/element-event.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="68">
@@ -207,8 +200,8 @@
           <file leaf-file-name="source-units.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/transpiler/source-units.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="233">
-                  <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+                <state relative-caret-position="204">
+                  <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -235,7 +228,9 @@
       <find>amount</find>
       <find>varDec</find>
       <find>width</find>
+      <find>ActionChoices_APRInflationToken</find>
       <find>typeDec</find>
+      <find>Campaign_APRInflationToken</find>
     </findStrings>
     <replaceStrings>
       <replace>*big</replace>
@@ -268,20 +263,20 @@
         <option value="$PROJECT_DIR$/testdata/example_apr.sol" />
         <option value="$PROJECT_DIR$/transpiler/data/prefix.sol" />
         <option value="$PROJECT_DIR$/transpiler/transpiler.js" />
-        <option value="$PROJECT_DIR$/output/debugOut.go" />
         <option value="$PROJECT_DIR$/transpiler/gc.js" />
         <option value="$PROJECT_DIR$/transpiler/soltogo-dictionary.js" />
-        <option value="$PROJECT_DIR$/testdata/example2.sol" />
         <option value="$PROJECT_DIR$/transpiler/source-elements.js" />
-        <option value="$PROJECT_DIR$/transpiler/element-enum.js" />
         <option value="$PROJECT_DIR$/transpiler/element-event.js" />
         <option value="$PROJECT_DIR$/transpiler/element-function.js" />
         <option value="$PROJECT_DIR$/transpiler/element-modifier.js" />
         <option value="$PROJECT_DIR$/transpiler/element-using.js" />
         <option value="$PROJECT_DIR$/transpiler/element-struct.js" />
-        <option value="$PROJECT_DIR$/transpiler/source-units.js" />
-        <option value="$PROJECT_DIR$/transpiler/element-state-variable.js" />
+        <option value="$PROJECT_DIR$/output/debugOut.go" />
         <option value="$PROJECT_DIR$/transpiler/history.js" />
+        <option value="$PROJECT_DIR$/transpiler/source-units.js" />
+        <option value="$PROJECT_DIR$/transpiler/element-enum.js" />
+        <option value="$PROJECT_DIR$/testdata/example2.sol" />
+        <option value="$PROJECT_DIR$/transpiler/element-state-variable.js" />
       </list>
     </option>
   </component>
@@ -467,7 +462,7 @@
       <workItem from="1520160051435" duration="17090000" />
       <workItem from="1520178263432" duration="17756000" />
       <workItem from="1520245113821" duration="1220000" />
-      <workItem from="1520332941759" duration="25026000" />
+      <workItem from="1520332941759" duration="27837000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -525,7 +520,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520336657737</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add Interface in Go code.">
+      <created>1520374296248</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1520374296248</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -543,7 +545,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119008000" />
+    <option name="totallyTimeSpent" value="121819000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -558,18 +560,18 @@
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32471263" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32471263" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27203065" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14479166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14479166" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35632184" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35632184" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -650,14 +652,8 @@
           <line>30</line>
           <option name="timeStamp" value="75" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/transpiler/source-elements.js</url>
-          <line>35</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="171" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="186" />
+      <option name="time" value="193" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -908,22 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testdata/example2.sol">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transpiler/source-elements.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="102" column="50" lean-forward="false" selection-start-line="102" selection-start-column="37" selection-end-line="102" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/transpiler/element-function.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -948,38 +928,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/transpiler/element-struct.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transpiler/source-units.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="49" column="35" lean-forward="false" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/debugOut.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="85" column="9" lean-forward="true" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transpiler/element-state-variable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/transpiler/element-using.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -988,10 +936,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/transpiler/element-struct.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/transpiler/history.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="19" column="86" lean-forward="false" selection-start-line="19" selection-start-column="86" selection-end-line="19" selection-end-column="86" />
+        <state relative-caret-position="299">
+          <caret line="21" column="20" lean-forward="false" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transpiler/source-units.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="99" column="0" lean-forward="true" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -999,7 +963,7 @@
     <entry file="file://$PROJECT_DIR$/transpiler/element-enum.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1" column="6" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1008,6 +972,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="42" lean-forward="false" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transpiler/source-elements.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="39" column="30" lean-forward="true" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testdata/example2.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="29" column="7" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/output/debugOut.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="111" column="19" lean-forward="false" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transpiler/element-state-variable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
           <folding />
         </state>
       </provider>
