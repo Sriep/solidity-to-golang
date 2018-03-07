@@ -4,11 +4,17 @@ const gc = require("./gc.js");
 
 module.exports = {
 
-    codeSignature: function(node, history, parent, hide) {
+    codeSignature: function(node, history, parent) {
         assert(node);
         let goCode = "\t";
+        goCode += this.getSignature(node, history, parent);
+        goCode += "\n";
+        return goCode;
+    },
 
-        if (hide) {
+    getSignature: function(node, history, parent) {
+        let goCode = "";
+        if (node.visibility === "internal" || node.visibility === "private") {
             goCode += gc.hideFuncPrefix + node.name;
         } else {
             goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
@@ -31,11 +37,15 @@ module.exports = {
                 goCode += " " + retParm.literal.literal;
             }
         }
-        goCode += "\n";
         return goCode;
     },
 
     codeFunction: function(node, history, parent) {
-
+        let goCode = "func (this ";
+        goCode += gc.structPrefix +  parent + gc.structSuffix;
+        goCode += ") ";
+        goCode += this.getSignature(node, history, parent);
+        goCode += " {}\n";
+        return goCode;
     }
 };

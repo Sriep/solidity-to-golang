@@ -16,25 +16,37 @@ module.exports = {
         return goCode + "\n";
     },
 
-    codeAccessorSig: function(node, history, parent, hide) {
+    codeAccessorSig: function(node, history, parent) {
         assert(node);
         assert(!(node instanceof Array));
 
-        let goCodeType = this.getType(node, history, parent);
-
         // get accessor
         let goCode = "\t";
-        if (hide) {
+        goCode += this.codeGetSig(node, history, parent);
+        goCode += "\n";
+
+        // set accessor
+        goCode += "\t";
+        goCode += this.codeSetSig(node, history, parent);
+        goCode += "\n";
+        return goCode;
+    },
+
+    codeGetSig: function(node, history, parent) {
+        let goCode = "";
+        if (node.visibility !== "public") {
             goCode += gc.hideDataPrefix + node.name;
         } else {
             goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
         }
         goCode += gc.suffixContract ? "_" + parent : "";
-        goCode += " ()( " + goCodeType + " )\n";
+        goCode += " ()( " + this.getType(node, history, parent) + " )";
+        return goCode;
+    },
 
-        // set accessor
-        goCode += "\t";
-        if (hide) {
+    codeSetSig: function(node, history, parent) {
+        let goCode = "";
+        if (node.visibility !== "public") {
             goCode += gc.hideDataPrefix + gc.setPrefix +  node.name;
         } else {
             goCode += gc.setPrefix;
@@ -42,14 +54,24 @@ module.exports = {
         }
         goCode += gc.suffixContract ? "_" + parent : "";
         goCode +=  " ( v ";
-        goCode += goCodeType;
-        goCode += " )\n";
-
+        goCode += this.getType(node, history, parent) + ")";
         return goCode;
     },
 
-    codeAccessors: function(node, history, parent, hide) {
-        return "";
+    codeAccessors: function(node, history, parent) {
+        let goCode = "func (this ";
+        goCode += gc.structPrefix +  parent + gc.structSuffix;
+        goCode += ") ";
+        goCode += this.codeGetSig(node, history, parent);
+        goCode += " {}\n";
+
+        goCode += "func (this ";
+        goCode += gc.structPrefix +  parent + gc.structSuffix;
+        goCode += ") ";
+        goCode += this.codeSetSig(node, history, parent);
+        goCode += " {}\n";
+
+        return goCode;
     },
 
     arrayPart: function(dimensions) {

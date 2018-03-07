@@ -1,13 +1,8 @@
 'use strict';
 const assert = require("assert");
-const gc = require("./gc.js");
 const stateVariable = require("./element-state-variable.js");
-const enumElement = require("./element-enum.js");
-const eventElement = require("./element-event.js");
-const modifierElement = require("./element-modifier.js");
 const functionElement = require("./element-function.js");
 const structElement = require("./element-struct.js");
-const usingElement = require("./element-using.js");
 
 module.exports = {
 
@@ -19,7 +14,11 @@ module.exports = {
             this.checkElement(node, history, unitType,  parent);
             history.addIdentifier(node, parent);
             if (node.type === "StateVariableDeclaration")
-                goCode +=  stateVariable.code(node, history,  parent, true);
+                goCode +=  stateVariable.code(node, history,  parent);
+            else if (node.type === "FunctionDeclaration") {
+                this.setFuncVisibility(node);
+                assert(node.visibility !== undefined);
+            }
         }
         return goCode;
     },
@@ -29,11 +28,12 @@ module.exports = {
         assert(nodeArray instanceof Array);
         let goCode = "";
         for (let node of nodeArray) {
-            if (node.type === "FunctionDeclaration"
-                && (node.visibility === "public" || !node.visibility)) {
-                goCode +=  functionElement.codeSignature(node, history,  parent,  false);
-            } else if (node.type === "StateVariableDeclaration" && node.visibility === "public") {
-                goCode += stateVariable.codeAccessorSig(node, history, parent, false)
+            if (node.type === "StateVariableDeclaration" && node.visibility === "public") {
+                goCode += stateVariable.codeAccessorSig(node, history, parent)
+            } else if (node.type === "FunctionDeclaration") {
+                if (node.visibility === "public") {
+                    goCode += functionElement.codeSignature(node, history, parent);
+                }
             }
         }
         return goCode;
@@ -45,7 +45,7 @@ module.exports = {
         let goCode = "";
         for (let node of nodeArray) {
             if (node.type === "FunctionDeclaration" && node.visibility === "external") {
-                goCode +=  functionElement.codeSignature(node, history,  parent, false);
+                goCode +=  functionElement.codeSignature(node, history,  parent);
             }
         }
         return goCode;
@@ -56,10 +56,10 @@ module.exports = {
         let goCode = "";
         for (let node of nodeArray) {
             if (node.type === "FunctionDeclaration" && node.visibility === "internal" ) {
-                goCode +=  functionElement.codeSignature(node, history,  parent, true);
+                goCode +=  functionElement.codeSignature(node, history,  parent);
             } else if (node.type === "StateVariableDeclaration"
-                && (node.visibility === "internal" || !node.visibility)) {
-                goCode += stateVariable.codeAccessorSig(node, history, parent, true)
+                && (node.visibility === "internal")) {
+                goCode += stateVariable.codeAccessorSig(node, history, parent)
             }
         }
         return goCode;
@@ -71,16 +71,33 @@ module.exports = {
         let goCode = "";
         for (let node of nodeArray) {
             if (node.type === "FunctionDeclaration" && node.visibility === "private" ) {
-                goCode +=  functionElement.codeSignature(node, history,  parent, true);
+                goCode +=  functionElement.codeSignature(node, history,  parent);
             } else if (node.type === "StateVariableDeclaration" && node.visibility === "private") {
-                goCode += stateVariable.codeAccessorSig(node, history, parent, true)
+                goCode += stateVariable.codeAccessorSig(node, history, parent)
             }
         }
         return goCode;
     },
 
-    codeDeclarations: function(node, history,  parent) {
-        return "";
+    codeDeclarations: function(nodeArray, history,  parent) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+        let goCode = "";
+        for (let node of nodeArray) {
+            switch (node.type) {
+                case "StateVariableDeclaration":
+                    goCode += stateVariable.codeAccessors(node, history, parent);
+                    break;
+                case "StructDeclaration":
+                    goCode +=  structElement.code(node, history, parent);
+                    break;
+                case "FunctionDeclaration":
+                    goCode +=  functionElement.codeFunction(node, history, parent);
+                    break;
+                default:
+            }
+        }
+        return goCode;
     },
 
     checkElement: function(node, history, unitType, parent) {
@@ -126,6 +143,34 @@ module.exports = {
             default:
                 throw (new Error("Unrecognised source element" + node.type));
         }
+    },
+
+    setFuncVisibility: function(node){
+        assert(node.type === "FunctionDeclaration");
+
+        if (!node.modifiers || !(node.modifiers instanceof Array)) {
+            node.visibility = "public";
+            return;
+        } else {
+            for (let modifier of node.modifiers) {
+                switch (modifier.name) {
+                    case "external":
+                        node.visibility = "external";
+                        return;
+                    case "internal":
+                        node.visibility = "internal";
+                        return;
+                    case "public":
+                        node.visibility = "public";
+                        return;
+                    case "private":
+                        node.visibility = "private";
+                        return;
+                    default:
+                }
+            }
+        }
+        node.visibility = "public";
     }
 
 };

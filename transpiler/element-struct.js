@@ -13,23 +13,10 @@ module.exports = {
 
         let goCode = "struct {";
         for (let body of node.body) {
-            goCode += stateVariable.code(body, history, parent) + ";"
+            goCode += "\t" + stateVariable.code(body, history, parent) + "\n"
         }
-        goCode += "}";
-        goCode = goCode.replace(/\t/g,"");
-        goCode = goCode.replace(/\n/g,"");
-
-        node.goCode = goCode;
-        history.addIdentifier(node.name, parent);
-
-        console.log("Declared structure" + node.name +"\n" + goCode);
-        return "//Declared structure" + node.name +"\n";
-
-        //goCode = goCode.replace(/\t/g,"");
-        //goCode = goCode.replace(/\n/g,"");
+        goCode += "}\n";
+        return goCode;
     },
 
-    codeInterface: function(node, history, parent) {
-        return "";
-    }
 };
