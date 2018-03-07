@@ -1,175 +1,131 @@
 'use strict';
 const assert = require("assert");
+const gc = require("./gc.js");
 const stateVariable = require("./element-state-variable.js");
-const enumDeclare = require("./element-enum.js");
-const eventDeclare = require("./element-event.js");
-const modifierDeclare = require("./element-modifier.js");
-const functionDeclare = require("./element-function.js");
-const structDeclare = require("./element-struct.js");
-const usingDeclare = require("./element-using.js");
+const enumElement = require("./element-enum.js");
+const eventElement = require("./element-event.js");
+const modifierElement = require("./element-modifier.js");
+const functionElement = require("./element-function.js");
+const structElement = require("./element-struct.js");
+const usingElement = require("./element-using.js");
 
 module.exports = {
 
-    codeBody: function(nodeArray, history, unitType, parent) {
+    codeDataStruct: function(nodeArray, history, parent, unitType) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
         let goCode = "";
         for (let node of nodeArray) {
-            goCode += this.codeBodyElement(node, history, unitType, parent);
-            console.log("Added element code now\n" + goCode );
-            assert(goCode !== undefined, "coding element");
+            this.checkElement(node, history, unitType,  parent);
+            history.addIdentifier(node, parent);
+            if (node.type === "StateVariableDeclaration")
+                goCode +=  stateVariable.code(node, history,  parent, true);
         }
         return goCode;
     },
 
-    codeBodyElement: function(node, history, unitType, parent) {
-        assert(node, "missing node");
-        assert(!(node instanceof Array), "unexpected node array");
-
-        switch (node.type) {
-        case "StateVariableDeclaration":
-            if (unitType === "contract" || unitType === "library") {
-                history.addIdentifier(node, parent);
-                return stateVariable.code(node, history,  parent);
-            } else {
-                throw (new Error(unitType + " cannot have state variables declarations"));
-            }
-        case "EnumDeclaration":
-            if (unitType === "contract" || unitType === "library") {
-                history.addIdentifier(node, parent);
-                return "//Declared enumeration" + node.name + "\n";
-            } else {
-                throw (new Error(unitType + " cannot have enum declarations"));
-            }
-        case "EventDeclaration":
-            if (unitType === "contract" || unitType === "library" || unitType === "interface") {
-                history.addIdentifier(node, parent);
-                return "//Declared event " + node.name + "\n";
-            } else {
-                throw (new Error(unitType + " cannot have event declarations"));
-            }
-        case "StructDeclaration":
-            if (unitType === "contract" || unitType === "library") {
-                history.addIdentifier(node, parent);
-                return "//Declared struct " + node.name + "\n";
-            } else {
-                throw (new Error(unitType + " cannot have struct declarations"));
-            }
-        case "ModifierDeclaration":
-            if (unitType === "contract" || unitType === "library" || unitType === "interface") {
-                history.addIdentifier(node, parent);
-                return "//Declared modifier " + node.name + "\n";
-            } else {
-                throw (new Error(unitType + " cannot have modifier declarations"));
-            }
-        case "FunctionDeclaration":
-            if (unitType === "contract" || unitType === "library" || unitType === "interface") {
-                history.addIdentifier(node, parent);
-                return "//Declared function " + node.name + "\n";
-            } else {
-                throw (new Error(unitType + " cannot have function declarations"));
-            }
-        case "UsingStatement":
-            if (unitType === "contract" || unitType === "library" || unitType === "interface") {
-                history.addIdentifier(node, parent);
-                return "//Declared using for " + node.name + "\n";
-            } else {
-                throw (new Error(unitType + " cannot have using statements"));
-            }
-        default:
-            throw (new Error("Unrecognised source element" + node.type));
-        }
-    },
-
-    codeInterface: function(nodeArray, history, unitType, parent) {
+    codePublicInterface: function(nodeArray, history, parent) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
         let goCode = "";
         for (let node of nodeArray) {
-            goCode += this.codeInterfaceElement(node, history, unitType, parent);
-            console.log("Added interface code now\n" + goCode );
-            assert(goCode !== undefined, "coding element");
+            if (node.type === "FunctionDeclaration"
+                && (node.visibility === "public" || !node.visibility)) {
+                goCode +=  functionElement.codeSignature(node, history,  parent,  false);
+            } else if (node.type === "StateVariableDeclaration" && node.visibility === "public") {
+                goCode += stateVariable.codeAccessorSig(node, history, parent, false)
+            }
         }
         return goCode;
     },
 
-    codeInterfaceElement: function(node, history, unitType, parent) {
+    codeExternalInterface: function(nodeArray, history,  parent) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+        let goCode = "";
+        for (let node of nodeArray) {
+            if (node.type === "FunctionDeclaration" && node.visibility === "external") {
+                goCode +=  functionElement.codeSignature(node, history,  parent, false);
+            }
+        }
+        return goCode;
+    },
+    codeInternalInterface: function(nodeArray, history,  parent) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+        let goCode = "";
+        for (let node of nodeArray) {
+            if (node.type === "FunctionDeclaration" && node.visibility === "internal" ) {
+                goCode +=  functionElement.codeSignature(node, history,  parent, true);
+            } else if (node.type === "StateVariableDeclaration"
+                && (node.visibility === "internal" || !node.visibility)) {
+                goCode += stateVariable.codeAccessorSig(node, history, parent, true)
+            }
+        }
+        return goCode;
+    },
+
+    codePrivateInterface: function(nodeArray, history,  parent) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+        let goCode = "";
+        for (let node of nodeArray) {
+            if (node.type === "FunctionDeclaration" && node.visibility === "private" ) {
+                goCode +=  functionElement.codeSignature(node, history,  parent, true);
+            } else if (node.type === "StateVariableDeclaration" && node.visibility === "private") {
+                goCode += stateVariable.codeAccessorSig(node, history, parent, true)
+            }
+        }
+        return goCode;
+    },
+
+    codeDeclarations: function(node, history,  parent) {
+        return "";
+    },
+
+    checkElement: function(node, history, unitType, parent) {
         assert(node, "missing node");
         assert(!(node instanceof Array), "unexpected node array");
 
         switch (node.type) {
             case "StateVariableDeclaration":
-                return stateVariable.codeInterface(node, history,  parent);
+                if (unitType === "contract" || unitType === "library") {
+                    throw (new Error(unitType + " cannot have state variables declarations"));
+                }
+                break;
             case "EnumDeclaration":
-                return enumDeclare.codeInterface(node, history,  parent);
+                if (unitType === "contract" || unitType === "library") {
+                    throw (new Error(unitType + " cannot have enum declarations"));
+                }
+                break;
             case "EventDeclaration":
-                return eventDeclare.codeInterface(node, history,  parent);
+                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                    throw (new Error(unitType + " cannot have event declarations"));
+                }
+                break;
             case "StructDeclaration":
-                return structDeclare.codeInterface(node, history,  parent);
+                if (unitType === "contract" || unitType === "library") {
+                    throw (new Error(unitType + " cannot have struct declarations"));
+                }
+                break;
             case "ModifierDeclaration":
-                return modifierDeclare.codeInterface(node, history,  parent);
+                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                    throw (new Error(unitType + " cannot have modifier declarations"));
+                }
+                break;
             case "FunctionDeclaration":
-                return functionDeclare.codeInterface(node, history,  parent);
+                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                    throw (new Error(unitType + " cannot have function declarations"));
+                }
+                break;
             case "UsingStatement":
-                return usingDeclare.codeInterface(node, history,  parent);
+                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                    throw (new Error(unitType + " cannot have using statements"));
+                }
+                break;
             default:
                 throw (new Error("Unrecognised source element" + node.type));
         }
-    },
-
-    codeExternal: function(nodeArray, history, unitType, parent) {
-        assert(nodeArray);
-        assert(nodeArray instanceof Array);
-        let goCode = "";
-        for (let node of nodeArray) {
-            goCode += this.codeExternalElement(node, history, unitType, parent);
-            console.log("Added external element code now\n" + goCode );
-            assert(goCode !== undefined, "coding element");
-        }
-        return goCode;
-    },
-
-    codeExternalElement: function(node, history, unitType, parent) {
-        assert(node, "missing node");
-        assert(!(node instanceof Array), "unexpected node array");
-
-        switch (node.type) {
-            case "StateVariableDeclaration":
-                return stateVariable.codeExternal(node, history,  parent);
-            case "EnumDeclaration":
-                return enumDeclare.codeExternal(node, history,  parent);
-            case "EventDeclaration":
-                return eventDeclare.codeExternal(node, history,  parent);
-            case "StructDeclaration":
-                return structDeclare.codeExternal(node, history,  parent);
-            case "ModifierDeclaration":
-                return modifierDeclare.codeExternal(node, history,  parent);
-            case "FunctionDeclaration":
-                return functionDeclare.codeExternal(node, history,  parent);
-            case "UsingStatement":
-                return usingDeclare.codeExternal(node, history,  parent);
-            default:
-                throw (new Error("Unrecognised source element" + node.type));
-        }
-    },
-
-    codePublicInterface: function(node, history, unitType, parent) {
-        return "";
-    },
-    codeExternalInterface: function(node, history, unitType, parent) {
-        return "";
-    },
-    codeInternalInterface: function(node, history, unitType, parent) {
-        return "";
-    },
-    codePrivateInterface: function(node, history, unitType, parent) {
-        return "";
-    },
-    codeDataStruct: function(node, history, unitType, parent) {
-        return "";
-    },
-    codeDeclarations: function(node, history, unitType, parent) {
-        return "";
-    },
+    }
 
 };

@@ -10,8 +10,11 @@ const gc = {
     structPrefix: "_",
     structSuffix: "_st",
 
-    hideFunctionPrefix: "__",
+    hideFuncPrefix: "__",
     hideDataPrefix: "___",
+    setPrefix: "set",
+
+    suffixContract: true
 
 };
 

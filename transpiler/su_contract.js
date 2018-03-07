@@ -34,7 +34,7 @@ module.exports = {
         goCode += gc.publicIPrefix +  node.name  + gc.publicISuffix;
         goCode += " interface {\n";
         goCode += this.codeBases(node, history, gc.publicIPrefix, gc.publicISuffix);
-        goCode += sourceElements.codePublicInterface(node.body, history, "contract", node.name);
+        goCode += sourceElements.codePublicInterface(node.body, history, node.name);
         goCode += "\n}\n";
         return goCode;
     },
@@ -45,7 +45,7 @@ module.exports = {
         goCode += " interface {\n";
         goCode += this.codeBases(node, history, "", "");
         goCode += "\t" + gc.publicIPrefix +  node.name  + gc.publicISuffix + "\n";
-        goCode += sourceElements.codeExternalInterface(node.body, history, "contract", node.name);
+        goCode += sourceElements.codeExternalInterface(node.body, history, node.name);
         goCode += "\n}\n";
         return goCode;
     },
@@ -56,7 +56,7 @@ module.exports = {
         goCode += " interface {\n";
         goCode += this.codeBases(node, history, gc.internalIPrefix, gc.internalISuffix);
         goCode += "\t" + gc.publicIPrefix +  node.name  + gc.publicISuffix + "\n";
-        goCode += sourceElements.codeInternalInterface(node.body, history, "contract", node.name);
+        goCode += sourceElements.codeInternalInterface(node.body, history, node.name);
         goCode += "\n}\n";
         return goCode;
     },
@@ -67,7 +67,7 @@ module.exports = {
         goCode += " interface {\n";
         goCode += this.codeBases(node, history, gc.privateIPrefix, gc.privateISuffix);
         goCode += "\t" + gc.internalIPrefix +  node.name  + gc.internalISuffix + "\n";
-        goCode += sourceElements.codePrivateInterface(node.body, history, "contract", node.name);
+        goCode += sourceElements.codePrivateInterface(node.body, history, node.name);
         goCode += "\n}\n";
         return goCode;
     },
@@ -77,13 +77,13 @@ module.exports = {
         goCode += gc.structPrefix + node.name + gc.structSuffix;
         goCode += " struct {\n";
         goCode += this.codeBases(node, history, gc.structPrefix, gc.structSuffix);
-        goCode += sourceElements.codeDataStruct(node.body, history, "contract", node.name);
+        goCode += sourceElements.codeDataStruct(node.body, history, node.name);
         goCode += "\n}\n";
         return goCode;
     },
 
     codeDeclarations: function(node, history) {
-        return sourceElements.codeDeclarations(node.body, history, "contract", node.name);
+        return sourceElements.codeDeclarations(node.body, history, node.name);
     },
 
     codeBases: function(node, history, pefix, suffix) {
@@ -93,14 +93,9 @@ module.exports = {
                 return;
             for (let base of node.is) {
                 console.log("derived from-" + base.name);
-                goCode += "\t" + pefix +  this.structName(base.name) + suffix + "\n";
+                goCode += "\t" + pefix +  base.name + suffix + "\n";
             }
         }
         return goCode;
     },
-
-    structName: function(name) {
-        return name + "_S";
-    },
-
 };

@@ -1,15 +1,19 @@
 'use strict';
 const assert = require("assert");
-module.exports = {
-    codeExternal: function(node, history, parent) {
-        return "";
-    },
+const gc = require("./gc.js");
 
-    codeInterface: function(node, history, parent) {
-        if (node.visibility === "private")
-            return "";
+module.exports = {
+
+    codeSignature: function(node, history, parent, hide) {
+        assert(node);
         let goCode = "\t";
-        goCode += node.visibility === "internal" ? "__" + node.name : node.name;
+
+        if (hide) {
+            goCode += gc.hideFuncPrefix + node.name;
+        } else {
+            goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
+        }
+        goCode += gc.suffixContract ? "_" + parent : "";
         goCode += "(";
         if (node.params instanceof Array && node.params.length > 0) {
             let start = true;
@@ -18,16 +22,20 @@ module.exports = {
                     start = false;
                 else
                     goCode += ", ";
-                goCode += param.name + " " + param.literal.literal;
+                goCode += param.id + " " + param.literal.literal;
             }
         }
-        goCode += ")"
+        goCode += ")";
         if (node.returnParams instanceof Array && node.returnParams.length > 0) {
             for (let  retParm of node.returnParams ) {
                 goCode += " " + retParm.literal.literal;
             }
         }
-        goCode += "  //This a function\n";
+        goCode += "\n";
         return goCode;
+    },
+
+    codeFunction: function(node, history, parent) {
+
     }
 };

@@ -1,47 +1,55 @@
 'use strict';
 const assert = require("assert");
+const gc = require("./gc.js");
 
 module.exports = {
     defaultArraySize: 10,
 
-    code: function(node, history, parent) {
+    code: function(node, history, parent, hide) {
         assert(node);
         assert(!(node instanceof Array));
 
-        let goCode = "\t" + node.name ;
-        if (node.literal.literal.type === "MappingExpression") {
-            goCode += " map [";
-            goCode += history.expandType(node.literal.literal.from.literal, parent);
-            goCode += "] ";
-            goCode += history.expandType(node.literal.literal.to.literal, parent);
-        } else {
-            goCode += " " + this.arrayPart(node.literal.array_parts);
-            goCode += history.expandType(node.literal.literal, parent);
-        }
+        let goCode = "\t";
+        goCode += hide ? gc.hideDataPrefix : "";
+        goCode += node.name;
+        goCode += this.getType(node, history, parent);
         return goCode + "\n";
     },
 
-     codeInterface: function(node, history, parent) {
+    codeAccessorSig: function(node, history, parent, hide) {
         assert(node);
         assert(!(node instanceof Array));
 
-        if (node.visibility === "private")
-            return "";
+        let goCodeType = this.getType(node, history, parent);
 
+        // get accessor
         let goCode = "\t";
-        goCode += node.visibility === "public" ? node.name : "__" + node.name;
-        goCode += "() (";
-        if (node.literal.literal.type === "MappingExpression") {
-            goCode += " map [";
-            goCode += history.expandType(node.literal.literal.from.literal, parent);
-            goCode += "] ";
-            goCode += history.expandType(node.literal.literal.to.literal, parent);
+        if (hide) {
+            goCode += gc.hideDataPrefix + node.name;
         } else {
-            goCode += " " + this.arrayPart(node.literal.array_parts);
-            goCode += history.expandType(node.literal.literal, parent);
+            goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
         }
-        goCode += ")";
-        return goCode + "\n";
+        goCode += gc.suffixContract ? "_" + parent : "";
+        goCode += " ()( " + goCodeType + " )\n";
+
+        // set accessor
+        goCode += "\t";
+        if (hide) {
+            goCode += gc.hideDataPrefix + gc.setPrefix +  node.name;
+        } else {
+            goCode += gc.setPrefix;
+            goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
+        }
+        goCode += gc.suffixContract ? "_" + parent : "";
+        goCode +=  " ( v ";
+        goCode += goCodeType;
+        goCode += " )\n";
+
+        return goCode;
+    },
+
+    codeAccessors: function(node, history, parent, hide) {
+        return "";
     },
 
     arrayPart: function(dimensions) {
@@ -60,8 +68,28 @@ module.exports = {
         return goCode;
     },
 
+    codeInterface: function(node, history, parent) {
+        assert(node);
+        assert(!(node instanceof Array));
+        return "";
+    },
+
     codeExternal: function(node, history, parent) {
         return "";
+    },
+
+    getType: function(node, history, parent) {
+        let goCode = "";
+        if (node.literal.literal.type === "MappingExpression") {
+            goCode += " map [";
+            goCode += history.expandType(node.literal.literal.from.literal, parent);
+            goCode += "] ";
+            goCode += history.expandType(node.literal.literal.to.literal, parent);
+        } else {
+            goCode += " " + this.arrayPart(node.literal.array_parts);
+            goCode += history.expandType(node.literal.literal, parent);
+        }
+        return goCode;
     }
 
 };

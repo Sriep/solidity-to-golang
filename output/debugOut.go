@@ -4,7 +4,6 @@ import (
     "fmt"
     "math/big"
     "time"
-    //"reflect"
 )
 
 const (
@@ -21,99 +20,59 @@ func now() int64 {
 }
 
 
-type _StandardToken_st struct {
+type _Base_st struct {
 
 }
-type _StandardToken_pub interface {
+type _Base_pub interface {
 
 }
-type StandardToken interface {
-	_StandardToken_pub
+type Base interface {
+	_Base_pub
 
 }
-type _StandardToken_int interface {
-	_StandardToken_pub
+type _Base_int interface {
+	_Base_pub
 
 }
-type _StandardToken_pri interface {
-	_StandardToken_int
-
-}
-
-type _Ownable_st struct {
-
-}
-type _Ownable_pub interface {
-
-}
-type Ownable interface {
-	_Ownable_pub
-
-}
-type _Ownable_int interface {
-	_Ownable_pub
-
-}
-type _Ownable_pri interface {
-	_Ownable_int
+type _Base_pri interface {
+	_Base_int
 
 }
 
-type _A_st struct {
-	_StandardToken_S_st
-	_Ownable_S_st
+type _Derived_st struct {
+	_Base_st
+	___pubSV *big.Int
+	___intSV *big.Int
+	___priSV *big.Int
 
 }
-type _A_pub interface {
-	_StandardToken_S_pub
-	_Ownable_S_pub
+type _Derived_pub interface {
+	_Base_pub
+	PubSV_Derived ()(  *big.Int )
+	setPubSV_Derived ( v  *big.Int )
+	ExtF_Derived(_value uint)
+	PubF_Derived(_value uint) uint
+	IntF_Derived(_value uint) uint
+	PriF_Derived(_value uint) uint
 
 }
-type A interface {
-	StandardToken_S
-	Ownable_S
-	_A_pub
+type Derived interface {
+	Base
+	_Derived_pub
 
 }
-type _A_int interface {
-	_StandardToken_S_int
-	_Ownable_S_int
-	_A_pub
+type _Derived_int interface {
+	_Base_int
+	_Derived_pub
+	___intSV_Derived ()(  *big.Int )
+	___setintSV_Derived ( v  *big.Int )
 
 }
-type _A_pri interface {
-	_StandardToken_S_pri
-	_Ownable_S_pri
-	_A_int
-
-}
-
-type _APRInflationToken_st struct {
-	_StandardToken_S_st
-	_Ownable_S_st
-
-}
-type _APRInflationToken_pub interface {
-	_StandardToken_S_pub
-	_Ownable_S_pub
-
-}
-type APRInflationToken interface {
-	StandardToken_S
-	Ownable_S
-	_APRInflationToken_pub
-
-}
-type _APRInflationToken_int interface {
-	_StandardToken_S_int
-	_Ownable_S_int
-	_APRInflationToken_pub
-
-}
-type _APRInflationToken_pri interface {
-	_StandardToken_S_pri
-	_Ownable_S_pri
-	_APRInflationToken_int
+type _Derived_pri interface {
+	_Base_pri
+	_Derived_int
+	___priSV_Derived ()(  *big.Int )
+	___setpriSV_Derived ( v  *big.Int )
 
 }
 func main() {
