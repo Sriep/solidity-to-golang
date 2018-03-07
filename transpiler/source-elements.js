@@ -1,6 +1,5 @@
 'use strict';
 const assert = require("assert");
-const gc = require("./gc.js");
 const stateVariable = require("./element-state-variable.js");
 const enumDeclare = require("./element-enum.js");
 const eventDeclare = require("./element-event.js");
@@ -40,7 +39,7 @@ module.exports = {
                 history.addIdentifier(node, parent);
                 return "//Declared enumeration" + node.name + "\n";
             } else {
-                throw (new Error(unitType + " cannot have enum declaraions"));
+                throw (new Error(unitType + " cannot have enum declarations"));
             }
         case "EventDeclaration":
             if (unitType === "contract" || unitType === "library" || unitType === "interface") {
@@ -75,7 +74,7 @@ module.exports = {
                 history.addIdentifier(node, parent);
                 return "//Declared using for " + node.name + "\n";
             } else {
-                throw (new Error(unitType + " cannot have using statments"));
+                throw (new Error(unitType + " cannot have using statements"));
             }
         default:
             throw (new Error("Unrecognised source element" + node.type));
@@ -152,5 +151,25 @@ module.exports = {
             default:
                 throw (new Error("Unrecognised source element" + node.type));
         }
-    }
+    },
+
+    codePublicInterface: function(node, history, unitType, parent) {
+        return "";
+    },
+    codeExternalInterface: function(node, history, unitType, parent) {
+        return "";
+    },
+    codeInternalInterface: function(node, history, unitType, parent) {
+        return "";
+    },
+    codePrivateInterface: function(node, history, unitType, parent) {
+        return "";
+    },
+    codeDataStruct: function(node, history, unitType, parent) {
+        return "";
+    },
+    codeDeclarations: function(node, history, unitType, parent) {
+        return "";
+    },
+
 };

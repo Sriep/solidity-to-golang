@@ -20,112 +20,102 @@ func now() int64 {
     return time.Now().Unix() // 123
 }
 
-//***************** StandardToken start struct declarations  *****************
-type StandardToken_S struct {
-	xx *big.Int
+
+type _StandardToken_st struct {
 
 }
+type _StandardToken_pub interface {
 
-//***************** StandardToken start interface declarations  *****************
+}
 type StandardToken interface {
-	__xx() ( *big.Int)
+	_StandardToken_pub
+
+}
+type _StandardToken_int interface {
+	_StandardToken_pub
+
+}
+type _StandardToken_pri interface {
+	_StandardToken_int
 
 }
 
-//***************** StandardToken start external declarations  *****************
-
-//***************** StandardToken end external declarations  *****************
-
-
-
-//***************** Ownable start struct declarations  *****************
-type Ownable_S struct {
+type _Ownable_st struct {
 
 }
+type _Ownable_pub interface {
 
-//***************** Ownable start interface declarations  *****************
+}
 type Ownable interface {
+	_Ownable_pub
+
+}
+type _Ownable_int interface {
+	_Ownable_pub
+
+}
+type _Ownable_pri interface {
+	_Ownable_int
 
 }
 
-//***************** Ownable start external declarations  *****************
-
-//***************** Ownable end external declarations  *****************
-
-
-
-//***************** A start struct declarations  *****************
-type A_S struct {
-	StandardToken_S
-	Ownable_S
+type _A_st struct {
+	_StandardToken_S_st
+	_Ownable_S_st
 
 }
+type _A_pub interface {
+	_StandardToken_S_pub
+	_Ownable_S_pub
 
-//***************** A start interface declarations  *****************
+}
 type A interface {
-	StandardToken
-	Ownable
-
-}
-
-//***************** A start external declarations  *****************
-
-//***************** A end external declarations  *****************
-
-
-
-//***************** APRInflationToken start struct declarations  *****************
-type APRInflationToken_S struct {
 	StandardToken_S
 	Ownable_S
-	startDate *big.Int
-	dailyAdjust *big.Int
-	data *big.Int
-	dataArray [10]*big.Int
-	m_aLotOfIntegers [10]*big.Int
-	m_pairsOfFlags [2][10]bool
-	lotsOfDimentions [1][22][32][111]*big.Int
-	balances map [*big.Int] *big.Int
-//Declared enumerationActionChoices
-	choice int
-	defaultChoice int
-//Declared struct Funder
-//Declared struct Campaign
-	numCampaigns *big.Int
-//Declared event NewRequest
-//Declared modifier canAdjustDaily
-//Declared function reveal
-//Declared function APRInflationToken
-//Declared function aprMintAdjustment
-//Declared function _setDailyAdjustControl
+	_A_pub
+
+}
+type _A_int interface {
+	_StandardToken_S_int
+	_Ownable_S_int
+	_A_pub
+
+}
+type _A_pri interface {
+	_StandardToken_S_pri
+	_Ownable_S_pri
+	_A_int
 
 }
 
-//***************** APRInflationToken start interface declarations  *****************
+type _APRInflationToken_st struct {
+	_StandardToken_S_st
+	_Ownable_S_st
+
+}
+type _APRInflationToken_pub interface {
+	_StandardToken_S_pub
+	_Ownable_S_pub
+
+}
 type APRInflationToken interface {
-	StandardToken
-	Ownable
-	startDate() ( *big.Int)
-	__data() ( *big.Int)
-	__dataArray() ( [10]*big.Int)
-	__m_aLotOfIntegers() ( [10]*big.Int)
-	__m_pairsOfFlags() ( [2][10]bool)
-	__lotsOfDimentions() ( [1][22][32][111]*big.Int)
-	balances() ( map [*big.Int] *big.Int)
-	__choice() ( int)
-	__defaultChoice() ( int)
-	__numCampaigns() ( *big.Int)
-	reveal()  //This a function
-	APRInflationToken(undefined int)  //This a function
-	aprMintAdjustment() bool  //This a function
-	_setDailyAdjustControl() uint256  //This a function
+	StandardToken_S
+	Ownable_S
+	_APRInflationToken_pub
 
 }
+type _APRInflationToken_int interface {
+	_StandardToken_S_int
+	_Ownable_S_int
+	_APRInflationToken_pub
 
-//***************** APRInflationToken start external declarations  *****************
+}
+type _APRInflationToken_pri interface {
+	_StandardToken_S_pri
+	_Ownable_S_pri
+	_APRInflationToken_int
 
-//***************** APRInflationToken end external declarations  *****************
-
+}
 func main() {
     fmt.Println("hello")
 }
