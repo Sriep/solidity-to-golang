@@ -5,12 +5,12 @@ const gc = require("./gc.js");
 module.exports = {
     defaultArraySize: 10,
 
-    code: function(node, history, parent, hide) {
+    code: function(node, history, parent) {
         assert(node);
         assert(!(node instanceof Array));
 
         let goCode = "\t";
-        goCode += hide ? gc.hideDataPrefix : "";
+        goCode += gc.hideDataPrefix;
         goCode += node.name;
         goCode += this.getType(node, history, parent);
         return goCode + "\n";
@@ -63,13 +63,18 @@ module.exports = {
         goCode += gc.structPrefix +  parent + gc.structSuffix;
         goCode += ") ";
         goCode += this.codeGetSig(node, history, parent);
-        goCode += " {}\n";
+        goCode += " { return this.";
+        goCode += gc.hideDataPrefix + node.name;
+        goCode += ";}\n";
+
 
         goCode += "func (this ";
         goCode += gc.structPrefix +  parent + gc.structSuffix;
         goCode += ") ";
         goCode += this.codeSetSig(node, history, parent);
-        goCode += " {}\n";
+        goCode += " { this.";
+        goCode += gc.hideDataPrefix + node.name;
+        goCode += " = v; }\n";
 
         return goCode;
     },
@@ -88,16 +93,6 @@ module.exports = {
             }
         }
         return goCode;
-    },
-
-    codeInterface: function(node, history, parent) {
-        assert(node);
-        assert(!(node instanceof Array));
-        return "";
-    },
-
-    codeExternal: function(node, history, parent) {
-        return "";
     },
 
     getType: function(node, history, parent) {

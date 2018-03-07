@@ -41,9 +41,9 @@ type _Base_pri interface {
 
 type _Derived_st struct {
 	_Base_st
-	pubSV *big.Int
-	intSV *big.Int
-	priSV *big.Int
+	___pubSV *big.Int
+	___intSV *big.Int
+	___priSV *big.Int
 
 }
 type _Derived_pub interface {
@@ -75,12 +75,12 @@ type _Derived_pri interface {
 	__priF_Derived(_value uint) uint
 
 }
-func (this _Derived_st) PubSV_Derived ()(  *big.Int ) {}
-func (this _Derived_st) setPubSV_Derived ( v  *big.Int) {}
-func (this _Derived_st) ___intSV_Derived ()(  *big.Int ) {}
-func (this _Derived_st) ___setintSV_Derived ( v  *big.Int) {}
-func (this _Derived_st) ___priSV_Derived ()(  *big.Int ) {}
-func (this _Derived_st) ___setpriSV_Derived ( v  *big.Int) {}
+func (this _Derived_st) PubSV_Derived ()(  *big.Int ) { return this.___pubSV;}
+func (this _Derived_st) setPubSV_Derived ( v  *big.Int) { this.___pubSV = v; }
+func (this _Derived_st) ___intSV_Derived ()(  *big.Int ) { return this.___intSV;}
+func (this _Derived_st) ___setintSV_Derived ( v  *big.Int) { this.___intSV = v; }
+func (this _Derived_st) ___priSV_Derived ()(  *big.Int ) { return this.___priSV;}
+func (this _Derived_st) ___setpriSV_Derived ( v  *big.Int) { this.___priSV = v; }
 func (this _Derived_st) ExtF_Derived(_value uint) {}
 func (this _Derived_st) PubF_Derived(_value uint) uint {}
 func (this _Derived_st) __intF_Derived(_value uint) uint {}
