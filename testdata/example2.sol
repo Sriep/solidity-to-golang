@@ -77,11 +77,11 @@ contract APRInflationToken is StandardToken, Ownable {
     /**
      * @dev Adjusts all the necessary calculations in constructor
      */
-    function APRInflationToken() public {
+    function APRInflationToken(int i) public {
         startDate = now;
 
         // 365 / 10%
-        startRate = 3650;
+        startRate = 3650 + i;
 
         // 365 / 1%
         endRate = 36500;
