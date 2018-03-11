@@ -1081,6 +1081,7 @@ function peg$parse(input, options) {
             literal: type,
             id: (id || {}).name,
             is_indexed: isindexed != null,
+            is_storage: isconstant != null,
             is_storage: isstorage != null,
             is_memory: ismemory != null,
             start: location().start.offset,
