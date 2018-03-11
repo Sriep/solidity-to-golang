@@ -81,10 +81,14 @@ func (this _Derived_st) ___intSV_Derived ()(  *big.Int ) { return this.___intSV;
 func (this _Derived_st) ___setintSV_Derived ( v  *big.Int) { this.___intSV = v; }
 func (this _Derived_st) ___priSV_Derived ()(  *big.Int ) { return this.___priSV;}
 func (this _Derived_st) ___setpriSV_Derived ( v  *big.Int) { this.___priSV = v; }
-func (this _Derived_st) ExtF_Derived(_value uint) {}
-func (this _Derived_st) PubF_Derived(_value uint) uint {}
-func (this _Derived_st) __intF_Derived(_value uint) uint {}
-func (this _Derived_st) __priF_Derived(_value uint) uint {}
+func (this _Derived_st) ExtF_Derived(_value uint) {
+}
+func (this _Derived_st) PubF_Derived(_value uint) uint {
+}
+func (this _Derived_st) __intF_Derived(_value uint) uint {
+}
+func (this _Derived_st) __priF_Derived(_value uint) uint {
+}
 
 func main() {
     fmt.Println("hello")

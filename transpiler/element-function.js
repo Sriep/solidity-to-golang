@@ -1,5 +1,6 @@
 'use strict';
 const assert = require("assert");
+const block = require("./block.js");
 const gc = require("./gc.js");
 
 module.exports = {
@@ -45,7 +46,41 @@ module.exports = {
         goCode += gc.structPrefix +  parent + gc.structSuffix;
         goCode += ") ";
         goCode += this.getSignature(node, history, parent);
-        goCode += " {}\n";
+        goCode += " {\n";
+        goCode += this.codeFunctionBody(node, history, parent);
+        goCode += "}\n";
         return goCode;
+    },
+
+    codeFunctionBody: function(node, history, parent) {
+        return block.code(node.body.body, history, parent);
     }
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
