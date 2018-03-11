@@ -31,9 +31,9 @@ contract APRInflationToken is StandardToken, Ownable {
 
 
     //enum
-    enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
-    ActionChoices choice;
-    ActionChoices constant defaultChoice = ActionChoices.GoStraight;
+    //enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+   // ActionChoices choice;
+   // ActionChoices constant defaultChoice = ActionChoices.GoStraight;
 
     // Defines a new type with two fields.
     struct Funder {
@@ -46,7 +46,7 @@ contract APRInflationToken is StandardToken, Ownable {
         uint fundingGoal;
         uint numFunders;
         uint amount2;
-        mapping (uint => Funder) funders;
+        //mapping (uint => Funder) funders;
     }
 
     uint numCampaigns;

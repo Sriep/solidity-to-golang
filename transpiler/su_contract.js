@@ -23,6 +23,7 @@ module.exports = {
         goCode += this.codeExternalInterface(node, history);
         goCode += this.codeInternalInterface(node, history);
         goCode += this.codePrivateInterface(node, history);
+        goCode += this.codeConstructor(node, history);
         goCode += this.codeDeclarations(node, history);
 
         //goCode += "\n//***************** " + node.name + " end declarations " + " *****************\n\n";
@@ -76,9 +77,22 @@ module.exports = {
         let goCode = "type ";
         goCode += gc.structPrefix + node.name + gc.structSuffix;
         goCode += " struct {\n";
-        goCode += this.codeBases(node, history, gc.structPrefix, gc.structSuffix);
+        //goCode += this.codeBases(node, history, gc.structPrefix, gc.structSuffix);
         goCode += sourceElements.codeDataStruct(node.body, history, node.name);
-        goCode += "\n}\n";
+        goCode += "\tContract\n";
+        goCode += "\tthis *" + gc.structPrefix + node.name + gc.structSuffix + "\n";
+        goCode += "}\n";
+        return goCode;
+    },
+
+    codeConstructor: function(node, history) {
+        let goCode = "func New" + node.name + "() (*";
+        goCode += gc.structPrefix + node.name + gc.structSuffix + ") {\n";
+        goCode += "\tp := new(" + gc.publicIPrefix +  node.name  + gc.publicISuffix + ")\n";
+        goCode +=  "\tp.this = p\n";
+        goCode += sourceElements.codeConstructor(node.body, history, node);
+        goCode += "\treturn p\n";
+        goCode += "}\n\n";
         return goCode;
     },
 

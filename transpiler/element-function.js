@@ -34,9 +34,11 @@ module.exports = {
         }
         goCode += ")";
         if (node.returnParams instanceof Array && node.returnParams.length > 0) {
+            goCode += "(";
             for (let  retParm of node.returnParams ) {
                 goCode += " " + retParm.literal.literal;
             }
+            goCode += ")";
         }
         return goCode;
     },

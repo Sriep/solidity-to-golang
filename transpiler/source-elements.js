@@ -13,13 +13,32 @@ module.exports = {
         for (let node of nodeArray) {
             this.checkElement(node, history, unitType,  parent);
             history.addIdentifier(node, parent);
-            if (node.type === "StateVariableDeclaration")
-                goCode +=  stateVariable.code(node, history,  parent);
-            else if (node.type === "FunctionDeclaration") {
+            //if (node.type === "StateVariableDeclaration")
+            //    goCode +=  stateVariable.code(node, history,  parent);
+            //else
+            if (node.type === "FunctionDeclaration") {
                 this.setFuncVisibility(node);
                 assert(node.visibility !== undefined);
             }
         }
+        return goCode;
+    },
+
+    codeConstructor: function(nodeArray, history, parentNode) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+
+        let goCode = "";
+        for (let base of parentNode.is) {
+            goCode += history.stateVarables[base.name];
+        }
+
+        for (let node of nodeArray) {
+            if (node.type === "StateVariableDeclaration") {
+                goCode += "\tp.create(\"" + node.name + "\", 0)\n";
+            }
+        }
+        history.stateVarables[parentNode.name] = goCode;
         return goCode;
     },
 
@@ -100,7 +119,7 @@ module.exports = {
         return goCode;
     },
 
-    checkElement: function(node, history, unitType, parent) {
+    checkElement: function(node, history, unitType) {
         assert(node, "missing node");
         assert(!(node instanceof Array), "unexpected node array");
 

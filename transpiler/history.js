@@ -9,6 +9,7 @@ module.exports = {
     identifiersSU: new Set(),
     identifiersInSU: new Set(),
 
+    stateVarables: new Map(),
     sourceUnits: new Map(),
 
     expandType: function(typeName, parent) {

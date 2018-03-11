@@ -13,7 +13,7 @@ module.exports = {
         goCode += gc.hideDataPrefix;
         goCode += node.name;
         goCode += this.getType(node, history, parent);
-        return goCode + "\n";
+        return goCode;
     },
 
     codeAccessorSig: function(node, history, parent) {
@@ -59,22 +59,27 @@ module.exports = {
     },
 
     codeAccessors: function(node, history, parent) {
-        let goCode = "func (this ";
-        goCode += gc.structPrefix +  parent + gc.structSuffix;
-        goCode += ") ";
-        goCode += this.codeGetSig(node, history, parent);
-        goCode += " { return this.";
-        goCode += gc.hideDataPrefix + node.name;
-        goCode += ";}\n";
+        let goCode = "";
+        if (node.visibility === "public") {
+            goCode = "func (this ";
+            goCode += gc.structPrefix + parent + gc.structSuffix;
+            goCode += ") ";
+            goCode += this.codeGetSig(node, history, parent);
 
+            goCode += " {\n";
+            goCode += "\tv := s.get(\"" + node.name + "\").(";
+            goCode += this.getType(node, history, parent) + ")\n";
+            goCode += "\treturn v\n}\n";
+        }
 
-        goCode += "func (this ";
-        goCode += gc.structPrefix +  parent + gc.structSuffix;
-        goCode += ") ";
-        goCode += this.codeSetSig(node, history, parent);
-        goCode += " { this.";
-        goCode += gc.hideDataPrefix + node.name;
-        goCode += " = v; }\n";
+        //goCode += "func (this ";
+        //goCode += gc.structPrefix +  parent + gc.structSuffix;
+        //goCode += ") ";
+        //goCode += this.codeSetSig(node, history, parent);
+
+        //goCode += " { this.";
+        //goCode += gc.hideDataPrefix + node.name;
+        //goCode += " = v; }\n";
 
         return goCode;
     },
