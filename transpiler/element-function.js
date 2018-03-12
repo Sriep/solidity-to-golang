@@ -56,7 +56,7 @@ module.exports = {
     },
 
     codeFunctionBody: function(node, history, parent) {
-        return block.code(node.body.body, history, localHistory, parent);
+        return block.code(node.body.body, history, localHistory, parent, 1);
     }
 
 };

@@ -53,6 +53,14 @@ const gf = {
         }
         return goCode;
     }
-
+/*
+    addTabs: function(depth) {
+        let goCode = "";
+        for ( let i = 0 ; i<depth ; i++ )   {
+            goCode += "\t"
+        }
+        return goCode;
+    }
+*/
 };
 module.exports = gf;
