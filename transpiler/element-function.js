@@ -1,6 +1,7 @@
 'use strict';
 const assert = require("assert");
 const block = require("./block.js");
+const localHistory = require("./history-local");
 const gc = require("./gc.js");
 
 module.exports = {
@@ -55,7 +56,7 @@ module.exports = {
     },
 
     codeFunctionBody: function(node, history, parent) {
-        return block.code(node.body.body, history, parent);
+        return block.code(node.body.body, history, localHistory, parent);
     }
 
 };

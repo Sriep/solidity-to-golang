@@ -3,6 +3,7 @@ const assert = require("assert");
 const stateVariable = require("./element-state-variable.js");
 const functionElement = require("./element-function.js");
 const structElement = require("./element-struct.js");
+const gf = require("./gf.js");
 
 module.exports = {
 
@@ -35,7 +36,17 @@ module.exports = {
 
         for (let node of nodeArray) {
             if (node.type === "StateVariableDeclaration") {
-                goCode += "\tp.create(\"" + node.name + "\", 0)\n";
+                goCode += "\tp.set(\"" + node.name + "\", ";
+                if (node.value && node.value.value) {
+                    goCode += node.value.value;
+                } else {
+                    if (node.literal.literal.type === "MappingExpression") {
+                        goCode += " make(" + gf.typeOf(node.literal) + ")"
+                    } else {
+                        goCode += " new(" + gf.typeOf(node.literal) + ")";
+                    }
+                }
+                goCode += ")\n";
             }
         }
         history.stateVarables[parentNode.name] = goCode;

@@ -31,9 +31,9 @@ contract APRInflationToken is StandardToken, Ownable {
 
 
     //enum
-    //enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
-   // ActionChoices choice;
-   // ActionChoices constant defaultChoice = ActionChoices.GoStraight;
+    enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+    ActionChoices choice;
+    ActionChoices constant defaultChoice = ActionChoices.GoStraight;
 
     // Defines a new type with two fields.
     struct Funder {
@@ -46,11 +46,11 @@ contract APRInflationToken is StandardToken, Ownable {
         uint fundingGoal;
         uint numFunders;
         uint amount2;
-        //mapping (uint => Funder) funders;
+        mapping (uint => Funder) funders;
     }
 
     uint numCampaigns;
-    //mapping (uint => Campaign) campaigns;
+    mapping (uint => Campaign) campaigns;
     //events
     event NewRequest(uint);
 
@@ -68,19 +68,21 @@ contract APRInflationToken is StandardToken, Ownable {
 
     function reveal()   public   canAdjustDaily returns (uint, uint) {
         uint i =2;
-        var  abc = i;
+        uint  abc = i;
+        uint av;
         uint [22] memory ar;
-        var (m,n) = (i,abc);
+        uint m;
+        (i, abc, m, av) = (1,2,3,4);
         if (startDate >2) {
             startDate = 3*i;
             abc = 3;
+            av = 3;
             m = 3;
-            n = 3;
         } else {
             i =7;
             ar[2] =3;
             abc = i;
-            throw;
+            //throw;
         }
         while (i++ < 27) {
             i++;

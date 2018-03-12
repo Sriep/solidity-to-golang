@@ -1,6 +1,5 @@
 'use strict';
 const assert = require("assert");
-const history = require("./history.js");
 
 module.exports = {
     codePragma: function(node, history) {

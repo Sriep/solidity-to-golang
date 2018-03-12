@@ -17,5 +17,6 @@ const gc = {
     suffixContract: true
 
 };
-
 module.exports = gc;
+
+

@@ -90,6 +90,7 @@ module.exports = {
         goCode += gc.structPrefix + node.name + gc.structSuffix + ") {\n";
         goCode += "\tp := new(" + gc.publicIPrefix +  node.name  + gc.publicISuffix + ")\n";
         goCode +=  "\tp.this = p\n";
+        goCode +=  "\tp.createStorage()\n";
         goCode += sourceElements.codeConstructor(node.body, history, node);
         goCode += "\treturn p\n";
         goCode += "}\n\n";

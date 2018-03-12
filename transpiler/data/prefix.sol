@@ -156,11 +156,10 @@ func (s *Contract) get(variableName string) (interface{}) {
 func (s *Contract) set(variableName string, value interface{}) {
     s.svStorage[variableName] = value;
 }
-func (s *Contract) create(variableName string, value interface{}) {
+func (s *Contract) createStorage() {
     if nil == s.svStorage {
         s.svStorage = make(map[string]interface{})
     }
-    s.svStorage[variableName] = value;
 }
 func (s *Contract) selfdestruct(recipient address) {
     // todo selfdestruct

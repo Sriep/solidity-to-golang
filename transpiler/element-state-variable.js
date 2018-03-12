@@ -1,9 +1,9 @@
 'use strict';
 const assert = require("assert");
 const gc = require("./gc.js");
+const gf = require("./gf.js");
 
 module.exports = {
-    defaultArraySize: 10,
 
     code: function(node, history, parent) {
         assert(node);
@@ -84,22 +84,6 @@ module.exports = {
         return goCode;
     },
 
-    arrayPart: function(dimensions) {
-        assert(dimensions instanceof Array);
-        let goCode = "";
-        for ( let dim of dimensions ) {
-            if (dim === null) {
-                goCode += "[" + this.defaultArraySize + "]";
-            } else if (dim === undefined) {
-                console.log("Parser unable to resolve array size");
-                goCode += "[" + this.defaultArraySize + "]";
-            } else {
-                goCode += "[" + dim + "]";
-            }
-        }
-        return goCode;
-    },
-
     getType: function(node, history, parent) {
         let goCode = "";
         if (node.literal.literal.type === "MappingExpression") {
@@ -108,7 +92,7 @@ module.exports = {
             goCode += "] ";
             goCode += history.expandType(node.literal.literal.to.literal, parent);
         } else {
-            goCode += " " + this.arrayPart(node.literal.array_parts);
+            goCode += " " + gf.arrayPart(node.literal.array_parts);
             goCode += history.expandType(node.literal.literal, parent);
         }
         return goCode;
