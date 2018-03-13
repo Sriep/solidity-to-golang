@@ -66,22 +66,27 @@ contract APRInflationToken is StandardToken, Ownable {
         _;
     }
 
-    function reveal()   public   canAdjustDaily returns (uint, uint) {
-        uint i =2;
+    function reveal(uint av)   public   canAdjustDaily returns (uint, uint) {
+        uint i =2+1;
         uint  abc = i;
-        uint av;
-        uint [22] memory ar;
+        int [22] memory ar;
         uint m;
-        (i, abc, m, av) = (1,2,3,4);
-        if (startDate >2) {
+        if (abc == i || !(i == 4)) {
+            (i, abc, m, av) = (1,2,3,4);
+        }
+        if (2 >abc && (av ==3 || i <=abc)) {
             startDate = 3*i;
             abc = 3;
             av = 3;
             m = 3;
         } else {
             i =7;
+            int anint = -44;
+            int [99][99][99][99] memory arra;
+            arra[14][i][av][77] = 23;
             ar[2] =3;
-            abc = i;
+            ar[7] = anint;
+            abc = m;
             //throw;
         }
         while (i++ < 27) {

@@ -3,6 +3,7 @@ const assert = require("assert");
 const block = require("./block.js");
 const localHistory = require("./history-local");
 const gc = require("./gc.js");
+const gf = require("./gf.js");
 
 module.exports = {
 
@@ -30,14 +31,20 @@ module.exports = {
                     start = false;
                 else
                     goCode += ", ";
-                goCode += param.id + " " + param.literal.literal;
+                goCode += param.id + " ";
+                goCode += gf.typeOf(param.literal);
             }
         }
         goCode += ")";
         if (node.returnParams instanceof Array && node.returnParams.length > 0) {
             goCode += "(";
+            let start = true;
             for (let  retParm of node.returnParams ) {
-                goCode += " " + retParm.literal.literal;
+                if (start)
+                    start = false;
+                else
+                    goCode += ", ";
+                goCode += " " + gf.typeOf(retParm.literal);
             }
             goCode += ")";
         }

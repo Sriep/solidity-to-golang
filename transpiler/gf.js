@@ -1,5 +1,7 @@
 'use strict';
 const assert = require("assert");
+const dic = require("./soltogo-dictionary.js");
+const gc = require("./gc.js");
 
 const gf = {
     defaultArraySize: 10,
@@ -20,20 +22,33 @@ const gf = {
         return goCode;
     },
 
-    typeOf(node) {
-        assert(node && node.type === "Type");
+    typeOf(node, history, parent, localHistory) {
+        if (node.type !== "Type")
+            assert(node && node.type === "Type");
 
         let goCode = "";
 
         if (node.literal.type === "MappingExpression") {
             goCode += " map[";
-            goCode += this.typeOf(node.literal.from);
-            goCode += "]" + this.typeOf(node.literal.to);
+            goCode += this.typeOf(node.literal.from, history, parent, localHistory);
+            goCode += "]" + this.typeOf(node.literal.to, history, parent, localHistory);
         } else {
             goCode += gf.arrayPart(node.array_parts);
-            goCode += node.literal;
+            if (dic.valueTypes.has(node.literal)) {
+                goCode += dic.valueTypes.get(node.literal);
+            } else {
+                goCode += node.literal;
+                if (history.sourceUnits.get(parent.name)) {
+                    if ( history.sourceUnits.get(parent.name).identifiers.has(node.literal)) {
+                        goCode += gc.suffixContract ? "_" + parent.name : "";
+                    }
+                } else {
+                    goCode += "What";
+                    assert(false, "strange type")
+                    // todo check exists in localHistory or throw unkonwn
+                }
+            }
         }
-
         return goCode;
     },
 
@@ -44,23 +59,92 @@ const gf = {
         for (let item of sequence) {
             goCode += first ? "" : ", ";
             if (item.type === "Identifier")
-                goCode += item.name;
+                goCode += this.getIdentifier(item.name);
             else if (item.type === "Literal")
-                goCode += item.value;
+                goCode += this.getLiteral(item.value);
             else
                 assert(false);
             first = false;
         }
         return goCode;
-    }
-/*
-    addTabs: function(depth) {
-        let goCode = "";
-        for ( let i = 0 ; i<depth ; i++ )   {
-            goCode += "\t"
+    },
+
+
+    getLiteral: function(value) {
+        switch (this.getLiteralType(value)) {
+            case "bool":
+                return value;
+            case "string":
+                return value;
+            case "int":
+                return "big.NewInt(" + value + ")";
+            case "float":
+                return "big.NewFloat(" + value + ")";
+            default:
+                assert(false, "unimplemented value type")
+                return value; // todo ??????
         }
-        return goCode;
+    },
+
+    getIdentifier: function(identifier, history, localHistory, parent) {
+        return identifier; //todo check exists and if state varable
+    },
+
+    getLiteralType: function(value) {
+        if (value === "true" || value === "false") {
+            return "bool";
+        } else if (/^[+\-]?\d+$/.test(value)) {
+            return "int";
+        } else if (/^[-+]?[0-9]*\.?[0-9]+$/.test(value)) {
+            // Maybe use /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/
+            return "float";
+        } else {
+            return "string";
+        }
+    },
+
+    getBigType: function (expression) {
+        if (expression.includes("big.NewFloat"))
+            return "Float";
+        if (expression.includes("big.NewInt"))
+            return "Int";
+    },
+
+    getBigOperator: function (operator) {
+        switch (operator) {
+            case "+":
+                return "Add";
+            case "-":
+                return "Sub";
+            case "*":
+                return "Mul";
+            case "/":
+                return "Div";
+            case "%":
+                return "Mod";
+            case "**":
+                return "Exp";
+            case "==":
+                return "Cmp";
+            case "!=":
+                return "Cmp";
+            case "<":
+                return "Cmp";
+            case "<=":
+                return "Cmp";
+            case ">":
+                return "Cmp";
+            case ">=":
+                return "Cmp";
+            case ">>":
+                return "Rsh";
+            case "<<":
+                return "Lsh";
+            default:
+                assert(false, "not impimented big operator");
+                return "";
+        }
     }
-*/
+
 };
 module.exports = gf;

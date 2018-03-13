@@ -164,3 +164,7 @@ func (s *Contract) createStorage() {
 func (s *Contract) selfdestruct(recipient address) {
     // todo selfdestruct
 }
+
+// ********************** End header ********************************
+//
+//******************** Generated code follows ***********************

@@ -66,6 +66,7 @@ module.exports = {
             assert( a && b);
             this.sourceUnits.get(node.name).bases.push(node.is[i].name);
         }
+        this.sourceUnits.get(node.name).constants = new Map;
         this.identifiersSU.add(node.name);
     },
 

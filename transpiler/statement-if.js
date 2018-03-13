@@ -13,6 +13,8 @@ module.exports = {
         goCode += expression.codeExpression(node.test, history, localHistory, parent);
         goCode += block.codeStatement(node.consequent, history, localHistory, parent, depth+1);
         if (node.alternate) {
+            if (goCode[goCode.length -1] == "\n")
+                goCode = goCode.slice(0, -1);
             goCode += " else ";
             goCode += block.codeStatement(node.alternate, history, localHistory, parent, depth+1);
         }

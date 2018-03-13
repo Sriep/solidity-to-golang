@@ -26,7 +26,7 @@ module.exports = {
             case "BlockStatement":
                 goCode += "{\n";
                 goCode += this.code(statement.body, history, localHistory, parent, depth+1);
-                goCode += "\t".repeat(depth) + "\n}";
+                goCode += "\n" +"\t".repeat(depth) + "}";
                 break;
             case "VariableDeclaration":
                 goCode += varDeclaration.code(statement, history, localHistory, parent, depth);

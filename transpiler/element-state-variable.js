@@ -67,7 +67,7 @@ module.exports = {
             goCode += this.codeGetSig(node, history, parent);
 
             goCode += " {\n";
-            goCode += "\tv := s.get(\"" + node.name + "\").(";
+            goCode += "\tv := this.get(\"" + node.name + "\").(";
             goCode += this.getType(node, history, parent) + ")\n";
             goCode += "\treturn v\n}\n";
         }

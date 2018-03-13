@@ -3,6 +3,7 @@ const assert = require("assert");
 const stateVariable = require("./element-state-variable.js");
 const functionElement = require("./element-function.js");
 const structElement = require("./element-struct.js");
+const enumElement = require("./element-enum.js");
 const gf = require("./gf.js");
 
 module.exports = {
@@ -25,12 +26,12 @@ module.exports = {
         return goCode;
     },
 
-    codeConstructor: function(nodeArray, history, parentNode) {
+    codeConstructor: function(nodeArray, history, parent) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
 
         let goCode = "";
-        for (let base of parentNode.is) {
+        for (let base of parent.is) {
             goCode += history.stateVarables[base.name];
         }
 
@@ -41,15 +42,15 @@ module.exports = {
                     goCode += node.value.value;
                 } else {
                     if (node.literal.literal.type === "MappingExpression") {
-                        goCode += " make(" + gf.typeOf(node.literal) + ")"
+                        goCode += " make(" + gf.typeOf(node.literal, history, parent) + ")"
                     } else {
-                        goCode += " new(" + gf.typeOf(node.literal) + ")";
+                        goCode += " new(" + gf.typeOf(node.literal, history, parent) + ")";
                     }
                 }
                 goCode += ")\n";
             }
         }
-        history.stateVarables[parentNode.name] = goCode;
+        history.stateVarables[parent.name] = goCode;
         return goCode;
     },
 
@@ -124,7 +125,11 @@ module.exports = {
                 case "FunctionDeclaration":
                     goCode +=  functionElement.codeFunction(node, history, parent);
                     break;
+                case "EnumDeclaration":
+                    goCode += enumElement.code(node, history, parent);
+                    break;
                 default:
+                    //assert(false, "declarations, node type not implemented")
             }
         }
         return goCode;

@@ -88,7 +88,7 @@ module.exports = {
     codeConstructor: function(node, history) {
         let goCode = "func New" + node.name + "() (*";
         goCode += gc.structPrefix + node.name + gc.structSuffix + ") {\n";
-        goCode += "\tp := new(" + gc.publicIPrefix +  node.name  + gc.publicISuffix + ")\n";
+        goCode += "\tp := new(" + gc.structPrefix +  node.name  + gc.structSuffix + ")\n";
         goCode +=  "\tp.this = p\n";
         goCode +=  "\tp.createStorage()\n";
         goCode += sourceElements.codeConstructor(node.body, history, node);
