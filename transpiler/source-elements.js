@@ -13,15 +13,12 @@ module.exports = {
         assert(nodeArray instanceof Array);
         let goCode = "";
         for (let node of nodeArray) {
-            this.checkElement(node, history, unitType,  parent);
-            history.addIdentifier(node, parent);
-            //if (node.type === "StateVariableDeclaration")
-            //    goCode +=  stateVariable.code(node, history,  parent);
-            //else
             if (node.type === "FunctionDeclaration") {
                 this.setFuncVisibility(node);
                 assert(node.visibility !== undefined);
             }
+            this.checkElement(node, history, unitType);
+            history.addIdentifier(node, parent);
         }
         return goCode;
     },
@@ -30,28 +27,33 @@ module.exports = {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
 
-        let goCode = "";
+        let goCodeBases = "";
         for (let base of parent.is) {
-            goCode += history.stateVarables[base.name];
+            goCodeBases += history.stateVariablesInitCode[base.name];
         }
-
+        let goCodeDerived = ""
         for (let node of nodeArray) {
+            let SvName = node.name;
+            if (!node.visibility || node.visibility === "public")
+                SvName = node.name.charAt(0).toUpperCase() + node.name.slice(1);
+
             if (node.type === "StateVariableDeclaration") {
-                goCode += "\tp.set(\"" + node.name + "\", ";
+                goCodeDerived += "\tp.set(\"" + SvName + "\", ";
                 if (node.value && node.value.value) {
-                    goCode += node.value.value;
+                    goCodeDerived += node.value.value;
                 } else {
                     if (node.literal.literal.type === "MappingExpression") {
-                        goCode += " make(" + gf.typeOf(node.literal, history, parent) + ")"
+                        goCodeDerived += " make(" + gf.typeOf(node.literal, history, parent) + ")"
                     } else {
-                        goCode += " new(" + gf.typeOf(node.literal, history, parent) + ")";
+                        goCodeDerived += " new(" + gf.typeOf(node.literal, history, parent) + ")";
                     }
                 }
-                goCode += ")\n";
+                goCodeDerived += ")\n";
             }
         }
-        history.stateVarables[parent.name] = goCode;
-        return goCode;
+        history.stateVariablesInitCode[parent.name] = goCodeDerived;
+
+        return goCodeBases + goCodeDerived;
     },
 
     codePublicInterface: function(nodeArray, history, parent) {

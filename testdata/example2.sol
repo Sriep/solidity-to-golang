@@ -1,7 +1,13 @@
 //Write your own contracts here. Currently compiles using solc v0.4.15+commit.bbb8e64f.
 pragma solidity ^0.4.18;
 contract StandardToken {
-    uint xx;
+    uint public xx;
+    struct stuff {
+        int cabbage;
+    }
+    function incXX(uint amount) public {
+        xx = xx + amount;
+    }
 }
 
 contract Ownable {
@@ -65,28 +71,44 @@ contract APRInflationToken is StandardToken, Ownable {
         require(now >= (startDate + (day * dailyAdjust)));
         _;
     }
+    string myText;
+    string constant constText = "This text is constant";
 
     function reveal(uint av)   public   canAdjustDaily returns (uint, uint) {
+        incXX(av);
+        xx = 77;
+        stuff memory sss;
+        sss.cabbage = 545;
+        StandardToken d = new StandardToken();
+        av = d.xx();
+
+        choice = ActionChoices.GoLeft;
+        Funder memory fund;
+        int [14][33] memory arra;
+        uint[] memory a = new uint[](7);
+        uint[2][] memory arrayOfPairs = new uint[2][](startDate);
+        int [22] memory ar;
         uint i =2+1;
         uint  abc = i;
-        int [22] memory ar;
-        uint m;
+        myText = "hi there";
+        startDate = startDate + 4;
         if (abc == i || !(i == 4)) {
-            (i, abc, m, av) = (1,2,3,4);
+            (i, abc, arra[1][2]) = (1,2,3);
         }
         if (2 >abc && (av ==3 || i <=abc)) {
             startDate = 3*i;
             abc = 3;
             av = 3;
-            m = 3;
+            a[6] = 8;
+            arrayOfPairs[1][1] = 3333;
+            fund.amount = 7;
+            // m[5] = 3;
         } else {
             i =7;
             int anint = -44;
-            int [99][99][99][99] memory arra;
-            arra[14][i][av][77] = 23;
+
             ar[2] =3;
             ar[7] = anint;
-            abc = m;
             //throw;
         }
         while (i++ < 27) {

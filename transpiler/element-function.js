@@ -22,17 +22,22 @@ module.exports = {
         } else {
             goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
         }
-        goCode += gc.suffixContract ? "_" + parent : "";
+        goCode += gc.suffixContract ? "_" + parent.name : "";
         goCode += "(";
         if (node.params instanceof Array && node.params.length > 0) {
             let start = true;
+            let data = history.findIdData(node.name, parent);
+            let localHistory = data.localHistory;
             for (let param of node.params) {
                 if (start)
                     start = false;
                 else
                     goCode += ", ";
                 goCode += param.id + " ";
-                goCode += gf.typeOf(param.literal);
+                goCode += gf.typeOf(param.literal, history, parent);
+                if (!localHistory.memoryVariables.has(param.id)
+                    && !localHistory.stateVariables.has(param.id) )
+                    localHistory.addVariableName(param, param.id, "internal", "memory", parent);
             }
         }
         goCode += ")";
@@ -44,7 +49,7 @@ module.exports = {
                     start = false;
                 else
                     goCode += ", ";
-                goCode += " " + gf.typeOf(retParm.literal);
+                goCode += " " + gf.typeOf(retParm.literal, history, parent);
             }
             goCode += ")";
         }
@@ -53,7 +58,7 @@ module.exports = {
 
     codeFunction: function(node, history, parent) {
         let goCode = "func (this ";
-        goCode += gc.structPrefix +  parent + gc.structSuffix;
+        goCode += gc.structPrefix +  parent.name + gc.structSuffix;
         goCode += ") ";
         goCode += this.getSignature(node, history, parent);
         goCode += " {\n";

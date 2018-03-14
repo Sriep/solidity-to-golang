@@ -33,7 +33,7 @@ module.exports = {
                 break;
             case "VariableDeclarationTuple":
                 //goCode += varDeclaration.codeTuple(statement, history, localHistory, parent);
-                break; // Bug in grammar
+                break; // todo Bug in grammar??????
             case "EmptyStatement":
                 break;
             case "PlaceholderStatement":

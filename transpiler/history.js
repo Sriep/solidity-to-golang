@@ -1,28 +1,36 @@
 const assert = require("assert");
 const dic = require("./soltogo-dictionary");
+const gf = require("./gf.js");
+const gc = require("./gc.js");
 
 module.exports = {
 
     startVersion:  "",
     endVersion: "",
 
-    identifiersSU: new Set(),
-    identifiersInSU: new Set(),
+    //identifiersSU: new Set(),
+    //identifiersInSU: new Set(),
 
-    stateVarables: new Map(),
+    publicFunctions: new Map(),
+    publicTypes: new Map(),
+    publicStateVariables: new Map(),
+    publicConstants: new Map(),
+
+    stateVariablesInitCode: new Map(),
     sourceUnits: new Map(),
 
     expandType: function(typeName, parent) {
         if (dic.valueTypes.has(typeName)) {
             return dic.valueTypes.get(typeName);
         } else {
-            assert(this.sourceUnits.has(parent));
-            if (this.sourceUnits.get(parent).identifiers.has(typeName)) {
-                let typeNode = this.sourceUnits.get(parent).identifiers.get(typeName);
+            if (!this.sourceUnits.has(parent.name))
+                assert(this.sourceUnits.has(parent.name));
+            if (this.sourceUnits.get(parent.name).identifiers.has(typeName)) {
+                let typeNode = this.sourceUnits.get(parent.name).identifiers.get(typeName);
                 if (typeNode.type === "EnumDeclaration") {
                     return "int";
                 } else {
-                    return typeNode.name + "_" + parent;
+                    return typeNode.name + "_" + parent.name;
                 }
             } else {
                 throw(new Error("used unknown type " + typeName + " in " + parent));
@@ -67,7 +75,9 @@ module.exports = {
             this.sourceUnits.get(node.name).bases.push(node.is[i].name);
         }
         this.sourceUnits.get(node.name).constants = new Map;
-        this.identifiersSU.add(node.name);
+        this.sourceUnits.get(node.name).stateVariables = new Map;
+        this.sourceUnits.get(node.name).functions = new Map;
+        this.sourceUnits.get(node.name).dataTypes = new Map;
     },
 
     addInterface: function(node) {
@@ -81,26 +91,108 @@ module.exports = {
         if (this.sourceUnits.has(node.name))
             throw(new Error("Library identifier " + node.name + " already used"));
         this.sourceUnits.set(node.name, this.emptyLibrary);
-        this.identifiersSU.add(node.name);
     },
 
     addIdentifier: function(node, parent) {
-        assert(parent && this.sourceUnits.has(parent));
-        assert(this.sourceUnits.get(parent).identifiers);
-
-        if (dic.valueTypes.has(node.name))
-            throw(new Error(node,name + " already defined basic type"));
-        if (this.identifiersSU.has(node.name) && node.name !== parent) {
-            throw(new Error("identifier " + node.name + " already used for storage unit."));
-        }
-        if (this.identifiersInSU.has(node.name)) {
-            console.log("identifier " + node.name + " shadows previous declaration");
-        }
-
-        if (this.sourceUnits.get(parent).identifiers.has(node.name)) {
-            throw(new Error("identifier " + node.name + " already declared in " + parent));
-        }
-        this.sourceUnits.get(parent).identifiers.set(node.name, node);
-        this.identifiersInSU.add(node.name);
+        return this.addIdName(node, node.name, node.visibility, node.type, parent);
     },
+
+    addIdName: function(node, name, visibility, nodeType, parent) {
+        assert(parent && this.sourceUnits.has(parent.name));
+        assert(this.sourceUnits.get(parent.name).identifiers);
+        let localHistory = require("./history-local.js");
+
+        if (dic.valueTypes.has(name))
+            throw(new Error(node,name + " already defined basic type"));
+
+        let goId = gf.modifyId(name, visibility, nodeType, parent.name);
+
+        if (this.sourceUnits.get(parent.name).identifiers.has(name)) {
+            throw(new Error("identifier " + name + " already declared in " + parent.name));
+        }
+        this.sourceUnits.get(parent.name).identifiers.set(name, node);
+        switch (nodeType) {
+            case "StateVariableDeclaration":
+                if (node.is_constant) {
+                    assert(node.value, "error getting constant value");
+                    this.sourceUnits.get(parent.name).constants.set(name, gf.getValue(node.value, this, parent));
+                } else {
+                    this.sourceUnits.get(parent.name).stateVariables.set(name,
+                        { node: node, parent: parent, goName: goId, goType: "" });
+                }
+                if (visibility === "public") {
+                    if (this.publicStateVariables.has(name))
+                        throw(new Error(name + "already defined as public state variable"));
+                    else
+                        this.publicStateVariables.set(
+                            name, {node: node, parent: parent, goName: goId, goType: ""})
+                } else {
+                    this.sourceUnits.get(parent.name).stateVariables.set(
+                        name, {node: node, parent: parent, goName: goId, goType: ""})
+                }
+                break;
+            case "EnumDeclaration":
+            case "StructDeclaration":
+                if (visibility === "public") {
+                    if (this.publicTypes.has(name))
+                        throw(new Error(name + "already defined as public type"));
+                    else
+                        this.publicTypes.set(name, {node: node, parent: parent, goName: goId})
+                } else {
+                    this.sourceUnits.get(parent.name).dataTypes.set(
+                        name, {node: node, parent: parent, goName: goId})
+                }
+                break;
+            case "FunctionDeclaration":
+                 if (visibility === "public") {
+                    if (this.publicFunctions.has(name))
+                        throw(new Error(name + "already defined as public function"));
+                    else
+                        this.publicFunctions.set(
+                            name, {node: node, parent: parent, goName: goId, localHistory: localHistory})
+                } else {
+                    this.sourceUnits.get(parent.name).functions.set(
+                        name, {node: node, parent: parent, goName: goId, localHistory: localHistory})
+                }
+                break;
+            case "EventDeclaration":
+                break; //todo eventDeclartion
+            case "ModifierDeclaration":
+                break; //todo modifier declartion
+            default:
+                assert(false, "unknown identifier type") //todo
+        }
+    },
+
+    findIdData: function(id, parent) {
+        if (this.publicFunctions.has(id)) {
+            return this.publicFunctions.get(id);
+        } else if (this.publicTypes.has(id)) {
+            return this.publicTypes.get(id);
+        }  else if (this.publicStateVariables.has(id)) {
+            return this.publicStateVariables.get(id);
+        } else if (this.publicConstants.has(id)) {
+            return this.publicConstants.get(id);
+
+        } else if (this.sourceUnits.get(parent.name).functions.has(id)) {
+            return this.sourceUnits.get(parent.name).functions.get(id);
+        } else if (this.sourceUnits.get(parent.name).dataTypes.has(id)) {
+            return this.sourceUnits.get(parent.name).dataTypes.get(id);
+        }  else if (this.sourceUnits.get(parent.name).stateVariables.has(id)) {
+            return this.sourceUnits.get(parent.name).stateVariables.get(id);
+        } else if (this.sourceUnits.get(parent.name).constants.has(id)) {
+            return this.sourceUnits.get(parent.name).constants.get(id);
+        } //todo search though all local histories??????
+/*
+         else if (localHistory) {
+            if (localHistory.memoryVariables.has(id)) {
+                return localHistory.memoryVariables.get(id)
+            } else if (localHistory.stateVariables.has(id)) {
+                return localHistory.stateVariables.get(id)
+            } else if (localHistory.constants.has(id)) {
+                return localHistory.constants.get(id)
+            }
+        }*/
+        //assert(false, "cant find Id");
+    }
 };

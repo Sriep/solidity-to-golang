@@ -39,7 +39,7 @@ module.exports = {
         } else {
             goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
         }
-        goCode += gc.suffixContract ? "_" + parent : "";
+        goCode += gc.suffixContract ? "_" + parent.name : "";
         goCode += " ()( " + this.getType(node, history, parent) + " )";
         return goCode;
     },
@@ -52,7 +52,7 @@ module.exports = {
             goCode += gc.setPrefix;
             goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
         }
-        goCode += gc.suffixContract ? "_" + parent : "";
+        goCode += gc.suffixContract ? "_" + parent.name : "";
         goCode +=  " ( v ";
         goCode += this.getType(node, history, parent) + ")";
         return goCode;
@@ -62,7 +62,7 @@ module.exports = {
         let goCode = "";
         if (node.visibility === "public") {
             goCode = "func (this ";
-            goCode += gc.structPrefix + parent + gc.structSuffix;
+            goCode += gc.structPrefix + parent.name + gc.structSuffix;
             goCode += ") ";
             goCode += this.codeGetSig(node, history, parent);
 

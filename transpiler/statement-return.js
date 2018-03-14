@@ -10,7 +10,7 @@ module.exports = {
         let goCode = "\t";
         goCode += "return ";
         if (node.argument && node.argument.expressions) {
-            goCode += gf.codeSequence(node.argument.expressions);
+            goCode += gf.codeSequence(node.argument.expressions, history, parent, localHistory);
         }
         return goCode;
     }

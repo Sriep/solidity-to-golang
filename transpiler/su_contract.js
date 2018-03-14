@@ -35,7 +35,7 @@ module.exports = {
         goCode += gc.publicIPrefix +  node.name  + gc.publicISuffix;
         goCode += " interface {\n";
         goCode += this.codeBases(node, history, gc.publicIPrefix, gc.publicISuffix);
-        goCode += sourceElements.codePublicInterface(node.body, history, node.name);
+        goCode += sourceElements.codePublicInterface(node.body, history, node);
         goCode += "\n}\n";
         return goCode;
     },
@@ -78,7 +78,7 @@ module.exports = {
         goCode += gc.structPrefix + node.name + gc.structSuffix;
         goCode += " struct {\n";
         //goCode += this.codeBases(node, history, gc.structPrefix, gc.structSuffix);
-        goCode += sourceElements.codeDataStruct(node.body, history, node.name);
+        goCode += sourceElements.codeDataStruct(node.body, history, node);
         goCode += "\tContract\n";
         goCode += "\tthis *" + gc.structPrefix + node.name + gc.structSuffix + "\n";
         goCode += "}\n";
@@ -98,7 +98,7 @@ module.exports = {
     },
 
     codeDeclarations: function(node, history) {
-        return sourceElements.codeDeclarations(node.body, history, node.name);
+        return sourceElements.codeDeclarations(node.body, history, node);
     },
 
     codeBases: function(node, history, pefix, suffix) {

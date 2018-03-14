@@ -9,10 +9,10 @@ module.exports = {
 
         let goCode = "";
         goCode += "type " + node.name;
-        goCode += gc.suffixContract ? "_" + parent : "";
+        goCode += gc.suffixContract ? "_" + parent.name : "";
         goCode += " int";
         for ( let i=0 ; i<node.members.length; i++ ) {
-            history.sourceUnits.get(parent).constants.set(node.members[i], i);
+            history.sourceUnits.get(parent.name).constants.set(node.members[i], i);
         }
         return goCode + "\n";
     }

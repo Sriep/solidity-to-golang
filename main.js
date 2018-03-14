@@ -8,7 +8,6 @@ const SolidityXParser = require("./index.js");
 //const SolidityXCompiler = require("./compiler.js");
 const SolidityToGo = require("./transpiler/transpiler.js");
 
-
 try {
     let result;
     let outputFile = "";
