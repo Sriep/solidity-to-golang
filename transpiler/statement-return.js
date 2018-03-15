@@ -4,7 +4,7 @@ const gf = require("./gf.js");
 
 module.exports = {
 
-    code: function (node, history, localHistory, parent) {
+    code: function (node, history, parent, localHistory) {
         assert(node.type === "ReturnStatement");
 
         let goCode = "\t";

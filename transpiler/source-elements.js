@@ -31,7 +31,8 @@ module.exports = {
         for (let base of parent.is) {
             goCodeBases += history.stateVariablesInitCode[base.name];
         }
-        let goCodeDerived = ""
+        let goCodeDerived = "";
+
         for (let node of nodeArray) {
             let SvName = node.name;
             if (!node.visibility || node.visibility === "public")
@@ -42,10 +43,11 @@ module.exports = {
                 if (node.value && node.value.value) {
                     goCodeDerived += node.value.value;
                 } else {
+                    let dataType = gf.typeOf(node.literal, history, parent);
                     if (node.literal.literal.type === "MappingExpression") {
-                        goCodeDerived += " make(" + gf.typeOf(node.literal, history, parent) + ")"
+                        goCodeDerived += " make(" + dataType + ")"
                     } else {
-                        goCodeDerived += " new(" + gf.typeOf(node.literal, history, parent) + ")";
+                        goCodeDerived += " new(" + dataType + ")";
                     }
                 }
                 goCodeDerived += ")\n";

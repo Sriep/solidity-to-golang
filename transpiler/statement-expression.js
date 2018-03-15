@@ -1,73 +1,79 @@
 'use strict';
 const assert = require("assert");
-const gc = require("./gc.js");
 const gf = require("./gf.js");
 
 module.exports = {
 
-    code: function(node, history, localHistory, parent, depth) {
+    code: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "ExpressionStatement");
 
-        return this.codeExpression(node.expression, history, localHistory, parent, depth);
+        return this.codeExpression(node.expression, history, parent, localHistory, depth);
     },
 
-    codeExpression: function(node, history, localHistory, parent, depth) {
+    codeExpression: function(node, history, parent, localHistory, depth) {
         switch(node.type) {
             case "AssignmentExpression":
-                return this.codeAssignment(node, history, localHistory, parent, depth);
+                return this.codeAssignment(node, history, parent, localHistory, depth);
             case "DeclarativeExpression":
-                return this.codeDeclaration(node, history, localHistory, parent,depth);
+                return this.codeDeclaration(node, history, parent, localHistory,depth);
             case "BinaryExpression":
-                return this.codeBinary(node, history, localHistory, parent, depth);
+                return this.codeBinary(node, history, parent, localHistory, depth);
             case "Literal":
-                return gf.getLiteral(node.value, history, localHistory, parent, depth);
+                return gf.getLiteral(node.value, history, parent, localHistory, depth);
             case "Identifier":
-                return gf.getIdentifier(node.name, history, localHistory, parent, depth);
+                return gf.getIdentifier(node.name, history, parent, localHistory, depth);
             case "UnaryExpression":
-                return this.codeUnary(node, history, localHistory, parent, depth);
+                return this.codeUnary(node, history, parent, localHistory, depth);
             case "MemberExpression":
-                return this.codeMember(node, history, localHistory, parent, depth);
+                return this.codeMember(node, history, parent, localHistory, depth);
             case "SequenceExpression":
-                return this.codeSequence(node, history, localHistory, parent, depth);
+                return this.codeSequence(node, history, parent, localHistory, depth);
             case "NewExpression":
-                return this.codeNewExpression(node, history, localHistory, parent, depth);
+                return this.codeNewExpression(node, history, parent, localHistory, depth);
             case "CallExpression":
-                return this.codeCallExpression(node, history, localHistory, parent, depth);
+                return this.codeCallExpression(node, history, parent, localHistory, depth);
+            case "UpdateExpression":
+                return this.codeUpdateExpression(node, history, parent, localHistory, depth);
             default:
                 assert(false, "unknown expression type");
         }
     },
 
-    codeAssignment: function(node, history, localHistory, parent, depth) {
+    codeAssignment: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "AssignmentExpression");
         let goCode = "\t".repeat(depth);
+
         let left = "";
-        let isStorage = false;
         switch(node.left.type) {
             case "DeclarativeExpression":
-                return this.codeDeclarativeAssignment(node, history, localHistory, parent, depth);
+                return this.codeDeclarativeAssignment(node, history, parent, localHistory, depth);
             case "CallExpression":
                 break;
             case "NewExpression":
                 break;
             case "SequenceExpression":
-                left = this.codeSequence(node.left, history, localHistory, parent, depth);
+                left = this.codeSequence(node.left, history, parent, localHistory, depth);
                 break;
             case "Identifier":
-                left = gf.getIdentifier(node.left.name, history, localHistory, parent);
-                isStorage = history.sourceUnits.get(parent.name).stateVariables.has(left);
+                //left = this.getGoIdentifier(node.left.name, history, parent, localHistory);
+                left = gf.getIdentifier(node.left.name, history, parent, localHistory, depth);
                 break;
             case "MemberExpression":
-                left =  this.codeMember(node.left, history, localHistory, parent, depth);
-                isStorage = true;
+                left =  this.codeMember(node.left, history, parent, localHistory, depth);
                 break;
             default:
                 throw(new Error("unknown expression left part"));
         }
-        let right = this.codeExpression(node.right, history, localHistory, parent, depth);
-        if (isStorage) {
-            if (node.operator !== "=")
-                assert(node.operator === "=");
+
+        let right = "";
+        if (node.right.type === "Identifier")
+            right = this.getGoIdentifier(node.right, history, parent, localHistory);
+        else
+            right = this.codeExpression(node.right, history, parent, localHistory, depth);
+
+        if (node.operator !== "=")
+            assert(node.operator === "=");
+        if (node.right.type === "Identifier") {
             goCode += "this.set(\"" + left + "\", " + right +")";
         } else {
             goCode += left + node.operator + right;
@@ -75,41 +81,43 @@ module.exports = {
         return goCode;
     },
 
-    codeDeclarativeAssignment: function(node, history, localHistory, parent, depth) {
+    codeDeclarativeAssignment: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "AssignmentExpression");
-        let storageType = node.left.storage_location ? node.left.storage_location : "memory";
-        let goCode = "\t".repeat(depth);
-        let left = node.left.name;
-        let right = this.codeExpression(node.right, history, localHistory, parent, depth);
 
-        if (storageType === "storage") {
-            goCode += "this.set(\"" + left + "\", " + right + ")";
-            localHistory.addVariable(left, gf.typeOf(node.left.literal, history, parent, localHistory), "storage");
+        let goCode = "\t".repeat(depth);
+        let left = this.codeDeclaration(node.left, history, parent, localHistory);
+        let right = this.codeExpression(node.right, history, parent, localHistory, depth);
+
+        if (node.left.storage_location === "storage") {
+            goCode += node.left.name + " := \"" + right + "\"";
         } else {
             goCode += node.left.name + " := " + right;
-            //localHistory.addVariable(left, gf.typeOf(node.left.literal, history, parent, localHistory), "memory");
-            localHistory.addVariable(node.left, history, parent);
         }
-
         return goCode;
     },
 
-    codeDeclaration: function(node, history, localHistory, parent, depth) {
+    codeDeclaration: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "DeclarativeExpression");
-        let storageType = node.storage_location ? node.storage_location : "memory";
         let goCode = "\t".repeat(depth);
-        if (storageType === "storage") {
-            goCode += "this.set(\"" + node.name + "\", ";
-            goCode += " new(" + gf.typeOf(node.literal, history, parnet, localHistory) + ")";
-            goCode += ")";
-        } else {
-            goCode += "var " + node.name + " " + gf.typeOf(node.literal, history, parent, localHistory);
-        }
 
+        let dataType = gf.typeOf(node.literal, history, parent, localHistory);
+        let isMemory;
+        if (node.storage_location)
+            isMemory = node.storage_location === "memory";
+        else
+            isMemory = !gf.isComplexType(dataType, history, parent, localHistory);
+        node.storage_location = isMemory ? "memory" : "storage";
+
+        if (isMemory) {
+            goCode += "var " + node.name + " " + dataType;
+        } else {
+            goCode += "var " + node.name + " " + "string";
+        }
+        localHistory.addVariableName(node, node.name, isMemory, dataType);
         return goCode;
     },
 
-    codeSequence: function(node, history, localHistory, parent, depth) {
+    codeSequence: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "SequenceExpression");
 
         let goCode = "";
@@ -117,14 +125,14 @@ module.exports = {
         return goCode;
     },
 
-    codeUnary: function(node, history, localHistory, parent, depth) {
+    codeUnary: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "UnaryExpression");
         let goCode = "";
         switch (node.argument.type) {
             case "BinaryExpression":
                 assert(node.operator === "!", "unknown binary operator");
                 goCode += node.operator + "(";
-                goCode += this.codeBinary(node.argument, history, localHistory, parent) + ")";
+                goCode += this.codeBinary(node.argument, history, parent, localHistory) + ")";
                 break;
             case "Literal":
                 assert(node.operator === "-" || node.operator === "+" , "unknown binary operator");
@@ -132,7 +140,7 @@ module.exports = {
                 break;
             case"Identifier":
                 assert(node.operator === "-" || node.operator === "+" , "unknown binary operator");
-                goCode += (node.operator) + gf.getIdentifier(node.argumnet.name, history, localHistory, parent);
+                goCode += (node.operator) + gf.getIdentifier(node.argumnet.name, history, parent, localHistory);
                 break;
             default:
                 assert(false, "unknown UnitaryExpression");
@@ -140,13 +148,24 @@ module.exports = {
         return goCode;
     },
 
-    codeBinary: function(node, history, localHistory, parent, depth) {
+    codeBinary: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "BinaryExpression");
         assert(node.left && node.right && node.operator);
 
         let goCode = "";
-        let left = this.codeExpression(node.left, history, localHistory, parent, depth);
-        let right = this.codeExpression(node.right, history, localHistory, parent, depth);
+        let left = "";
+        if (node.left.type === "Identifier")
+            left = this.getGoIdentifier(node.left, history, parent, localHistory);
+        else
+            left = this.codeExpression(node.left, history, parent, localHistory, depth);
+        //let left = this.codeExpression(node.left, history, parent, localHistory, depth);
+        let right ="";
+        if (node.right.type === "Identifier")
+            right = this.getGoIdentifier(node.right, history, parent, localHistory);
+        else
+            right = this.codeExpression(node.right, history, parent, localHistory, depth);
+        //let right = this.codeExpression(node.right, history, parent, localHistory, depth);
+
         if (node.left.type === "BinaryExpression" || node.left.type === "UnaryExpression" ) {
             assert(node.right.type === "BinaryExpression" || node.right.type === "UnaryExpression");
             goCode += left;
@@ -187,7 +206,20 @@ module.exports = {
         }
     },
 
-    codeNewExpression: function(node, history, localHistory, parent, depth) {
+    codeUpdateExpression: function(node, history, parent, localHistory, depth) {
+        assert(node && node.type === "UpdateExpression");
+        let goCode = "";
+        let argument = this.codeExpression(node.argument,history, parent, localHistory, depth);
+        goCode += argument + ".";
+
+        assert(node.operator === "++" || node.operator === "--");
+        goCode += node.operator === "++" ? "Add" : "Sub";
+
+        goCode += "(" + argument + ", big.NewInt(1))";
+        return goCode;
+    },
+
+    codeNewExpression: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "NewExpression");
         let goCode = "";
         goCode += "new(";
@@ -196,17 +228,17 @@ module.exports = {
         return goCode;
     },
 
-    codeCallExpression:function(node, history, localHistory, parent, depth) {
+    codeCallExpression:function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "CallExpression");
 
         let goCode = "";
-        goCode += this.codeExpression(node.callee, history, localHistory, parent, depth);
-        goCode += this.codeArguments(node.arguments, history, localHistory, parent, depth);
+        goCode += this.codeExpression(node.callee, history, parent, localHistory, depth);
+        goCode += this.codeArguments(node.arguments, history, parent, localHistory, depth);
 
         return goCode;
     },
 
-    codeArguments: function(argArray, history, localHistory, parent, depth) {
+    codeArguments: function(argArray, history, parent, localHistory, depth) {
         assert(argArray && argArray instanceof Array);
         let goCode = "(";
         let start = true;
@@ -215,29 +247,53 @@ module.exports = {
                 start = false;
             else
                 goCode += ", ";
-            goCode += this.codeExpression(arg, history, localHistory, parent, depth);
+            goCode += this.codeExpression(arg, history, parent, localHistory, depth);
         }
         goCode += ")";
         return goCode;
     },
 
-    codeMember: function(node, history, localHistory, parent, depth) {
+    getGoIdentifier: function(node, history, parent, localHistory){
+        let goCode = "";
+        if (!node && node.type !== "Identifier")
+            assert(node && node.type === "Identifier");
+        let idData = history.findIdData(node.name, parent, localHistory);
+        if (!idData)
+            idData = history.findIdData(node.name, parent, localHistory);
+        if (history.getStorageType(node.name, parent, localHistory) === "stateVariable") {
+            goCode += "this.get(" + node.name + ").(";
+            goCode += idData.dataType;
+            goCode += ")";
+        } else {
+            goCode += idData.goName;
+        }
+        return goCode;
+    },
+
+    codeMember: function(node, history, parent, localHistory, depth) {
         assert(node && node.type === "MemberExpression");
         let goCode = "";
-        goCode += this.codeExpression(node.object, history, localHistory, parent, depth);
-        goCode += "[";
+        let object="";
+        if (node.object.type === "Identifier") {
+            object += this.getGoIdentifier(node.object, history, parent, localHistory);
+        } else {
+            object = this.codeExpression(node.object, history, parent, localHistory, depth);
+        }
+        goCode += object;
+        goCode += node.computed ? "[" : ".";
         switch (node.property.type) {
             case "Literal":
-                goCode += node.property.value;
+                goCode += node.property.value ; //todo what boaut bigInts?
                 break;
             case "Identifier":
-                goCode += gf.getLiteral(node.property.name, history, localHistory, parent);
+                goCode += gf.getLiteral(node.property.name, history, parent, localHistory);
                 goCode += ".Uint64()";
                 break;
             default:
                 assert(false, "unsupported member expression"); //todo
         }
-        goCode += "]";
+        goCode += node.computed ? "]" : "";
+
         return goCode; // to    do codeMember
     }
 

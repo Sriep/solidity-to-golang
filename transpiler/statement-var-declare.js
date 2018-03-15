@@ -4,7 +4,7 @@ const assert = require("assert");
 
 module.exports = {
 
-    code: function(node, history, localHistory, parent) {
+    code: function(node, history, parent, localHistory) {
         assert(node.type == "VariableDeclaration");
 
         let goCode = "";
@@ -22,7 +22,7 @@ module.exports = {
         return goCode;
     },
 
-    codeTuple: function(node, history, localHistory, parent) {
+    codeTuple: function(node, history, parent, localHistory) {
         assert(node.type == "VariableDeclarationTruple");
         assert(node.declarations instanceof Array);
         // todo not implemented. Seems to be bug in grammer. init is null.

@@ -23,36 +23,52 @@ module.exports = {
             goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
         }
         goCode += gc.suffixContract ? "_" + parent.name : "";
+
+        //let data = history.findIdData(node.name, parent);
+        let localHistory = history.findIdData(node.name, parent).localHistory;
+        goCode += this.codeFunctionParameters(node.params, history, parent, localHistory);
+        if (node.returnParams)
+            goCode += this.codeReturnParameters(node.returnParams, history, parent);
+        return goCode;
+    },
+
+    codeFunctionParameters(node, history, parent, localHistory) {
+        assert(node && node instanceof Array);
+        let goCode ="";
         goCode += "(";
-        if (node.params instanceof Array && node.params.length > 0) {
-            let start = true;
-            let data = history.findIdData(node.name, parent);
-            let localHistory = data.localHistory;
-            for (let param of node.params) {
-                if (start)
-                    start = false;
-                else
-                    goCode += ", ";
-                goCode += param.id + " ";
-                goCode += gf.typeOf(param.literal, history, parent);
-                if (!localHistory.memoryVariables.has(param.id)
-                    && !localHistory.stateVariables.has(param.id) )
-                    localHistory.addVariableName(param, param.id, "internal", "memory", parent);
+        let start = true;
+        for (let param of node) {
+            assert(param && param.type === "InformalParameter");
+            if (start)
+                start = false;
+            else
+                goCode += ", ";
+            goCode += param.id + " ";
+            let dataType = gf.typeOf(param.literal, history, parent);
+            goCode += dataType;
+            //Function parameter written in two locations, so maybe already added
+            if (!localHistory.variables.has(param.id) && !localHistory.constants.has(param.id)) {
+                let isMemory = param.is_storage ? false : true;
+                localHistory.addVariableName(param, param.id, isMemory, dataType);
             }
         }
         goCode += ")";
-        if (node.returnParams instanceof Array && node.returnParams.length > 0) {
-            goCode += "(";
-            let start = true;
-            for (let  retParm of node.returnParams ) {
-                if (start)
-                    start = false;
-                else
-                    goCode += ", ";
-                goCode += " " + gf.typeOf(retParm.literal, history, parent);
-            }
-            goCode += ")";
+        return goCode;
+    },
+
+    codeReturnParameters: function(node, history, parent) {
+        assert(node && node instanceof Array);
+        let goCode ="";
+        goCode += "(";
+        let start = true;
+        for (let  retParm of node ) {
+            if (start)
+                start = false;
+            else
+                goCode += ", ";
+            goCode += " " + gf.typeOf(retParm.literal, history, parent);
         }
+        goCode += ")";
         return goCode;
     },
 
@@ -68,7 +84,7 @@ module.exports = {
     },
 
     codeFunctionBody: function(node, history, parent) {
-        return block.code(node.body.body, history, localHistory, parent, 1);
+        return block.code(node.body.body, history, parent, localHistory, 1);
     }
 
 };

@@ -2,11 +2,12 @@
 pragma solidity ^0.4.18;
 contract StandardToken {
     uint public xx;
+    uint[4] stArray;
     struct stuff {
         int cabbage;
     }
     function incXX(uint amount) public {
-        xx = xx + amount;
+        stArray[3] = xx + amount;
     }
 }
 
@@ -73,11 +74,13 @@ contract APRInflationToken is StandardToken, Ownable {
     }
     string myText;
     string constant constText = "This text is constant";
-
+    stuff bob;
     function reveal(uint av)   public   canAdjustDaily returns (uint, uint) {
+        int [22] memory ar;
+        ar[4] = 3;
         incXX(av);
         xx = 77;
-        stuff memory sss;
+        stuff storage sss = bob;
         sss.cabbage = 545;
         StandardToken d = new StandardToken();
         av = d.xx();
@@ -87,7 +90,7 @@ contract APRInflationToken is StandardToken, Ownable {
         int [14][33] memory arra;
         uint[] memory a = new uint[](7);
         uint[2][] memory arrayOfPairs = new uint[2][](startDate);
-        int [22] memory ar;
+
         uint i =2+1;
         uint  abc = i;
         myText = "hi there";
@@ -99,7 +102,7 @@ contract APRInflationToken is StandardToken, Ownable {
             startDate = 3*i;
             abc = 3;
             av = 3;
-            a[6] = 8;
+            a[3] = 8;
             arrayOfPairs[1][1] = 3333;
             fund.amount = 7;
             // m[5] = 3;
@@ -114,10 +117,12 @@ contract APRInflationToken is StandardToken, Ownable {
         while (i++ < 27) {
             i++;
         }
+
         do {
             i++;
         }
         while (i < 5);
+
         for (uint j = 12; j > startDate; j--) {
             if ( i == 3) {
                 continue;

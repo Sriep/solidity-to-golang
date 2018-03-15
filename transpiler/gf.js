@@ -61,9 +61,9 @@ const gf = {
         for (let item of sequence) {
             goCode += first ? "" : ", ";
             if (item.type === "Identifier")
-                goCode += this.getIdentifier(item.name, history, localHistory, parent);
+                goCode += this.getIdentifier(item.name, history, parent, localHistory);
             else if (item.type === "Literal")
-                goCode += this.getLiteral(item.value, history, localHistory, parent);
+                goCode += this.getLiteral(item.value, history, parent, localHistory);
             else if (item.type === "MemberExpression")
                 goCode += this.getMemberValue(item, history, parent, localHistory);
             else
@@ -96,7 +96,7 @@ const gf = {
                 goCode += node.property.value;
                 break;
             case "Identifier":
-                goCode += gf.getLiteral(node.property.name, history, localHistory, parent);
+                goCode += gf.getLiteral(node.property.name, history, parent, localHistory);
                 goCode += ".Uint64()";
                 break;
             default:
@@ -122,7 +122,7 @@ const gf = {
         }
     },
 
-    getIdentifier: function(id, history, localHistory, parent) {
+    getIdentifier: function(id, history, parent, localHistory) {
         if (!history)
             assert(false);
         if  (!history.sourceUnits.get(parent.name))
@@ -146,15 +146,15 @@ const gf = {
             return history.sourceUnits.get(parent.name).constants.get(id).value;
         
         } else if (localHistory) {
-            if (localHistory.memoryVariables.has(id)) {
-                return localHistory.memoryVariables.get(id).goName
-            } else if (localHistory.stateVariables.has(id)) {
-                return localHistory.stateVariables.get(id).goName
+            if (localHistory.variables.has(id)) {
+                return localHistory.variables.get(id).goName
             } else if (localHistory.constants.has(id)) {
-                return localHistory.constants.get(id).value
+                return localHistory.constants.get(id)
             }
         }
-        //throw(new Error("unkonw identifer " + identifier));
+        //this.getIdentifier(id, history, parent, localHistory);
+        throw(new Error("unkonw identifer " + identifier));
+        //assert(false, "getting non existant identifier");
         return id;
     },
 
@@ -184,6 +184,13 @@ const gf = {
         } else {
             return "string";
         }
+    },
+
+    isComplexType: function(typeId, history, parent, localHistory) {
+        //assert(node && node.type = "Type");
+        //id
+
+        return dic.valueTypes.has(typeId); //todo impliment
     },
 
     getBigType: function (expression) {
