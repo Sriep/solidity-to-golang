@@ -10,12 +10,14 @@ module.exports = {
     codeFunctionBlock: function( node, history, parent, localHistory)
     {
         assert(node && node instanceof Array);
-
+        let goCode = "";
         let declarations = { code: ""};
         let bodyCode = this.code(node, history, parent, localHistory, 1, declarations);
-        let goCode = declarations.code;
-        goCode += "\n\t// Declarations have to be at top of file as go variable scope are block based\n"
-                    + "\t// and Solidity scope is function based.\n";
+        if (declarations.code !== "") {
+            goCode = declarations.code;
+            //goCode += "\n\t// Declarations have to be at top of file as go variable scope are block based\n"
+            //    + "\t// and Solidity scope is function based.\n";
+        }
         goCode += bodyCode;
         return goCode;
     },
@@ -89,7 +91,4 @@ module.exports = {
         goCode += "\n";
         return goCode;
     }
-
-
-
 };

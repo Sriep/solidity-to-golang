@@ -77,14 +77,13 @@ contract APRInflationToken is StandardToken, Ownable {
     stuff bob;
     function reveal(uint av)   public   canAdjustDaily returns (uint, uint) {
         int [22] memory ar;
-        ar[4] = 3;
-        incXX(av);
-        xx = 77;
         stuff storage sss = bob;
         sss.cabbage = 545;
         StandardToken d = new StandardToken();
         av = d.xx();
-
+        ar[4] = 3;
+        incXX(av);
+        xx = 77;
         choice = ActionChoices.GoLeft;
         Funder memory fund;
         int [14][33] memory arra;

@@ -1,6 +1,6 @@
 'use strict';
 const assert = require("assert");
-const gf = require("./gf.js");
+const expression = require("./statement-expression.js");
 
 module.exports = {
 
@@ -9,10 +9,10 @@ module.exports = {
 
         let goCode = "\t";
         goCode += "return ";
-        if (node.argument && node.argument.expressions) {
-            goCode += gf.codeSequence(node.argument.expressions, history, parent, localHistory);
+        if (node.argument) {
+            goCode += expression.codeExpression(node.argument, history, parent, localHistory);
         }
         return goCode;
-    }
+    },
 
-}
+};

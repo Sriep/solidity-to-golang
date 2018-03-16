@@ -35,10 +35,10 @@ module.exports = {
 
         for (let node of nodeArray) {
             let SvName = node.name;
-            if (!node.visibility || node.visibility === "public")
-                SvName = node.name.charAt(0).toUpperCase() + node.name.slice(1);
+            //if (!node.visibility || node.visibility === "public")
+             //   SvName = node.name.charAt(0).toUpperCase() + node.name.slice(1);
 
-            if (node.type === "StateVariableDeclaration") {
+            if (node.type === "StateVariableDeclaration" && !node.is_constant) {
                 goCodeDerived += "\tp.set(\"" + SvName + "\", ";
                 if (node.value && node.value.value) {
                     goCodeDerived += node.value.value;

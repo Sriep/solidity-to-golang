@@ -20,7 +20,7 @@ module.exports = {
         const block = require("./block.js");
         let goCode = "";
         goCode += "\t".repeat(depth) + "for __ok := true; __ok; __ok = ";
-        goCode += goCode += expression.codeExpression(node.test, history, parent, localHistory, depth, declarations);
+        goCode += expression.codeExpression(node.test, history, parent, localHistory, depth, declarations);
         goCode += block.codeStatement(node.body, history, parent, localHistory, depth+1, declarations);
         return goCode;
     },

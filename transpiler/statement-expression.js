@@ -42,8 +42,8 @@ module.exports = {
     codeAssignment: function(node, history, parent, localHistory, depth, declarations) {
         assert(node && node.type === "AssignmentExpression");
         let goCode = "\t".repeat(depth);
-
         let left = "";
+        let right = "";
         switch(node.left.type) {
             case "DeclarativeExpression":
                 return this.codeDeclarativeAssignment(node, history, parent, localHistory, depth, declarations);
@@ -55,9 +55,17 @@ module.exports = {
                 left = this.codeSequence(node.left, history, parent, localHistory, depth);
                 break;
             case "Identifier":
-                //left = this.getGoIdentifier(node.left.name, history, parent, localHistory);
-                left = gf.getIdentifier(node.left.name, history, parent, localHistory, depth);
-                break;
+                right = this.getGoIdentifier(node.right, history, parent, localHistory);
+                if (localHistory.variables.has(node.left.name)) {
+                    if (localHistory.variables.get(node.left.name).isMemory) {
+                        goCode += left + node.operator + right;
+                    } else {
+                        localHistory.setNewAlias(node.left.name, right);
+                    }
+                } else {
+                    goCode += "this.set(\"" + node.left.name + "\", " + right +")";
+                }
+                return goCode;
             case "MemberExpression":
                 left =  this.codeMember(node.left, history, parent, localHistory, depth);
                 break;
@@ -65,21 +73,15 @@ module.exports = {
                 throw(new Error("unknown expression left part"));
         }
 
-        let right = "";
-        if (node.right.type === "Identifier")
-            right = this.getGoIdentifier(node.right, history, parent, localHistory);
-        else
-            right = this.codeExpression(node.right, history, parent, localHistory, depth);
-
+        right = this.codeExpression(node.right, history, parent, localHistory, depth);
         if (node.operator !== "=")
             assert(node.operator === "=");
-        if (node.right.type === "Identifier") {
-            goCode += "this.set(\"" + left + "\", " + right +")";
-        } else {
-            goCode += left + node.operator + right;
-        }
+
+        goCode += left + node.operator + right;
         return goCode;
     },
+
+
 
     codeDeclarativeAssignment: function(node, history, parent, localHistory, depth, declarations) {
         assert(node && node.type === "AssignmentExpression");
@@ -89,7 +91,9 @@ module.exports = {
         let right = this.codeExpression(node.right, history, parent, localHistory, depth);
 
         if (node.left.storage_location === "storage") {
-            goCode += node.left.name + " = \"" + right + "\"";
+            //goCode += node.left.name + " = \"" + right + "\"";
+            localHistory.setNewAlias(node.left.name, right);
+
         } else {
             goCode += node.left.name + " = " + right;
         }
@@ -110,14 +114,13 @@ module.exports = {
             isMemory = !gf.isComplexType(dataType, history, parent, localHistory);
         node.storage_location = isMemory ? "memory" : "storage";
 
+        // Don't need to declare aliases as they are only for compiler to replace
         if (isMemory) {
             goCode += "var " + node.name + " " + dataType;
-        } else {
-            goCode += "var " + node.name + " " + "string";
+            declarations.code += goCode + "\n";
         }
         localHistory.addVariableName(node, node.name, isMemory, dataType);
-        declarations.code += goCode + "\n";
-        return "";//goCode;
+        return "";
     },
 
     codeSequence: function(node, history, parent, localHistory, ) {
@@ -289,8 +292,9 @@ module.exports = {
                 goCode += node.property.value ; //todo what boaut bigInts?
                 break;
             case "Identifier":
-                goCode += gf.getLiteral(node.property.name, history, parent, localHistory);
-                goCode += ".Uint64()";
+                //goCode += gf.getLiteral(node.property.name, history, parent, localHistory);
+                goCode += node.property.name;
+                //goCode += ".Uint64()";
                 break;
             default:
                 assert(false, "unsupported member expression"); //todo

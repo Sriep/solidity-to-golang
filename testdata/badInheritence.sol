@@ -1,4 +1,4 @@
-// This will not compile
+// This should not compile
 
 pragma solidity ^0.4.0;
 

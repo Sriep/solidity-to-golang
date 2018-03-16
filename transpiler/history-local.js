@@ -6,8 +6,14 @@ module.exports = {
     variables: new Map(),
     constants: new Map(),
 
-    addVariable: function(node, history, parent) {
-        return this.addVariableName(node, node.name, node.Type, parent)
+    setNewAlias: function(variable, newValue) {
+        if (!this.variables.has(variable)) {
+            assert(false, "setting value to unknown alias")
+        } else  if (this.variables.get(variable).isMemory) {
+            assert(false, "treating memory variable as alias")
+        } else {
+            this.variables.get(variable).goName = newValue;
+        }
     },
 
     addVariableName: function(node, id, isMemory, dataType) {
@@ -25,8 +31,6 @@ module.exports = {
                 dataType: dataType
             });
         }
-
     }
-
 
 };

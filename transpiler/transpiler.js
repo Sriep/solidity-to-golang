@@ -10,27 +10,29 @@ module.exports = {
     suffixFile: "./transpiler/data/suffix.sol",
 
     compileToGoToFile: function(ast, outputFile) {
-        let data = this.compileToGo(ast);
+        let data = this.compileToGo(ast, outputFile);
         if(outputFile == null ||  outputFile ==='') {
             //ouput to stdout,
+            console.log("Error file was not saved to " + outputFile);
             return console.log(data)
         }
         fs.writeFile(path.resolve(outputFile), data, function(err) {
             if(err) {
+                console.log("Error file was not saved to " + outputFile);
                 return console.log(err);
             }
-            console.log("The file was saved!");
+            console.log("The file was saved! to " + outputFile);
         });
     },
 
-    compileToGo: function(ast) {
-        let output = this.codeProgram(ast);
+    compileToGo: function(ast, outputFile) {
+        let output = this.codeProgram(ast, outputFile);
 
         console.log(JSON.stringify(ast, null, 2));
         return output;
     },
 
-    codeProgram: function(node) {
+    codeProgram: function(node, outputFile) {
         if(node === undefined) {
             console.log("undefined");
             return;
@@ -42,9 +44,12 @@ module.exports = {
         }
         if (node.type === "Program") {
             console.log("Found valid solidity program");
-            let goCode = this.prefix();
+            let packageName = outputFile.replace(/\.[^/.]+$/, "");
+            packageName = packageName.replace(/^.*[\\\/]/, '');
+            let goCode = "package " + packageName;
+            goCode += this.prefix();
             goCode +=  sourceUnits.code(node.body);
-            goCode += this.suffix();
+            //goCode += this.suffix();
             assert(goCode !== undefined);
             return goCode;
         } else {
@@ -54,24 +59,24 @@ module.exports = {
     },
 
     prefix: function() {
-        try {
+       // try {
             return fs.readFileSync(this.prefixFile,'utf8');
-        }
-        catch(e) {
-            console.log(e.message);
-            return "package main\n";
-        }
+        //}
+       // catch(e) {
+       //     console.log(e.message);
+        //    return "package main\n";
+       // }
 
     },
 
-    suffix: function() {
-        try {
-            return fs.readFileSync(this.suffixFile,'utf8');
-        }
-        catch(e) {
-            console.log(e.message);
-            return "func main() {}\n";
-        }
-    }
+    //suffix: function() {
+        //try {
+           // return fs.readFileSync(this.suffixFile,'utf8');
+        //}
+        //catch(e) {
+        //    console.log(e.message);
+       //     return "func main() {}\n";
+        //}
+    //}
 
 };

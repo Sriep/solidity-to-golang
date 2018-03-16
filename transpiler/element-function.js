@@ -19,10 +19,10 @@ module.exports = {
         let goCode = "";
         if (node.visibility === "internal" || node.visibility === "private") {
             goCode += gc.hideFuncPrefix + node.name;
+            goCode += gc.suffixContract ? "_" + parent.name : "";
         } else {
             goCode += node.name.charAt(0).toUpperCase() + node.name.slice(1);
         }
-        goCode += gc.suffixContract ? "_" + parent.name : "";
 
         //let data = history.findIdData(node.name, parent);
         let localHistory = history.findIdData(node.name, parent).localHistory;
@@ -33,6 +33,8 @@ module.exports = {
     },
 
     codeFunctionParameters(node, history, parent, localHistory) {
+        if (node === null)
+            return "()";
         assert(node && node instanceof Array);
         let goCode ="";
         goCode += "(";

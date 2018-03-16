@@ -114,28 +114,37 @@ module.exports = {
         if (dic.valueTypes.has(name))
             throw(new Error(node,name + " already defined basic type"));
 
-        let goId = gf.modifyId(name, visibility, nodeType, parent.name);
 
         if (this.sourceUnits.get(parent.name).identifiers.has(name)) {
             throw(new Error("identifier " + name + " already declared in " + parent.name));
         }
         this.sourceUnits.get(parent.name).identifiers.set(name, node);
+        let goId = "";
+        if (visibility === "public" || visibility === "external") {
+            goId = name.charAt(0).toUpperCase() + name.slice(1);
+        } else {
+            goId = gc.hideFuncPrefix + name;
+            goId += (gc.suffixContract) ? "_" + parent.name : "";
+        }
+
         switch (nodeType) {
             case "StateVariableDeclaration":
+                goId = "this.get(\"" + name + "\").(" + dataType + ")";
                 if (node.is_constant) {
                     assert(node.value, "error getting constant value");
-                    this.sourceUnits.get(parent.name).constants.set(name, gf.getValue(node.value, this, parent));
-                } else {
-                    this.sourceUnits.get(parent.name).stateVariables.set(name,
-                        { node: node, parent: parent, goName: goId, dataType: dataType});
-                }
-                if (visibility === "public") {
+                    if (dataType === "string") {
+                        this.sourceUnits.get(parent.name).constants.set(name, "\"" + gf.getValue(node.value, this, parent) + "\"");
+                    } else {
+                        this.sourceUnits.get(parent.name).constants.set(name, gf.getValue(node.value, this, parent));
+                    }
+                } else if (visibility === "public") {
                     if (this.publicStateVariables.has(name))
                         throw(new Error(name + "already defined as public state variable"));
                     else
                         this.publicStateVariables.set(
                             name, {node: node, parent: parent, goName: goId, dataType: dataType})
                 } else {
+
                     this.sourceUnits.get(parent.name).stateVariables.set(
                         name, {node: node, parent: parent, goName: goId, dataType: dataType})
                 }
@@ -153,14 +162,15 @@ module.exports = {
                 }
                 break;
             case "FunctionDeclaration":
-                 if (visibility === "public") {
+                 if (visibility === "public" || visibility === "external") {
                     if (this.publicFunctions.has(name))
                         throw(new Error(name + "already defined as public function"));
-                    else
+                    else {
                         this.publicFunctions.set(
                             name, {node: node, parent: parent, goName: goId, localHistory: localHistory})
+                    }
                 } else {
-                    this.sourceUnits.get(parent.name).functions.set(
+                     this.sourceUnits.get(parent.name).functions.set(
                         name, {node: node, parent: parent, goName: goId, localHistory: localHistory})
                 }
                 break;
