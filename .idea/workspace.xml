@@ -5,27 +5,16 @@
     <bookmark url="file://$PROJECT_DIR$/transpiler/source-elements.js" line="44" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Setup testing framwork. Run test/runtest.bar to perform unit tests.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/runtest.bat" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/simplestore.sol" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/testdata/simple-store.sol" />
+    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/.idea/out-gos.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/.idea/workspace.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/go-test.out" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/simplestore/simplestore.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/simplestore/simplestore_test.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/simplestore_test.go" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/output/debugOut.go" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/output/voting.solx" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/correctinheritence.sol" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/testdata/badInheritence.sol" afterPath="$PROJECT_DIR$/testdata/badInheritence.sol" />
-      <change beforePath="$PROJECT_DIR$/testdata/example2.sol" afterPath="$PROJECT_DIR$/testdata/example2.sol" />
-      <change beforePath="$PROJECT_DIR$/transpiler/block.js" afterPath="$PROJECT_DIR$/transpiler/block.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/data/prefix.sol" afterPath="$PROJECT_DIR$/transpiler/data/prefix.sol" />
-      <change beforePath="$PROJECT_DIR$/transpiler/data/suffix.sol" afterPath="$PROJECT_DIR$/transpiler/data/suffix.sol" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-function.js" afterPath="$PROJECT_DIR$/transpiler/element-function.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/history-local.js" afterPath="$PROJECT_DIR$/transpiler/history-local.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/history.js" afterPath="$PROJECT_DIR$/transpiler/history.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/source-elements.js" afterPath="$PROJECT_DIR$/transpiler/source-elements.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-expression.js" afterPath="$PROJECT_DIR$/transpiler/statement-expression.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-iteration.js" afterPath="$PROJECT_DIR$/transpiler/statement-iteration.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-return.js" afterPath="$PROJECT_DIR$/transpiler/statement-return.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/transpiler.js" afterPath="$PROJECT_DIR$/transpiler/transpiler.js" />
+      <change beforePath="$PROJECT_DIR$/testdata/correctInheritence.sol" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -81,8 +70,8 @@
           <file leaf-file-name="statement-expression.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/transpiler/statement-expression.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="224">
-                  <caret line="241" column="42" lean-forward="false" selection-start-line="241" selection-start-column="42" selection-end-line="241" selection-end-column="42" />
+                <state relative-caret-position="207">
+                  <caret line="240" column="22" lean-forward="false" selection-start-line="240" selection-start-column="22" selection-end-line="240" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -549,7 +538,7 @@
       <workItem from="1521112725972" duration="33247000" />
       <workItem from="1521147833319" duration="859000" />
       <workItem from="1521196645964" duration="33049000" />
-      <workItem from="1521237076331" duration="3453000" />
+      <workItem from="1521237076331" duration="3589000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -719,7 +708,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521201691088</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Setup testing framwork. Run test/runtest.bar to perform unit tests.">
+      <created>1521240542320</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1521240542320</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -737,7 +733,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="347211000" />
+    <option name="totallyTimeSpent" value="347347000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -751,9 +747,9 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15068494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15068494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2918707" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2918707" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27130264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1288,8 +1284,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/transpiler/statement-expression.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="241" column="42" lean-forward="false" selection-start-line="241" selection-start-column="42" selection-end-line="241" selection-end-column="42" />
+        <state relative-caret-position="207">
+          <caret line="240" column="22" lean-forward="false" selection-start-line="240" selection-start-column="22" selection-end-line="240" selection-end-column="22" />
           <folding />
         </state>
       </provider>
