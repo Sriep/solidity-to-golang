@@ -4,18 +4,18 @@ const gf = require("./gf.js");
 
 module.exports = {
 
-    code: function(node, history, parent, localHistory, depth) {
+    code: function(node, history, parent, localHistory, depth, declarations) {
         assert(node && node.type === "ExpressionStatement");
 
-        return this.codeExpression(node.expression, history, parent, localHistory, depth);
+        return this.codeExpression(node.expression, history, parent, localHistory, depth, declarations);
     },
 
-    codeExpression: function(node, history, parent, localHistory, depth) {
+    codeExpression: function(node, history, parent, localHistory, depth, declarations) {
         switch(node.type) {
             case "AssignmentExpression":
-                return this.codeAssignment(node, history, parent, localHistory, depth);
+                return this.codeAssignment(node, history, parent, localHistory, depth, declarations);
             case "DeclarativeExpression":
-                return this.codeDeclaration(node, history, parent, localHistory,depth);
+                return this.codeDeclaration(node, history, parent, localHistory,depth, declarations);
             case "BinaryExpression":
                 return this.codeBinary(node, history, parent, localHistory, depth);
             case "Literal":
@@ -39,14 +39,14 @@ module.exports = {
         }
     },
 
-    codeAssignment: function(node, history, parent, localHistory, depth) {
+    codeAssignment: function(node, history, parent, localHistory, depth, declarations) {
         assert(node && node.type === "AssignmentExpression");
         let goCode = "\t".repeat(depth);
 
         let left = "";
         switch(node.left.type) {
             case "DeclarativeExpression":
-                return this.codeDeclarativeAssignment(node, history, parent, localHistory, depth);
+                return this.codeDeclarativeAssignment(node, history, parent, localHistory, depth, declarations);
             case "CallExpression":
                 break;
             case "NewExpression":
@@ -81,24 +81,26 @@ module.exports = {
         return goCode;
     },
 
-    codeDeclarativeAssignment: function(node, history, parent, localHistory, depth) {
+    codeDeclarativeAssignment: function(node, history, parent, localHistory, depth, declarations) {
         assert(node && node.type === "AssignmentExpression");
 
         let goCode = "\t".repeat(depth);
-        let left = this.codeDeclaration(node.left, history, parent, localHistory);
+        this.codeDeclaration(node.left, history, parent, localHistory, depth, declarations); //todo
         let right = this.codeExpression(node.right, history, parent, localHistory, depth);
 
         if (node.left.storage_location === "storage") {
-            goCode += node.left.name + " := \"" + right + "\"";
+            goCode += node.left.name + " = \"" + right + "\"";
         } else {
-            goCode += node.left.name + " := " + right;
+            goCode += node.left.name + " = " + right;
         }
         return goCode;
     },
 
-    codeDeclaration: function(node, history, parent, localHistory, depth) {
+    codeDeclaration: function(node, history, parent, localHistory, depth, declarations) {
         assert(node && node.type === "DeclarativeExpression");
-        let goCode = "\t".repeat(depth);
+        if (!declarations)
+            assert(declarations);
+        let goCode = "\t";
 
         let dataType = gf.typeOf(node.literal, history, parent, localHistory);
         let isMemory;
@@ -114,10 +116,11 @@ module.exports = {
             goCode += "var " + node.name + " " + "string";
         }
         localHistory.addVariableName(node, node.name, isMemory, dataType);
-        return goCode;
+        declarations.code += goCode + "\n";
+        return "";//goCode;
     },
 
-    codeSequence: function(node, history, parent, localHistory, depth) {
+    codeSequence: function(node, history, parent, localHistory, ) {
         assert(node && node.type === "SequenceExpression");
 
         let goCode = "";
@@ -125,7 +128,7 @@ module.exports = {
         return goCode;
     },
 
-    codeUnary: function(node, history, parent, localHistory, depth) {
+    codeUnary: function(node, history, parent, localHistory, ) {
         assert(node && node.type === "UnaryExpression");
         let goCode = "";
         switch (node.argument.type) {
@@ -219,7 +222,7 @@ module.exports = {
         return goCode;
     },
 
-    codeNewExpression: function(node, history, parent, localHistory, depth) {
+    codeNewExpression: function(node, history, parent, localHistory) {
         assert(node && node.type === "NewExpression");
         let goCode = "";
         goCode += "new(";

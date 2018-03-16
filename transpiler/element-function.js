@@ -48,7 +48,7 @@ module.exports = {
             goCode += dataType;
             //Function parameter written in two locations, so maybe already added
             if (!localHistory.variables.has(param.id) && !localHistory.constants.has(param.id)) {
-                let isMemory = param.is_storage ? false : true;
+                let isMemory = !param.is_storage;
                 localHistory.addVariableName(param, param.id, isMemory, dataType);
             }
         }
@@ -84,7 +84,7 @@ module.exports = {
     },
 
     codeFunctionBody: function(node, history, parent) {
-        return block.code(node.body.body, history, parent, localHistory, 1);
+        return block.codeFunctionBlock(node.body.body, history, parent, localHistory, 1);
     }
 
 };
