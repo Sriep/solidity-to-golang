@@ -1,5 +1,6 @@
 'use strict';
 const assert = require("assert");
+const dic = require("./soltogo-dictionary.js");
 const gf = require("./gf.js");
 
 module.exports = {
@@ -267,7 +268,9 @@ module.exports = {
         if (!idData)
             idData = history.findIdData(node.name, parent, localHistory);
         if (history.getStorageType(node.name, parent, localHistory) === "stateVariable") {
-            goCode += "this.get(" + node.name + ").(";
+            goCode += "this.get(\"" + node.name + "\").(";
+            if (!dic.goValueTypes.has(idData.dataType))
+                goCode += "*";
             goCode += idData.dataType;
             goCode += ")";
         } else {
@@ -286,15 +289,16 @@ module.exports = {
             object = this.codeExpression(node.object, history, parent, localHistory, depth);
         }
         goCode += object;
+
+        // node.compmuted true means an array, false then a structure
         goCode += node.computed ? "[" : ".";
         switch (node.property.type) {
             case "Literal":
                 goCode += node.property.value ; //todo what boaut bigInts?
                 break;
             case "Identifier":
-                //goCode += gf.getLiteral(node.property.name, history, parent, localHistory);
                 goCode += node.property.name;
-                //goCode += ".Uint64()";
+                goCode += node.computed ? ".Uint64()" : "";
                 break;
             default:
                 assert(false, "unsupported member expression"); //todo

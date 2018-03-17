@@ -8,6 +8,7 @@ FOR %%f IN (test\test-sols\*.sol) DO (
 
 cd test/src
 go test ./... >go-test.out 2>&1
+type go-test.out
 cd ..
 
 

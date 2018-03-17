@@ -11,7 +11,8 @@ const gc = {
     structSuffix: "_st",
 
     hideFuncPrefix: "__",
-    hideDataPrefix: "___",
+    //hideDataPrefix: "___",
+    hideDataPrefix: "", //todo doo we need this?
     setPrefix: "set",
 
     suffixContract: true

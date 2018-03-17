@@ -71,16 +71,6 @@ module.exports = {
             goCode += this.getType(node, history, parent) + ")\n";
             goCode += "\treturn v\n}\n";
         }
-
-        //goCode += "func (this ";
-        //goCode += gc.structPrefix +  parent + gc.structSuffix;
-        //goCode += ") ";
-        //goCode += this.codeSetSig(node, history, parent);
-
-        //goCode += " { this.";
-        //goCode += gc.hideDataPrefix + node.name;
-        //goCode += " = v; }\n";
-
         return goCode;
     },
 

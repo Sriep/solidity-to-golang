@@ -112,7 +112,7 @@ func (a address) send(ammount *big.Int) (bool) {
 type block_ struct {
     coinbase address 		//current block miner’s address
     difficulty *big.Int		//current block difficulty
-    gasLimit *big.Int		//current block gaslimit
+    gaslimit *big.Int		//current block gaslimit
     number *big.Int			//current block number
     timestamp *big.Int		//current block timestamp as seconds since unix epoch
 }
@@ -139,7 +139,7 @@ type tx_ struct {
 var tx tx_
 
 func gasleft() *big.Int { //todo should this be here?
-    return block.gasLimit.Sub(block.gasLimit, tx.gassprice)
+    return block.gaslimit.Sub(block.gaslimit, tx.gassprice)
 }
 
 // ********************** Contract base ********************************

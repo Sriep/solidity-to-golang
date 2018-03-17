@@ -21,5 +21,9 @@ module.exports = {
         [ "ufixed", "float64" ], //TODO support ufixedMxN
         [ "address" , "*big.Int"], //TODO add address object to prefix
         [ "byte" , "byte"] //TODO add bytes1 to bytes32
+    ]),
+
+    goValueTypes : new Set([
+        ["bool"], ["*big.Int"], ["*big.Float"], ["float64"], ["byte"]
     ])
 };
