@@ -22,9 +22,10 @@ try {
         result = SolidityXParser.parse(originalSrc);
         outputFile = argv._[1]  + ".sol"|| argv.outputfile + ".sol";
         outputGoFile  = argv._[1] + ".go" || argv.outputfile + ".go";
+        outputAbiFile = argv._[1] + ".abi" || argv.outputfile + ".abi";
     }
     //SolidityXCompiler.compileToSolidityToFile(originalSrc, result, outputFile);
-    SolidityToGo.compileToGoToFile(result, outputGoFile);
+    SolidityToGo.compileToGoToFile(result, outputGoFile, outputAbiFile);
 
 } catch (e) {
     console.error(e.message);

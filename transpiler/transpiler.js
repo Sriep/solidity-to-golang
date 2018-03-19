@@ -10,7 +10,7 @@ module.exports = {
     prefixFile: "./transpiler/data/prefix.sol",
     suffixFile: "./transpiler/data/suffix.sol",
 
-    compileToGoToFile: function(ast, outputFile) {
+    compileToGoToFile: function(ast, outputFile, outputAbiFile) {
         let data = this.compileToGo(ast, outputFile, abi);
         if(outputFile == null ||  outputFile ==='') {
             //ouput to stdout,
@@ -23,6 +23,19 @@ module.exports = {
                 return console.log(err);
             }
             console.log("The file was saved! to " + outputFile);
+        });
+
+        if(outputAbiFile == null ||  outputAbiFile ==='') {
+            //ouput to stdout,
+            console.log("Error file was not saved to " + outputFile);
+            return console.log(data)
+        }
+        fs.writeFile(path.resolve(outputAbiFile), JSON.stringify(abi), function(err) {
+            if(err) {
+                console.log("Error ABI file was not saved to " + outputAbiFile);
+                return console.log(err);
+            }
+            console.log("The ABI file was saved! to " + outputAbiFile);
         });
     },
 

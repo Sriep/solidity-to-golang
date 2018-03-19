@@ -19,8 +19,9 @@ module.exports = {
             }
             this.checkElement(node, history, parent.type);
             history.addIdentifier(node, parent);
-            abi.addToAbi(abi, node, parent);
+            abi.addToAbi(abi, node, history, parent);
         }
+        abi.addConstructor(abi, parent);
         return goCode;
     },
 
