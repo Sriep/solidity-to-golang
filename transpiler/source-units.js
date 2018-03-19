@@ -7,13 +7,13 @@ const suContract = require("./su_contract.js");
 
 module.exports = {
 
-    code: function(node) {
+    code: function(node, abi) {
         if (node instanceof Array) {
             console.log("Source units array found.");
             let goCode = "";
             for (let item of node) {
                 console.log("Contract type item-" + item);
-                goCode += this.codeUnit(item, history);
+                goCode += this.codeUnit(item, abi);
                 assert(goCode !== undefined);
             }
             return goCode
@@ -24,7 +24,7 @@ module.exports = {
         }
     },
 
-    codeUnit: function(node, history) {
+    codeUnit: function(node, abi) {
         if(node === undefined) {
             console.log("Undefined source unit");
             throw (new Error("Use of undefined source unit"));
@@ -38,11 +38,11 @@ module.exports = {
             case "PragmaStatement":
                 return suPragma.codePragma(node, history);
             case "ContractStatement":
-                return suContract.codeContract(node, history);
+                return suContract.codeContract(node, history, abi);
             case "InterfaceStatement":
-                return this.codeInterface(node, history);
+                return this.codeInterface(node, history, abi);
             case "LibraryStatement":
-                return this.codeLibrary(node, history);
+                return this.codeLibrary(node, history, abi);
             case "ImportStatement":
                 console.log("Import command not supported. Flatten code first.");
                 console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
@@ -73,7 +73,7 @@ module.exports = {
         return goCode;
     },
 
-    codeLibrary: function(node, history) {
+    codeLibrary: function(node, history, abi) {
         assert(node);
         assert(!(node instanceof Array));
         console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);

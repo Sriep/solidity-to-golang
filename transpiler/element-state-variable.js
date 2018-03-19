@@ -26,9 +26,9 @@ module.exports = {
         goCode += "\n";
 
         // set accessor
-        goCode += "\t";
-        goCode += this.codeSetSig(node, history, parent);
-        goCode += "\n";
+        //goCode += "\t";
+        //goCode += this.codeSetSig(node, history, parent);
+        //goCode += "\n";
         return goCode;
     },
 
@@ -43,7 +43,7 @@ module.exports = {
         goCode += " ()( " + this.getType(node, history, parent) + " )";
         return goCode;
     },
-
+/*
     codeSetSig: function(node, history, parent) {
         let goCode = "";
         if (node.visibility !== "public") {
@@ -57,7 +57,7 @@ module.exports = {
         goCode += this.getType(node, history, parent) + ")";
         return goCode;
     },
-
+*/
     codeAccessors: function(node, history, parent) {
         let goCode = "";
         if (node.visibility === "public") {

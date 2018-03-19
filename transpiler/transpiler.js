@@ -3,6 +3,7 @@ const path = require("path");
 const assert = require("assert");
 const fs = require("fs");
 const sourceUnits = require("./source-units.js");
+const abi = require("./abi.js");
 
 module.exports = {
 
@@ -10,7 +11,7 @@ module.exports = {
     suffixFile: "./transpiler/data/suffix.sol",
 
     compileToGoToFile: function(ast, outputFile) {
-        let data = this.compileToGo(ast, outputFile);
+        let data = this.compileToGo(ast, outputFile, abi);
         if(outputFile == null ||  outputFile ==='') {
             //ouput to stdout,
             console.log("Error file was not saved to " + outputFile);
@@ -25,14 +26,14 @@ module.exports = {
         });
     },
 
-    compileToGo: function(ast, outputFile) {
-        let output = this.codeProgram(ast, outputFile);
+    compileToGo: function(ast, outputFile, abi) {
+        let output = this.codeProgram(ast, outputFile,abi);
 
         console.log(JSON.stringify(ast, null, 2));
         return output;
     },
 
-    codeProgram: function(node, outputFile) {
+    codeProgram: function(node, outputFile, abi) {
         if(node === undefined) {
             console.log("undefined");
             return;
@@ -48,7 +49,9 @@ module.exports = {
             packageName = packageName.replace(/^.*[\\\/]/, '');
             let goCode = "package " + packageName;
             goCode += this.prefix();
-            goCode +=  sourceUnits.code(node.body);
+
+            goCode +=  sourceUnits.code(node.body, abi);
+
             //goCode += this.suffix();
             assert(goCode !== undefined);
             return goCode;

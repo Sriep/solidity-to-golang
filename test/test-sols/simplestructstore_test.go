@@ -6,7 +6,7 @@ import "math/big"
 
 func TestSetGet(t *testing.T) {
 
-myStore := NewSimpleStructStore()
+    myStore := NewSimpleStructStore()
     for  x  := 0; x < 10; x++ {
         for  y  := 0; y < 10; y++ {
             bigX := big.NewInt(int64(x))

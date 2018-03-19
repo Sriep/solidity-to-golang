@@ -2,10 +2,11 @@
 const assert = require("assert");
 const gc = require("./gc.js");
 const sourceElements = require("./source-elements.js");
+const functionElement = require("./element-function.js");
 
 module.exports = {
 
-    codeContract: function(node, history) {
+    codeContract: function(node, history, abi) {
         assert(node);
         assert(!(node instanceof Array));
         console.log("node-" + node.type + ' start-' + node.start + ' end-' + node.end);
@@ -18,7 +19,7 @@ module.exports = {
         //goCode += "\n//***************** " + node.name + " start contract declarations " + " *****************\n";
         history.addContract(node);
 
-        goCode += this.codeDataStruct(node, history);
+        goCode += this.codeDataStruct(node, history, abi);
         goCode += this.codePublicInterface(node, history);
         goCode += this.codeExternalInterface(node, history);
         goCode += this.codeInternalInterface(node, history);
@@ -73,12 +74,12 @@ module.exports = {
         return goCode;
     },
 
-    codeDataStruct: function(node, history) {
+    codeDataStruct: function(node, history, abi) {
         let goCode = "type ";
         goCode += gc.structPrefix + node.name + gc.structSuffix;
         goCode += " struct {\n";
         //goCode += this.codeBases(node, history, gc.structPrefix, gc.structSuffix);
-        goCode += sourceElements.codeDataStruct(node.body, history, node);
+        goCode += sourceElements.codeDataStruct(node.body, history, node, abi);
         goCode += "\tContract\n";
         goCode += "\tthis *" + gc.structPrefix + node.name + gc.structSuffix + "\n";
         goCode += "}\n";
@@ -86,15 +87,43 @@ module.exports = {
     },
 
     codeConstructor: function(node, history) {
-        let goCode = "func New" + node.name + "() (*";
+        let goCode = "func New" + node.name ;
+        goCode += this.getConstructorParameters(node, history);
+        goCode += " (*";
         goCode += gc.structPrefix + node.name + gc.structSuffix + ") {\n";
         goCode += "\tp := new(" + gc.structPrefix +  node.name  + gc.structSuffix + ")\n";
         goCode +=  "\tp.this = p\n";
         goCode +=  "\tp.createStorage()\n";
-        goCode += sourceElements.codeConstructor(node.body, history, node);
+        goCode += sourceElements.codeConstructorBody(node.body, history, node);
+        let constructorCall = this.getConstructorCall(node);
+        if (constructorCall)
+            goCode += "\t" + constructorCall + "\n";
         goCode += "\treturn p\n";
         goCode += "}\n\n";
         return goCode;
+    },
+
+    getConstructorParameters: function(node, history) {
+        assert(node && node.body instanceof Array);
+        for ( let item of node.body ) {
+            if ( item.type === "FunctionDeclaration" && item.name === node.name ) {
+                return functionElement.codeFunctionParameters(item.params, history, node);
+            }
+        }
+        return "()";
+    },
+
+    getConstructorCall: function(node) {
+        assert(node && node.body instanceof Array);
+        let goCode = "";
+        for ( let item of node.body ) {
+            if ( item.type === "FunctionDeclaration" && item.name === node.name ) {
+                goCode = "p." + gc.constructorPrefix + node.name;
+                goCode += functionElement.codeFunctionArguments(item.params);
+                return goCode;
+            }
+        }
+        return "";
     },
 
     codeDeclarations: function(node, history) {

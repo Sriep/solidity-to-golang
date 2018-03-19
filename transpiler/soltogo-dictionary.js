@@ -19,8 +19,9 @@ module.exports = {
         [ "int256", "*big.Int" ],
         [ "fixed", "float64" ], //TODO support fixedMxN
         [ "ufixed", "float64" ], //TODO support ufixedMxN
-        [ "address" , "*big.Int"], //TODO add address object to prefix
-        [ "byte" , "byte"] //TODO add bytes1 to bytes32
+        [ "address" , "*big.Int" ], //TODO add address object to prefix
+        [ "byte" , "byte" ], //TODO add bytes1 to bytes32
+        [ "string" , "string" ]
     ]),
 
     goValueTypes : new Set([

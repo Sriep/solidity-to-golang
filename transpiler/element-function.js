@@ -17,7 +17,9 @@ module.exports = {
 
     getSignature: function(node, history, parent) {
         let goCode = "";
-        if (node.visibility === "internal" || node.visibility === "private") {
+        if (node.name === parent.name) {
+            goCode += gc.constructorPrefix + node.name;
+        } else if (node.visibility === "internal" || node.visibility === "private") {
             goCode += gc.hideFuncPrefix + node.name;
             goCode += gc.suffixContract ? "_" + parent.name : "";
         } else {
@@ -32,7 +34,7 @@ module.exports = {
         return goCode;
     },
 
-    codeFunctionParameters(node, history, parent, localHistory) {
+    codeFunctionParameters: function(node, history, parent, localHistory) {
         if (node === null)
             return "()";
         assert(node && node instanceof Array);
@@ -49,10 +51,26 @@ module.exports = {
             let dataType = gf.typeOf(param.literal, history, parent);
             goCode += dataType;
             //Function parameter written in two locations, so maybe already added
-            if (!localHistory.variables.has(param.id) && !localHistory.constants.has(param.id)) {
+            if (localHistory && !localHistory.variables.has(param.id) && !localHistory.constants.has(param.id)) {
                 let isMemory = !param.is_storage;
                 localHistory.addVariableName(param, param.id, isMemory, dataType);
             }
+        }
+        goCode += ")";
+        return goCode;
+    },
+
+    codeFunctionArguments: function(node) {
+        assert(node && node instanceof Array);
+        let goCode = "(";
+        let start = true;
+        for (let param of node) {
+            assert(param && param.type === "InformalParameter");
+            if (start)
+                start = false;
+            else
+                goCode += ", ";
+            goCode += param.id + " ";
         }
         goCode += ")";
         return goCode;

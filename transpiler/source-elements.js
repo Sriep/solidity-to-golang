@@ -8,7 +8,7 @@ const gf = require("./gf.js");
 
 module.exports = {
 
-    codeDataStruct: function(nodeArray, history, parent, unitType) {
+    codeDataStruct: function(nodeArray, history, parent, abi) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
         let goCode = "";
@@ -17,20 +17,21 @@ module.exports = {
                 this.setFuncVisibility(node);
                 assert(node.visibility !== undefined);
             }
-            this.checkElement(node, history, unitType);
+            this.checkElement(node, history, parent.type);
             history.addIdentifier(node, parent);
+            abi.addToAbi(abi, node, parent);
         }
         return goCode;
     },
 
-    codeConstructor: function(nodeArray, history, parent) {
+    codeConstructorBody: function(nodeArray, history, parent) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
 
         let goCodeBases = "";
         for (let base of parent.is) {
             goCodeBases += history.stateVariablesInitCode[base.name];
-        }
+        } // todo check overridden functions and variables
         let goCodeDerived = "";
 
         for (let node of nodeArray) {
@@ -145,37 +146,37 @@ module.exports = {
 
         switch (node.type) {
             case "StateVariableDeclaration":
-                if (unitType === "contract" || unitType === "library") {
+                if (unitType !== "ContractStatement" && unitType !== "LibraryStatement") {
                     throw (new Error(unitType + " cannot have state variables declarations"));
                 }
                 break;
             case "EnumDeclaration":
-                if (unitType === "contract" || unitType === "library") {
+                if (unitType !== "ContractStatement" && unitType !== "LibraryStatement") {
                     throw (new Error(unitType + " cannot have enum declarations"));
                 }
                 break;
             case "EventDeclaration":
-                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                if (unitType !== "ContractStatement" && unitType !== "LibraryStatement" && unitType !== "InterfaceStatement") {
                     throw (new Error(unitType + " cannot have event declarations"));
                 }
                 break;
             case "StructDeclaration":
-                if (unitType === "contract" || unitType === "library") {
+                if (unitType !== "ContractStatement" && unitType !== "LibraryStatement") {
                     throw (new Error(unitType + " cannot have struct declarations"));
                 }
                 break;
             case "ModifierDeclaration":
-                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                if (unitType !== "ContractStatement" && unitType !== "LibraryStatement" && unitType !== "InterfaceStatement") {
                     throw (new Error(unitType + " cannot have modifier declarations"));
                 }
                 break;
             case "FunctionDeclaration":
-                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                if (unitType !== "ContractStatement" && unitType !== "LibraryStatement" && unitType !== "InterfaceStatement") {
                     throw (new Error(unitType + " cannot have function declarations"));
                 }
                 break;
             case "UsingStatement":
-                if (unitType === "contract" || unitType === "library" || unitType === "interface") {
+                if (unitType !== "ContractStatement" && unitType !== "LibraryStatement" && unitType !== "InterfaceStatement") {
                     throw (new Error(unitType + " cannot have using statements"));
                 }
                 break;

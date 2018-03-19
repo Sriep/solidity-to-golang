@@ -9,13 +9,14 @@ const gc = {
     privateISuffix: "_pri",
     structPrefix: "_",
     structSuffix: "_st",
+    constructorPrefix: "constructor__",
 
     hideFuncPrefix: "__",
     //hideDataPrefix: "___",
     hideDataPrefix: "", //todo doo we need this?
     setPrefix: "set",
 
-    suffixContract: true
+    suffixContract: false
 
 };
 module.exports = gc;
