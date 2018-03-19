@@ -6,21 +6,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Pass basic constructor unit test.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/compile.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/constructor.sol" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/constructor_test.go" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/transpiler/abi.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/go-test.out" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/output/constructor.go.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/output/example2.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/output/simple-store.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/output/simplearraystore.sol.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/output/simplestructstore.sol.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/.idea/modules.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/.idea/test.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/constructor/constructor.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/constructor/constructor_test.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore_test.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore.go" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore_test.go" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/src/go-test.out" afterPath="$PROJECT_DIR$/test/src/go-test.out" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/simplestructstore_test.go" afterPath="$PROJECT_DIR$/test/test-sols/simplestructstore_test.go" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-function.js" afterPath="$PROJECT_DIR$/transpiler/element-function.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-state-variable.js" afterPath="$PROJECT_DIR$/transpiler/element-state-variable.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/gc.js" afterPath="$PROJECT_DIR$/transpiler/gc.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/soltogo-dictionary.js" afterPath="$PROJECT_DIR$/transpiler/soltogo-dictionary.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/source-elements.js" afterPath="$PROJECT_DIR$/transpiler/source-elements.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/source-units.js" afterPath="$PROJECT_DIR$/transpiler/source-units.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/su_contract.js" afterPath="$PROJECT_DIR$/transpiler/su_contract.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/transpiler.js" afterPath="$PROJECT_DIR$/transpiler/transpiler.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -559,7 +560,7 @@
       <workItem from="1521379162639" duration="1297000" />
       <workItem from="1521385151278" duration="59000" />
       <workItem from="1521385225901" duration="15000" />
-      <workItem from="1521456381412" duration="14142000" />
+      <workItem from="1521456381412" duration="14228000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -764,7 +765,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521303423735</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Pass basic constructor unit test.">
+      <created>1521471293627</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1521471293627</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -782,7 +790,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="380375000" />
+    <option name="totallyTimeSpent" value="380461000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -803,7 +811,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905138" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14963119" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14963119" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
