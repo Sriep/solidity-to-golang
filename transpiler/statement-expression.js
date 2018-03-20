@@ -4,55 +4,55 @@ const gf = require("./gf.js");
 
 module.exports = {
 
-    code: function(node, history, parent, localHistory, depth, declarations) {
+    code: function(node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node.type === "ExpressionStatement");
 
-        return this.codeExpression(node.expression, history, parent, localHistory, depth, declarations);
+        return this.codeExpression(node.expression, history, parent, localHistory, statHistory, declarations);
     },
 
-    codeExpression: function(node, history, parent, localHistory, depth, declarations) {
+    codeExpression: function(node, history, parent, localHistory, statHistory, declarations) {
         switch(node.type) {
             case "AssignmentExpression":
-                return this.codeAssignment(node, history, parent, localHistory, depth, declarations);
+                return this.codeAssignment(node, history, parent, localHistory, statHistory, declarations);
             case "DeclarativeExpression":
                 return this.codeDeclaration(node, history, parent, localHistory,depth, declarations);
             case "BinaryExpression":
-                return this.codeBinary(node, history, parent, localHistory, depth);
+                return this.codeBinary(node, history, parent, localHistory, statHistory);
             case "Literal":
-                return gf.getLiteral(node.value, history, parent, localHistory, depth);
+                return gf.getLiteral(node.value, history, parent, localHistory, statHistory);
             case "Identifier":
-                return gf.getIdentifier(node.name, history, parent, localHistory, depth);
+                return gf.getIdentifier(node.name, history, parent, localHistory, statHistory);
             case "UnaryExpression":
-                return this.codeUnary(node, history, parent, localHistory, depth);
+                return this.codeUnary(node, history, parent, localHistory, statHistory);
             case "MemberExpression":
-                return this.codeMember(node, history, parent, localHistory, depth);
+                return this.codeMember(node, history, parent, localHistory, statHistory);
             case "SequenceExpression":
-                return this.codeSequence(node, history, parent, localHistory, depth);
+                return this.codeSequence(node, history, parent, localHistory, statHistory);
             case "NewExpression":
-                return this.codeNewExpression(node, history, parent, localHistory, depth);
+                return this.codeNewExpression(node, history, parent, localHistory, statHistory);
             case "CallExpression":
-                return this.codeCallExpression(node, history, parent, localHistory, depth);
+                return this.codeCallExpression(node, history, parent, localHistory, statHistory);
             case "UpdateExpression":
-                return this.codeUpdateExpression(node, history, parent, localHistory, depth);
+                return this.codeUpdateExpression(node, history, parent, localHistory, statHistory);
             default:
                 assert(false, "unknown expression type");
         }
     },
 
-    codeAssignment: function(node, history, parent, localHistory, depth, declarations) {
+    codeAssignment: function(node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node.type === "AssignmentExpression");
-        let goCode = "\t".repeat(depth);
+        let goCode = "\t".repeat(statHistory.depth);
         let left = "";
         let right = "";
         switch(node.left.type) {
             case "DeclarativeExpression":
-                return this.codeDeclarativeAssignment(node, history, parent, localHistory, depth, declarations);
+                return this.codeDeclarativeAssignment(node, history, parent, localHistory, statHistory, declarations);
             case "CallExpression":
                 break;
             case "NewExpression":
                 break;
             case "SequenceExpression":
-                left = this.codeSequence(node.left, history, parent, localHistory, depth);
+                left = this.codeSequence(node.left, history, parent, localHistory, statHistory);
                 break;
             case "Identifier":
                 right = this.getGoIdentifier(node.right, history, parent, localHistory);
@@ -67,13 +67,13 @@ module.exports = {
                 }
                 return goCode;
             case "MemberExpression":
-                left =  this.codeMember(node.left, history, parent, localHistory, depth);
+                left =  this.codeMember(node.left, history, parent, localHistory, statHistory);
                 break;
             default:
                 throw(new Error("unknown expression left part"));
         }
 
-        right = this.codeExpression(node.right, history, parent, localHistory, depth);
+        right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
         if (node.operator !== "=")
             assert(node.operator === "=");
 
@@ -83,12 +83,12 @@ module.exports = {
 
 
 
-    codeDeclarativeAssignment: function(node, history, parent, localHistory, depth, declarations) {
+    codeDeclarativeAssignment: function(node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node.type === "AssignmentExpression");
 
-        let goCode = "\t".repeat(depth);
-        this.codeDeclaration(node.left, history, parent, localHistory, depth, declarations); //todo
-        let right = this.codeExpression(node.right, history, parent, localHistory, depth);
+        let goCode = "\t".repeat(statHistory.depth);
+        this.codeDeclaration(node.left, history, parent, localHistory, statHistory, declarations); //todo
+        let right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
 
         if (node.left.storage_location === "storage") {
             //goCode += node.left.name + " = \"" + right + "\"";
@@ -100,7 +100,7 @@ module.exports = {
         return goCode;
     },
 
-    codeDeclaration: function(node, history, parent, localHistory, depth, declarations) {
+    codeDeclaration: function(node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node.type === "DeclarativeExpression");
         if (!declarations)
             assert(declarations);
@@ -154,7 +154,7 @@ module.exports = {
         return goCode;
     },
 
-    codeBinary: function(node, history, parent, localHistory, depth) {
+    codeBinary: function(node, history, parent, localHistory, statHistory) {
         assert(node && node.type === "BinaryExpression");
         assert(node.left && node.right && node.operator);
 
@@ -163,14 +163,14 @@ module.exports = {
         if (node.left.type === "Identifier")
             left = this.getGoIdentifier(node.left, history, parent, localHistory);
         else
-            left = this.codeExpression(node.left, history, parent, localHistory, depth);
-        //let left = this.codeExpression(node.left, history, parent, localHistory, depth);
+            left = this.codeExpression(node.left, history, parent, localHistory, statHistory);
+        //let left = this.codeExpression(node.left, history, parent, localHistory, statHistory);
         let right ="";
         if (node.right.type === "Identifier")
             right = this.getGoIdentifier(node.right, history, parent, localHistory);
         else
-            right = this.codeExpression(node.right, history, parent, localHistory, depth);
-        //let right = this.codeExpression(node.right, history, parent, localHistory, depth);
+            right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
+        //let right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
 
         if (node.left.type === "BinaryExpression" || node.left.type === "UnaryExpression" ) {
             assert(node.right.type === "BinaryExpression" || node.right.type === "UnaryExpression");
@@ -212,10 +212,10 @@ module.exports = {
         }
     },
 
-    codeUpdateExpression: function(node, history, parent, localHistory, depth) {
+    codeUpdateExpression: function(node, history, parent, localHistory, statHistory) {
         assert(node && node.type === "UpdateExpression");
         let goCode = "";
-        let argument = this.codeExpression(node.argument,history, parent, localHistory, depth);
+        let argument = this.codeExpression(node.argument,history, parent, localHistory, statHistory);
         goCode += argument + ".";
 
         assert(node.operator === "++" || node.operator === "--");
@@ -234,7 +234,7 @@ module.exports = {
         return goCode;
     },
 
-    codeCallExpression:function(node, history, parent, localHistory, depth) {
+    codeCallExpression:function(node, history, parent, localHistory, statHistory) {
         assert(node && node.type === "CallExpression");
 
         let goCode = "";
@@ -250,20 +250,20 @@ module.exports = {
             if (node.callee.object.type === "Identifier") {
                 goCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
             } else {
-                goCode = this.codeExpression(node.callee.object, history, parent, localHistory, depth);
+                goCode = this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
             }
-            goCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, depth);
+            goCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, statHistory);
             goCode += "))";
             goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
             goCode += ") ))"
         } else {
-            goCode += this.codeExpression(node.callee, history, parent, localHistory, depth);
-            goCode += "(" + this.codeArguments(node.arguments, history, parent, localHistory, depth) + ")";
+            goCode += this.codeExpression(node.callee, history, parent, localHistory, statHistory);
+            goCode += "(" + this.codeArguments(node.arguments, history, parent, localHistory, statHistory) + ")";
         }
         return goCode;
     },
 
-    codeArguments: function(argArray, history, parent, localHistory, depth) {
+    codeArguments: function(argArray, history, parent, localHistory, statHistory) {
         assert(argArray && argArray instanceof Array);
         let goCode = "";
         let start = true;
@@ -272,7 +272,7 @@ module.exports = {
                 start = false;
             else
                 goCode += ", ";
-            goCode += this.codeExpression(arg, history, parent, localHistory, depth);
+            goCode += this.codeExpression(arg, history, parent, localHistory, statHistory);
         }
         return goCode;
     },
@@ -290,37 +290,67 @@ module.exports = {
         return goCode;
     },
 
-    codeMember: function(node, history, parent, localHistory, depth) {
+    codeMember: function(node, history, parent, localHistory, statHistory, reversing) {
         assert(node && node.type === "MemberExpression");
         let goCode = "";
         let object="";
+
         if (node.object.type === "Identifier") {
             object += this.getGoIdentifier(node.object, history, parent, localHistory);
+        } else if (node.object.type === "MemberExpression") {
+            object = this.codeMember(node.object, history, parent, localHistory, statHistory, node.computed);
         } else {
-            object = this.codeExpression(node.object, history, parent, localHistory, depth);
+            object = this.codeExpression(node.object, history, parent, localHistory, statHistory);
         }
         goCode += object;
 
         // node.computed true means an array, false then a structure
-        goCode += node.computed ? "[" : ".";
-        switch (node.property.type) {
+        if (node.computed) {
+            //Need to reverse the order of arrays as Solidity uses different order to Go
+            if (statHistory.prevArrayProperties.length > 0)
+                goCode = goCode.slice(0, -1*statHistory.prevArrayProperties.length);
+            let property = this.codeArrayProperty(node);
+            goCode += property + statHistory.prevArrayProperties;
+            statHistory.prevArrayProperties = reversing ? property + statHistory.prevArrayProperties : "";
+        } else if (node.property.name === "length") {
+            return "big.NewInt(int64(len(" + object + ")))";
+        } else {
+            goCode += this.codeStructProperty(node);
+        }
+        return goCode;
+    },
+
+    codeArrayProperty: function(node) {
+        let goCode = "";
+        goCode += "[";
+        switch (node.type) {
             case "Literal":
-                goCode += node.property.value ; //todo what about bigInts?
+                goCode += node.value; //todo ????
                 break;
-            case "Identifier": //todo check for special members like length and push
-                if (node.property.name === "length" && !node.computed) {
-                    return "big.NewInt(int64(len(" + object + ")))";
-                }
-                goCode += node.property.name;
-                goCode += node.computed ? ".Uint64()" : "";
+            case "Identifier":
+                goCode += node.name;
+                goCode += ".Uint64()";
                 break;
             default:
                 assert(false, "unsupported member expression"); //todo
         }
-        goCode += node.computed ? "]" : "";
+        goCode += "]";
+        return goCode;
+    },
 
-        return goCode; // to    do codeMember
-    }
-
+    codeStructProperty: function(node) {
+        let goCode = "";
+        goCode += ".";
+        switch (node.type) {
+            case "Literal":
+                goCode += node.value; //todo ????
+                break;
+            case "Identifier": //todo check for special members like length
+                goCode += node.name;
+                break;
+            default:
+                assert(false, "unsupported member expression"); //todo
+        }
+    },
 
 };

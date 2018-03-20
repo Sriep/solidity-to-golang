@@ -4,6 +4,7 @@ const expression = require("./statement-expression.js");
 const varDeclaration = require("./statement-var-declare.js");
 const returnStatement = require("./statement-return.js");
 const iterationStatement = require("./statement-iteration.js");
+const StatHistory = require("./statement-history.js");
 
 module.exports = {
 
@@ -12,7 +13,7 @@ module.exports = {
         assert(node && node instanceof Array);
         let goCode = "";
         let declarations = { code: ""};
-        let bodyCode = this.code(node, history, parent, localHistory, 1, declarations);
+        let bodyCode = this.code(node, history, parent, localHistory, new StatHistory(), declarations);
         if (declarations.code !== "") {
             goCode = declarations.code;
             //goCode += "\n\t// Declarations have to be at top of file as go variable scope are block based\n"
@@ -22,28 +23,29 @@ module.exports = {
         return goCode;
     },
 
-    code: function( node, history, parent, localHistory, depth, declarations) {
+    code: function( node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node instanceof Array);
 
         let goCode = "";
         for ( let statement of node ) {
-            goCode += this.codeStatement(statement, history, parent, localHistory, depth, declarations);
+            goCode += this.codeStatement(statement, history, parent, localHistory, statHistory, declarations);
         }
         return goCode;
     },
 
-    codeStatement: function(statement, history, parent, localHistory, depth, declarations) {
+    codeStatement: function(statement, history, parent, localHistory, statHistory, declarations) {
         assert(statement);
 
         let goCode ="";
         switch (statement.type) {
             case "BlockStatement":
                 goCode += "{\n";
-                goCode += this.code(statement.body, history, parent, localHistory, depth+1, declarations);
-                goCode += "\n" +"\t".repeat(depth) + "}";
+                statHistory.depth +=1;
+                goCode += this.code(statement.body, history, parent, localHistory, statHistory, declarations);
+                goCode += "\n" +"\t".repeat(statHistory.depth) + "}";
                 break;
             case "VariableDeclaration":
-                declarations.code += varDeclaration.code(statement, history, parent, localHistory, depth);
+                declarations.code += varDeclaration.code(statement, history, parent, localHistory, statHistory);
                 declarations.code += "\n";
                 break;
             case "VariableDeclarationTuple":
@@ -54,34 +56,34 @@ module.exports = {
             case "PlaceholderStatement":
                 break;
             case "ExpressionStatement":
-                goCode += expression.code(statement, history, parent, localHistory, depth, declarations);
+                goCode += expression.code(statement, history, parent, localHistory, statHistory, declarations);
                 break;
             case "IfStatement":
                 const ifStatement = require("./statement-if.js");
-                goCode += ifStatement.code(statement, history, parent, localHistory, depth, declarations);
+                goCode += ifStatement.code(statement, history, parent, localHistory, statHistory, declarations);
                 break;
             case "DoWhileStatement":
-                goCode += iterationStatement.codeDoWhile(statement, history, parent, localHistory, depth, declarations);
+                goCode += iterationStatement.codeDoWhile(statement, history, parent, localHistory, statHistory, declarations);
                 break;
             case "WhileStatement":
-                goCode += iterationStatement.codeWhile(statement, history, parent, localHistory, depth, declarations);
+                goCode += iterationStatement.codeWhile(statement, history, parent, localHistory, statHistory, declarations);
                 break;
             case "ForStatement":
-                goCode += iterationStatement.codeFor(statement, history, parent, localHistory, depth, declarations);
+                goCode += iterationStatement.codeFor(statement, history, parent, localHistory, statHistory, declarations);
                 break;
             case "InlineAssemblyStatement":
                 break;
             case "ContinueStatement":
-                goCode += "\t".repeat(depth) + "continue";
+                goCode += "\t".repeat(statHistory.depth) + "continue";
                 break;
             case "BreakStatement":
-                goCode += "\t".repeat(depth) + "break";
+                goCode += "\t".repeat(statHistory.depth) + "break";
                 break;
             case "ReturnStatement":
-                goCode += returnStatement.code(statement, history, parent, localHistory, depth);
+                goCode += returnStatement.code(statement, history, parent, localHistory, statHistory);
                 break;
             case "ThrowStatement":
-                goCode += "\t".repeat(depth) + "panic(\"\")";
+                goCode += "\t".repeat(statHistory.depth) + "panic(\"\")";
                 break;
             case "UsingStatement":
                 break;

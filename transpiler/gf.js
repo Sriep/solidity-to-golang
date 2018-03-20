@@ -9,14 +9,15 @@ const gf = {
     arrayPart: function(dimensions) {
         assert(dimensions instanceof Array);
         let goCode = "";
-        for ( let dim of dimensions ) {
-            if (dim === null) {
+        for ( let i = dimensions.length -1 ; i >=0 ; i--) {//  let dim of dimensions.reverse() ) {
+        //for ( let dim of dimensions ) {
+            if (dimensions[i] === null) {
                 goCode += "[" + this.defaultArraySize + "]";
-            } else if (dim === undefined) {
+            } else if (dimensions[i]  === undefined) {
                 console.log("Parser unable to resolve array size");
                 goCode += "[" + this.defaultArraySize + "]";
             } else {
-                goCode += "[" + dim + "]";
+                goCode += "[" + dimensions[i]  + "]";
             }
         }
         return goCode;
@@ -58,7 +59,7 @@ const gf = {
         assert(node && node.type === "Type");
         return (node.array_parts instanceof Array
             && node.array_parts.length > 0
-            && node.array_parts[0] === null);
+            && node.array_parts[node.array_parts.length-1] === null);
     },
 
     getSVTypeAssertion: function(node, history, parent, localHistory){
@@ -178,22 +179,7 @@ const gf = {
         }
         throw(new Error("unkonw identifer " + identifier));
     },
-/*
-    modifyId: function(name, nodeVisibility, nodeType, parentName) {
-        let goId = name;
-        if (nodeVisibility === "public" || nodeVisibility === "external") {
-            goId =  name.charAt(0).toUpperCase() + name.slice(1);
-        } else {
-            if (nodeType === "StateVariableDeclaration") {
-                goId = gc.hideDataPrefix + goId;
-            } else {
-                goId = gc.hideFuncPrefix + goId;
-                goId += (gc.suffixContract) ? "_" + parentName : "";
-            }
-        }
-        return goId;
-    },
-*/
+
     getLiteralType: function(value) {
         if (value === "true" || value === "false") {
             return "bool";
@@ -209,18 +195,9 @@ const gf = {
 
     isComplexType: function(typeId, history, parent, localHistory) {
         //assert(node && node.type = "Type");
-        //id
-
         return dic.valueTypes.has(typeId); //todo impliment
     },
-/*
-    getBigType: function (expression) {
-        if (expression.includes("big.NewFloat"))
-            return "Float";
-        if (expression.includes("big.NewInt"))
-            return "Int";
-    },
-*/
+
     getBigOperator: function (operator) {
         switch (operator) {
             case "+":

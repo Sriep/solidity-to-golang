@@ -36,7 +36,6 @@ module.exports = {
         goCode += gc.suffixContract ? "_" + parent.name : "";
         goCode += " ";
         goCode += this.codeParams(node.literal.array_parts, history, parent);
-        //goCode += "( " + gf.typeOf(node.literal, history, parent) + " )";
         goCode += this.codeRetunType(node.literal, history, parent);
         return goCode;
     },
@@ -62,7 +61,7 @@ module.exports = {
         assert(node && node.type === "Type");
         let goCode = "(";
         let goType = gf.typeOf(node, history, parent);
-        goCode += goType.substring(goType.indexOf("]") + 1);
+        goCode += goType.substring(goType.lastIndexOf("]") + 1);
         return goCode + ")";
     },
 
@@ -78,7 +77,7 @@ module.exports = {
             goCode += gf.typeOf(node.literal, history, parent) + ")";
             if (node.array_parts !== null && node.literal.array_parts instanceof Array)
             {
-                for ( let i = 0 ; i < node.literal.array_parts.length ; i++ ) {
+                for ( let i = node.literal.array_parts.length-1 ; i >=0  ; i-- ) {
                     goCode += "[i" + i + ".Uint64()]";
                 }
             }
