@@ -5,29 +5,8 @@
     <bookmark url="file://$PROJECT_DIR$/transpiler/source-elements.js" line="46" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Pass array members unit test. Added support for push and length for dynamic arrays.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/array_members.sol" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/array_members_test.go" />
+    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/workspace.xml" afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/src/constructor/constructor.go" afterPath="$PROJECT_DIR$/test/src/constructor/constructor.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/go-test.out" afterPath="$PROJECT_DIR$/test/src/go-test.out" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" afterPath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore_test.go" afterPath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplestore/simplestore.go" afterPath="$PROJECT_DIR$/test/src/simplestore/simplestore.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplestore/simplestore_test.go" afterPath="$PROJECT_DIR$/test/src/simplestore/simplestore_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore.go" afterPath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore_test.go" afterPath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/simplearraystore_test.go" afterPath="$PROJECT_DIR$/test/test-sols/simplearraystore_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/simplestore_test.go" afterPath="$PROJECT_DIR$/test/test-sols/simplestore_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/simplestructstore_test.go" afterPath="$PROJECT_DIR$/test/test-sols/simplestructstore_test.go" />
-      <change beforePath="$PROJECT_DIR$/transpiler/abi.js" afterPath="$PROJECT_DIR$/transpiler/abi.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/data/prefix.sol" afterPath="$PROJECT_DIR$/transpiler/data/prefix.sol" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-state-variable.js" afterPath="$PROJECT_DIR$/transpiler/element-state-variable.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/gf.js" afterPath="$PROJECT_DIR$/transpiler/gf.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/soltogo-dictionary.js" afterPath="$PROJECT_DIR$/transpiler/soltogo-dictionary.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/source-elements.js" afterPath="$PROJECT_DIR$/transpiler/source-elements.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-expression.js" afterPath="$PROJECT_DIR$/transpiler/statement-expression.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,8 +22,8 @@
           <file leaf-file-name="statement-expression.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/transpiler/statement-expression.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="213">
-                  <caret line="254" column="53" lean-forward="false" selection-start-line="254" selection-start-column="53" selection-end-line="254" selection-end-column="53" />
+                <state relative-caret-position="247">
+                  <caret line="256" column="43" lean-forward="true" selection-start-line="256" selection-start-column="43" selection-end-line="256" selection-end-column="43" />
                   <folding />
                 </state>
               </provider>
@@ -598,7 +577,7 @@
       <workItem from="1521385151278" duration="59000" />
       <workItem from="1521385225901" duration="15000" />
       <workItem from="1521456381412" duration="31801000" />
-      <workItem from="1521543676547" duration="10183000" />
+      <workItem from="1521543676547" duration="10221000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -824,7 +803,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521475168194</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Pass array members unit test. Added support for push and length for dynamic arrays.">
+      <created>1521559450937</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1521559450937</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -842,7 +828,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="408217000" />
+    <option name="totallyTimeSpent" value="408255000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -855,6 +841,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14963119" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1482,8 +1469,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/transpiler/statement-expression.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="254" column="53" lean-forward="false" selection-start-line="254" selection-start-column="53" selection-end-line="254" selection-end-column="53" />
+        <state relative-caret-position="247">
+          <caret line="256" column="43" lean-forward="true" selection-start-line="256" selection-start-column="43" selection-end-line="256" selection-end-column="43" />
           <folding />
         </state>
       </provider>
