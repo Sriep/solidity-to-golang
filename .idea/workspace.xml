@@ -6,23 +6,8 @@
     <bookmark url="file://$PROJECT_DIR$/transpiler/source-elements.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Pass constant array of arrays. Needed to reverse order of arrays in Go.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/array_ofconstarray.sol" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/array_ofconstarray_test.go" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/transpiler/statement-history.js" />
+    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/workspace.xml" afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/.~lock.utets.csv#" afterPath="$PROJECT_DIR$/test/.~lock.utets.csv#" />
-      <change beforePath="$PROJECT_DIR$/test/src/go-test.out" afterPath="$PROJECT_DIR$/test/src/go-test.out" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" afterPath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" />
-      <change beforePath="$PROJECT_DIR$/test/utets.csv" afterPath="$PROJECT_DIR$/test/utets.csv" />
-      <change beforePath="$PROJECT_DIR$/transpiler/block.js" afterPath="$PROJECT_DIR$/transpiler/block.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-state-variable.js" afterPath="$PROJECT_DIR$/transpiler/element-state-variable.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/gf.js" afterPath="$PROJECT_DIR$/transpiler/gf.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-expression.js" afterPath="$PROJECT_DIR$/transpiler/statement-expression.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-if.js" afterPath="$PROJECT_DIR$/transpiler/statement-if.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-iteration.js" afterPath="$PROJECT_DIR$/transpiler/statement-iteration.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-return.js" afterPath="$PROJECT_DIR$/transpiler/statement-return.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -595,7 +580,7 @@
       <workItem from="1521385151278" duration="59000" />
       <workItem from="1521385225901" duration="15000" />
       <workItem from="1521456381412" duration="31801000" />
-      <workItem from="1521543676547" duration="24646000" />
+      <workItem from="1521543676547" duration="24657000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -828,7 +813,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521559450937</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Pass constant array of arrays. Needed to reverse order of arrays in Go.">
+      <created>1521577292030</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1521577292030</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -846,7 +838,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="422680000" />
+    <option name="totallyTimeSpent" value="422691000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -859,6 +851,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2938296" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
