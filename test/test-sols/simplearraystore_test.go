@@ -1,7 +1,9 @@
 package simplearraystore
 
-import "testing"
-import "math/big"
+import (
+    "testing"
+    "math/big"
+)
 
 
 func TestSetGet(t *testing.T) {
@@ -17,7 +19,7 @@ func TestSetGet(t *testing.T) {
                 myStore.Set(bigV, bigX, bigY)
 
                 rtv := myStore.Get(bigX, bigY)
-                if rtv != bigV {
+                if 0 != rtv.Cmp(bigV) {
                     t.Fatalf("Set value[%d][%d] to %d but got %d", bigX, bigY, bigV, rtv)
                 }
             }

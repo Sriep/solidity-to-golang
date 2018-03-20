@@ -1,6 +1,5 @@
 'use strict';
 const assert = require("assert");
-const dic = require("./soltogo-dictionary.js");
 const gf = require("./gf.js");
 
 module.exports = {
@@ -239,15 +238,34 @@ module.exports = {
         assert(node && node.type === "CallExpression");
 
         let goCode = "";
-        goCode += this.codeExpression(node.callee, history, parent, localHistory, depth);
-        goCode += this.codeArguments(node.arguments, history, parent, localHistory, depth);
 
+        // array push member special case.
+        if (node.callee.type === "MemberExpression"
+            && !node.callee.computed
+            && node.callee.property.name === "push")
+        {
+            goCode += "big.NewInt(int64(len(";
+            goCode += "this.set(\"" + node.callee.object.name + "\", ";
+            goCode += "append(";
+            if (node.callee.object.type === "Identifier") {
+                goCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
+            } else {
+                goCode = this.codeExpression(node.callee.object, history, parent, localHistory, depth);
+            }
+            goCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, depth);
+            goCode += "))";
+            goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
+            goCode += ") ))"
+        } else {
+            goCode += this.codeExpression(node.callee, history, parent, localHistory, depth);
+            goCode += "(" + this.codeArguments(node.arguments, history, parent, localHistory, depth) + ")";
+        }
         return goCode;
     },
 
     codeArguments: function(argArray, history, parent, localHistory, depth) {
         assert(argArray && argArray instanceof Array);
-        let goCode = "(";
+        let goCode = "";
         let start = true;
         for ( let arg of argArray) {
             if (start)
@@ -256,25 +274,18 @@ module.exports = {
                 goCode += ", ";
             goCode += this.codeExpression(arg, history, parent, localHistory, depth);
         }
-        goCode += ")";
         return goCode;
     },
 
     getGoIdentifier: function(node, history, parent, localHistory){
         let goCode = "";
-        if (!node && node.type !== "Identifier")
-            assert(node && node.type === "Identifier");
-        let idData = history.findIdData(node.name, parent, localHistory);
-        if (!idData)
-            idData = history.findIdData(node.name, parent, localHistory);
+        assert(node && node.type === "Identifier");
+
         if (history.getStorageType(node.name, parent, localHistory) === "stateVariable") {
-            goCode += "this.get(\"" + node.name + "\").(";
-            if (!dic.goValueTypes.has(idData.dataType))
-                goCode += "*";
-            goCode += idData.dataType;
-            goCode += ")";
+            goCode += "this.get(\"" + node.name + "\")";
+            goCode += gf.getSVTypeAssertion(node, history, parent, localHistory);
         } else {
-            goCode += idData.goName;
+            goCode += history.findIdData(node.name, parent, localHistory).goName;
         }
         return goCode;
     },
@@ -290,13 +301,16 @@ module.exports = {
         }
         goCode += object;
 
-        // node.compmuted true means an array, false then a structure
+        // node.computed true means an array, false then a structure
         goCode += node.computed ? "[" : ".";
         switch (node.property.type) {
             case "Literal":
-                goCode += node.property.value ; //todo what boaut bigInts?
+                goCode += node.property.value ; //todo what about bigInts?
                 break;
-            case "Identifier":
+            case "Identifier": //todo check for special members like length and push
+                if (node.property.name === "length" && !node.computed) {
+                    return "big.NewInt(int64(len(" + object + ")))";
+                }
                 goCode += node.property.name;
                 goCode += node.computed ? ".Uint64()" : "";
                 break;
@@ -307,5 +321,6 @@ module.exports = {
 
         return goCode; // to    do codeMember
     }
+
 
 };

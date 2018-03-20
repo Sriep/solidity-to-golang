@@ -1,8 +1,9 @@
 package simplestructstore
 
-import "testing"
-import "math/big"
-
+import (
+    "testing"
+    "math/big"
+)
 
 func TestSetGet(t *testing.T) {
 
@@ -14,7 +15,7 @@ func TestSetGet(t *testing.T) {
             myStore.Set(bigX, bigY)
             rtX := myStore.GetX()
             rtY := myStore.GetY()
-            if rtX != bigX || rtY != bigY {
+            if 0 != rtX.Cmp(bigX) || 0 != rtY.Cmp(bigY) {
                 t.Fatalf("Set (x,y) to (%d,%d) but got (%d,%d)", bigX, bigY, rtX, rtY)
             }
         }

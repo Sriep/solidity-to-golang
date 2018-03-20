@@ -1,7 +1,9 @@
 package simplestore
 
-import "testing"
-import "math/big"
+import (
+    "testing"
+    "math/big"
+)
 
 
 func TestSetGet(t *testing.T) {
@@ -11,7 +13,7 @@ myStore := NewSimpleStore()
         bigI := big.NewInt(int64(i))
         myStore.Set(bigI)
         rtv := myStore.Get()
-        if rtv != bigI {
+        if 0 != rtv.Cmp(bigI) {
             t.Fatalf("Set %d but got %d", bigI, rtv)
         }
     }

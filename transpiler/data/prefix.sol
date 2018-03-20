@@ -151,8 +151,9 @@ type Contract struct {
 func (s *Contract) get(variableName string) (interface{}) {
     return s.svStorage[variableName]
 }
-func (s *Contract) set(variableName string, value interface{}) {
+func (s *Contract) set(variableName string, value interface{})  (interface{}) {
     s.svStorage[variableName] = value;
+    return s.svStorage[variableName]
 }
 func (s *Contract) createStorage() {
     if nil == s.svStorage {

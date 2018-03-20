@@ -1,4 +1,5 @@
-ok  	constructor	0.481s
+ok  	array_members	(cached)
+ok  	constructor	(cached)
 ok  	simplearraystore	(cached)
 ok  	simplestore	(cached)
 ok  	simplestructstore	(cached)

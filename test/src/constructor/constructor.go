@@ -151,8 +151,9 @@ type Contract struct {
 func (s *Contract) get(variableName string) (interface{}) {
     return s.svStorage[variableName]
 }
-func (s *Contract) set(variableName string, value interface{}) {
+func (s *Contract) set(variableName string, value interface{})  (interface{}) {
     s.svStorage[variableName] = value;
+    return s.svStorage[variableName]
 }
 func (s *Contract) createStorage() {
     if nil == s.svStorage {
@@ -171,7 +172,7 @@ type _Inbox_st struct {
 	this *_Inbox_st
 }
 type _Inbox_pub interface {
-	Message ()(  string )
+	Message ()(string)
 	constructor__Inbox(initialMessage string)
 	SetMessage(newMessage string)
 
@@ -197,9 +198,8 @@ func NewInbox(initialMessage string) (*_Inbox_st) {
 	return p
 }
 
-func (this _Inbox_st) Message ()(  string ) {
-	v := this.get("message").( string)
-	return v
+func (this _Inbox_st) Message ()(string) {
+	return this.get("message").(string)
 }
 func (this _Inbox_st) constructor__Inbox(initialMessage string) {
 	this.set("message", initialMessage)

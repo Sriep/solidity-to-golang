@@ -47,7 +47,7 @@ module.exports = {
                 }
             }
             if (node.returnParams) {
-                for ( let param of node.params ) {
+                for ( let param of node.returnParams ) {
                     newAbi.outputs.push({
                         name: param.id,
                         type: gf.typeOf(param.literal, history, parent)

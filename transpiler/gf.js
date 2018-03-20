@@ -4,7 +4,7 @@ const dic = require("./soltogo-dictionary.js");
 const gc = require("./gc.js");
 
 const gf = {
-    defaultArraySize: 10,
+    defaultArraySize: "",
 
     arrayPart: function(dimensions) {
         assert(dimensions instanceof Array);
@@ -54,6 +54,30 @@ const gf = {
         return goCode;
     },
 
+    isDynamic: function(node) {
+        assert(node && node.type === "Type");
+        return (node.array_parts instanceof Array
+            && node.array_parts.length > 0
+            && node.array_parts[0] === null);
+    },
+
+    getSVTypeAssertion: function(node, history, parent, localHistory){
+        assert(node && node.type === "Identifier");
+        let goCode = "";
+
+        if (history.getStorageType(node.name, parent, localHistory) === "stateVariable") {
+            let idData = history.findIdData(node.name, parent, localHistory);
+            assert(idData, "cant find data on identifier" + node.name);
+
+            goCode = ".(";
+            if (idData.dataType.substring(0,2) !== "[]")
+                goCode += "*";
+            goCode += idData.dataType;
+            goCode += ")";
+        }
+        return goCode;
+    },
+
     codeSequence: function(sequence, history, parent, localHistory) {
         assert(sequence instanceof Array);
         let goCode = "";
@@ -80,7 +104,7 @@ const gf = {
             case "MemberExpression":
                 return this.getMemberValue(node, history, parent, localHistory); //todo
             default:
-                assert(false, "unimplemented value type")
+                assert(false, "unimplemented value type");
                 return ""; // todo ??????
         }
     },
@@ -117,7 +141,7 @@ const gf = {
             case "float":
                 return "big.NewFloat(" + value + ")";
             default:
-                assert(false, "unimplemented value type")
+                assert(false, "unimplemented value type");
                 return value; // todo ??????
         }
     },
@@ -152,12 +176,9 @@ const gf = {
                 return localHistory.constants.get(id)
             }
         }
-        //this.getIdentifier(id, history, parent, localHistory);
         throw(new Error("unkonw identifer " + identifier));
-        //assert(false, "getting non existant identifier");
-        return id;
     },
-
+/*
     modifyId: function(name, nodeVisibility, nodeType, parentName) {
         let goId = name;
         if (nodeVisibility === "public" || nodeVisibility === "external") {
@@ -172,7 +193,7 @@ const gf = {
         }
         return goId;
     },
-
+*/
     getLiteralType: function(value) {
         if (value === "true" || value === "false") {
             return "bool";
@@ -192,14 +213,14 @@ const gf = {
 
         return dic.valueTypes.has(typeId); //todo impliment
     },
-
+/*
     getBigType: function (expression) {
         if (expression.includes("big.NewFloat"))
             return "Float";
         if (expression.includes("big.NewInt"))
             return "Int";
     },
-
+*/
     getBigOperator: function (operator) {
         switch (operator) {
             case "+":
