@@ -14,7 +14,7 @@
     <SUITE FILE_PATH="coverage/test$array_members_test_go.coverage" NAME="array_members_test.go Coverage Results" MODIFIED="1521495199319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5505618">
+    <splitter split-orientation="horizontal" split-proportion="0.70037454">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="array_members.go" pinned="false" current-in-tab="false">
@@ -79,11 +79,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="fibonacci.go" pinned="false" current-in-tab="false">
+          <file leaf-file-name="fibonacci.go" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="165">
-                  <caret line="207" column="19" lean-forward="false" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="19" />
+                <state relative-caret-position="304">
+                  <caret line="209" column="0" lean-forward="true" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -99,11 +99,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="true">
+          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="148">
-                  <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+                  <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -177,7 +177,7 @@
             <entry file="file://$PROJECT_DIR$/test-sols/fibonacci.sol">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="528">
-                  <caret line="60" column="1" lean-forward="false" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
+                  <caret line="69" column="1" lean-forward="false" selection-start-line="69" selection-start-column="1" selection-end-line="69" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -253,9 +253,9 @@
         <option value="$PROJECT_DIR$/src/array_dyncon/array_dyncon.go" />
         <option value="$PROJECT_DIR$/test-sols/simplestore_test.go" />
         <option value="$PROJECT_DIR$/src/fibonacci/fibonacci_test.go" />
-        <option value="$PROJECT_DIR$/src/fibonacci/fibonacci.go" />
         <option value="$PROJECT_DIR$/test-sols/fibonacci_test.go" />
         <option value="$PROJECT_DIR$/test-sols/fibonacci.sol" />
+        <option value="$PROJECT_DIR$/src/fibonacci/fibonacci.go" />
       </list>
     </option>
   </component>
@@ -265,7 +265,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="54" />
     <option name="y" value="100" />
     <option name="width" value="1684" />
@@ -437,7 +437,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14605543" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -500,7 +500,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/fibonacci/fibonacci.go</url>
-          <line>273</line>
+          <line>286</line>
           <properties />
           <option name="timeStamp" value="79" />
         </line-breakpoint>
@@ -863,14 +863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="207" column="19" lean-forward="false" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -882,7 +874,7 @@
     <entry file="file://$PROJECT_DIR$/test-sols/fibonacci.sol">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
-          <caret line="60" column="1" lean-forward="false" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
+          <caret line="69" column="1" lean-forward="false" selection-start-line="69" selection-start-column="1" selection-end-line="69" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -890,7 +882,15 @@
     <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
-          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="209" column="0" lean-forward="true" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
           <folding />
         </state>
       </provider>

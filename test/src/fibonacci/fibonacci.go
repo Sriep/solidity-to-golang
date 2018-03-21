@@ -172,6 +172,7 @@ type _Fibonacci_st struct {
 	this *_Fibonacci_st
 }
 type _Fibonacci_pub interface {
+	FibRecurse(n *big.Int)( *big.Int)
 	FibWhile(n *big.Int)( *big.Int)
 	FibDo(n *big.Int)( *big.Int)
 	FibFor(n *big.Int)( *big.Int)
@@ -196,6 +197,18 @@ func NewFibonacci() (*_Fibonacci_st) {
 	return p
 }
 
+func (this _Fibonacci_st) FibRecurse(n *big.Int)( *big.Int) {
+	if n.Cmp(big.NewInt(0)) == 0{
+		return big.NewInt(0)
+
+	} else 	if n.Cmp(big.NewInt(1)) == 0{
+		return big.NewInt(1)
+
+	}
+
+
+	return new(big.Int).Add(this.FibRecurse(new(big.Int).Sub(n, big.NewInt(1))), this.FibRecurse(new(big.Int).Sub(n, big.NewInt(2))))
+}
 func (this _Fibonacci_st) FibWhile(n *big.Int)( *big.Int) {
 	var xm1 *big.Int
 	var x *big.Int

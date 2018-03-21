@@ -167,11 +167,43 @@ func (s *Contract) selfdestruct(recipient address) {
 // ********************** End header ********************************
 //
 //******************** Generated code follows ***********************
+type _A_st struct {
+	Contract
+	this *_A_st
+}
+type _A_pub interface {
+	Hi()( string)
+
+}
+type A interface {
+	_A_pub
+
+}
+type _A_int interface {
+	_A_pub
+
+}
+type _A_pri interface {
+	_A_int
+
+}
+func NewA() (*_A_st) {
+	p := new(_A_st)
+	p.this = p
+	p.createStorage()
+	return p
+}
+
+func (this _A_st) Hi()( string) {
+	return "hi"
+}
+
 type _Fibonacci_st struct {
 	Contract
 	this *_Fibonacci_st
 }
 type _Fibonacci_pub interface {
+	FibRecurse(n *big.Int)( *big.Int)
 	FibWhile(n *big.Int)( *big.Int)
 	FibDo(n *big.Int)( *big.Int)
 	FibFor(n *big.Int)( *big.Int)
@@ -196,6 +228,22 @@ func NewFibonacci() (*_Fibonacci_st) {
 	return p
 }
 
+func (this _Fibonacci_st) FibRecurse(n *big.Int)( *big.Int) {
+	var aa A
+	if n.Cmp(big.NewInt(0)) == 0{
+		return big.NewInt(0)
+
+	} else 	if n.Cmp(big.NewInt(1)) == 0{
+		return big.NewInt(1)
+
+	}
+
+
+
+	aa=new(A)
+aa.hi()
+	return new(big.Int).Add(this.FibRecurse(new(big.Int).Sub(n, big.NewInt(1))), this.FibRecurse(new(big.Int).Sub(n, big.NewInt(2))))
+}
 func (this _Fibonacci_st) FibWhile(n *big.Int)( *big.Int) {
 	var xm1 *big.Int
 	var x *big.Int

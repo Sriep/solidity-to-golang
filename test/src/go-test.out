@@ -2,7 +2,7 @@ ok  	array_dyncon	(cached)
 ok  	array_members	(cached)
 ok  	array_ofconstarray	(cached)
 ok  	constructor	(cached)
-ok  	fibonacci	(cached)
+ok  	fibonacci	0.626s
 ok  	simplearraystore	(cached)
 ok  	simplestore	(cached)
 ok  	simplestructstore	(cached)

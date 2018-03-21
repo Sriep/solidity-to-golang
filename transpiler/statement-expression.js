@@ -264,43 +264,10 @@ module.exports = {
             && node.callee.property.name === "push")
         {
             goCode += this.codePush(node, history, parent, localHistory, statHistory)
-            /*
-            goCode += "big.NewInt(int64(len(this.get(\"";
-            goCode += gf.getObjectName(node.callee.object, history, parent, localHistory);
-            goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
-            goCode += ") ))";
-
-            goCode += "this.set(\"";
-            goCode += gf.getObjectName(node.callee.object, history, parent, localHistory);
-            goCode += "\", ";
-            goCode += "append(";
-            if (node.callee.object.type === "Identifier") {
-                goCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
-            } else {
-                goCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
-            }
-            goCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, statHistory);
-            goCode += "))";
-            goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
-            goCode += ") ))"
-
-
-            let prevCode = "";
-            if (node.callee.object.type === "Identifier") {
-                prevCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
-            } else {
-                prevCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
-            }
-            prevCode += " = append(";
-            if (node.callee.object.type === "Identifier") {
-                prevCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
-            } else {
-                prevCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
-            }
-            prevCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, statHistory);
-            prevCode += "))";
-            statHistory.previousStatments.push(prevCode);*/
         } else {
+            // If no object assume called from contract.
+            if (node.callee.type === "Identifier")
+                goCode += "this.";
             goCode += this.codeExpression(node.callee, history, parent, localHistory, statHistory);
             goCode += "(" + this.codeArguments(node.arguments, history, parent, localHistory, statHistory) + ")";
         }

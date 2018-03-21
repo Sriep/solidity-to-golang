@@ -28,6 +28,11 @@ func TestSetGet(t *testing.T) {
 			t.Fatalf("%dth do fibonacci returned %d instead of %d.", i, bigFibDo.Uint64(), ithFib)
 		}
 
+		bigFibRecurse := fibContract.FibRecurse(bigI)
+		if ithFib != bigFibRecurse.Int64() {
+			t.Fatalf("%dth recursive fibonacci returned %d instead of %d.", i, bigFibRecurse.Uint64(), ithFib)
+		}
+
 	}
 }
 
