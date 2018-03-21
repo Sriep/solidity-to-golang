@@ -7,24 +7,8 @@
     <bookmark url="file://$PROJECT_DIR$/transpiler/element-state-variable.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Pass  dynamic array of constants. Needed to split into two statments to handle push.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/array_dyncon.sol" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/array_dyncon_test.go" />
+    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/output/simplestructstore.go" afterPath="$PROJECT_DIR$/output/simplestructstore.go" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/workspace.xml" afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/.~lock.utets.csv#" afterPath="$PROJECT_DIR$/test/.~lock.utets.csv#" />
-      <change beforePath="$PROJECT_DIR$/test/src/array_members/array_members_test.go" afterPath="$PROJECT_DIR$/test/src/array_members/array_members_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/go-test.out" afterPath="$PROJECT_DIR$/test/src/go-test.out" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplestore/simplestore.go" afterPath="$PROJECT_DIR$/test/src/simplestore/simplestore.go" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/array_members_test.go" afterPath="$PROJECT_DIR$/test/test-sols/array_members_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/simplestore.sol" afterPath="$PROJECT_DIR$/test/test-sols/simplestore.sol" />
-      <change beforePath="$PROJECT_DIR$/test/utets.csv" afterPath="$PROJECT_DIR$/test/utets.csv" />
-      <change beforePath="$PROJECT_DIR$/transpiler/block.js" afterPath="$PROJECT_DIR$/transpiler/block.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-state-variable.js" afterPath="$PROJECT_DIR$/transpiler/element-state-variable.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/gf.js" afterPath="$PROJECT_DIR$/transpiler/gf.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-expression.js" afterPath="$PROJECT_DIR$/transpiler/statement-expression.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-history.js" afterPath="$PROJECT_DIR$/transpiler/statement-history.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -611,7 +595,7 @@
       <workItem from="1521385151278" duration="59000" />
       <workItem from="1521385225901" duration="15000" />
       <workItem from="1521456381412" duration="31801000" />
-      <workItem from="1521543676547" duration="38512000" />
+      <workItem from="1521543676547" duration="38530000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -851,7 +835,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521577292030</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Pass  dynamic array of constants. Needed to split into two statments to handle push.">
+      <created>1521596575478</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1521596575478</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -869,7 +860,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="436546000" />
+    <option name="totallyTimeSpent" value="436564000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
