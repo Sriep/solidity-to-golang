@@ -62,13 +62,37 @@ const gf = {
             && node.array_parts[node.array_parts.length-1] === null);
     },
 
-    getSVTypeAssertion: function(node, history, parent, localHistory){
-        assert(node && node.type === "Identifier");
-        let goCode = "";
+    getObjectName: function(node) {
+        if (node.type === "Identifier")
+            return node.name;
 
-        if (history.getStorageType(node.name, parent, localHistory) === "stateVariable") {
-            let idData = history.findIdData(node.name, parent, localHistory);
-            assert(idData, "cant find data on identifier" + node.name);
+        let ObjNode = node.object;
+        while(ObjNode && ObjNode.type !== "Identifier") {
+            ObjNode = ObjNode.object
+        }
+        assert(ObjNode.type === "Identifier");
+        return ObjNode.name; //todo
+    },
+
+    getSVTypeAssertion: function(node, history, parent, localHistory){ //todo
+        assert(node);
+
+        let idNode;
+        if (node.type !== "Identifier") {
+            let ObjNode = node.object;
+            while(ObjNode && ObjNode.type !== "Identifier") {
+                ObjNode = ObjNode.object
+            }
+            assert(ObjNode.type === "Identifier");
+            idNode = ObjNode;
+        }  else {
+            idNode = node;
+        }
+
+        let goCode = "";
+        if (history.getStorageType(idNode.name, parent, localHistory) === "stateVariable") {
+            let idData = history.findIdData(idNode.name, parent, localHistory);
+            assert(idData, "cant find data on identifier" + idNode.name);
 
             goCode = ".(";
             if (idData.dataType.substring(0,2) !== "[]")
@@ -193,7 +217,7 @@ const gf = {
         }
     },
 
-    isComplexType: function(typeId, history, parent, localHistory) {
+    isComplexType: function(typeId) {
         //assert(node && node.type = "Type");
         return dic.valueTypes.has(typeId); //todo impliment
     },

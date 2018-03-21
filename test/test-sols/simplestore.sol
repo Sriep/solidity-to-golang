@@ -8,5 +8,5 @@ contract SimpleStore {
         return value;
     }
 
-    uint value;
+    uint public value;
 }

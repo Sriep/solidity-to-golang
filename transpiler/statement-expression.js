@@ -244,6 +244,53 @@ module.exports = {
             && !node.callee.computed
             && node.callee.property.name === "push")
         {
+            goCode += this.codePush(node, history, parent, localHistory, statHistory)
+            /*
+            goCode += "big.NewInt(int64(len(this.get(\"";
+            goCode += gf.getObjectName(node.callee.object, history, parent, localHistory);
+            goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
+            goCode += ") ))";
+
+            goCode += "this.set(\"";
+            goCode += gf.getObjectName(node.callee.object, history, parent, localHistory);
+            goCode += "\", ";
+            goCode += "append(";
+            if (node.callee.object.type === "Identifier") {
+                goCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
+            } else {
+                goCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
+            }
+            goCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, statHistory);
+            goCode += "))";
+            goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
+            goCode += ") ))"
+
+
+            let prevCode = "";
+            if (node.callee.object.type === "Identifier") {
+                prevCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
+            } else {
+                prevCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
+            }
+            prevCode += " = append(";
+            if (node.callee.object.type === "Identifier") {
+                prevCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
+            } else {
+                prevCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
+            }
+            prevCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, statHistory);
+            prevCode += "))";
+            statHistory.previousStatments.push(prevCode);*/
+        } else {
+            goCode += this.codeExpression(node.callee, history, parent, localHistory, statHistory);
+            goCode += "(" + this.codeArguments(node.arguments, history, parent, localHistory, statHistory) + ")";
+        }
+        return goCode;
+    },
+
+    codePush: function(node, history, parent, localHistory, statHistory) {
+        let goCode = "";
+        if (node.callee.object.type === "Identifier") {
             goCode += "big.NewInt(int64(len(";
             goCode += "this.set(\"" + node.callee.object.name + "\", ";
             goCode += "append(";
@@ -257,8 +304,26 @@ module.exports = {
             goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
             goCode += ") ))"
         } else {
-            goCode += this.codeExpression(node.callee, history, parent, localHistory, statHistory);
-            goCode += "(" + this.codeArguments(node.arguments, history, parent, localHistory, statHistory) + ")";
+            goCode += "big.NewInt(int64(len(this.get(\"";
+            goCode += gf.getObjectName(node.callee.object, history, parent, localHistory);
+            goCode += "\")";
+            goCode += gf.getSVTypeAssertion(node.callee.object, history, parent, localHistory);
+            goCode += ") ))";
+            let prevCode = "";
+            if (node.callee.object.type === "Identifier") {
+                prevCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
+            } else {
+                prevCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
+            }
+            prevCode += " = append(";
+            if (node.callee.object.type === "Identifier") {
+                prevCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
+            } else {
+                prevCode += this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
+            }
+            prevCode += ", " + this.codeArguments(node.arguments, history, parent, localHistory, statHistory);
+            prevCode += ")";
+            statHistory.previousStatments.push(prevCode);
         }
         return goCode;
     },
@@ -307,20 +372,32 @@ module.exports = {
         // node.computed true means an array, false then a structure
         if (node.computed) {
             //Need to reverse the order of arrays as Solidity uses different order to Go
-            if (statHistory.prevArrayProperties.length > 0)
-                goCode = goCode.slice(0, -1*statHistory.prevArrayProperties.length);
-            let property = this.codeArrayProperty(node);
-            goCode += property + statHistory.prevArrayProperties;
-            statHistory.prevArrayProperties = reversing ? property + statHistory.prevArrayProperties : "";
+            //Member expressions could be nested
+            let previous = "";
+            let preIndex = statHistory.prevProperties.length-1;
+            if (preIndex >= 0) {
+                previous = statHistory.prevProperties[preIndex];
+                if (previous.length > 0)
+                    goCode = goCode.slice(0, -1*previous.length);
+            }
+            let property = this.codeArrayProperty(node.property, history, parent, localHistory, statHistory);
+            let newOrderedProperties = property + previous;
+            goCode += newOrderedProperties;
+            if (preIndex >=0)
+                statHistory.prevProperties.pop();
+            if (reversing) {
+                statHistory.prevProperties.push(newOrderedProperties);
+            }
+
         } else if (node.property.name === "length") {
             return "big.NewInt(int64(len(" + object + ")))";
         } else {
-            goCode += this.codeStructProperty(node);
+            goCode += this.codeStructProperty(node.property);
         }
         return goCode;
     },
 
-    codeArrayProperty: function(node) {
+    codeArrayProperty: function(node, history, parent, localHistory, statHistory) {
         let goCode = "";
         goCode += "[";
         switch (node.type) {
@@ -332,6 +409,7 @@ module.exports = {
                 goCode += ".Uint64()";
                 break;
             default:
+                goCode += this.codeExpression(node, history, parent, localHistory, statHistory);
                 assert(false, "unsupported member expression"); //todo
         }
         goCode += "]";
@@ -351,6 +429,7 @@ module.exports = {
             default:
                 assert(false, "unsupported member expression"); //todo
         }
+        return goCode;
     },
 
 };

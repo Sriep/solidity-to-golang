@@ -174,6 +174,7 @@ type _SimpleStore_st struct {
 type _SimpleStore_pub interface {
 	Set(_value *big.Int)
 	Get()( *big.Int)
+	Value ()(*big.Int)
 
 }
 type SimpleStore interface {
@@ -200,5 +201,8 @@ func (this _SimpleStore_st) Set(_value *big.Int) {
 	this.set("value", _value)
 }
 func (this _SimpleStore_st) Get()( *big.Int) {
+	return this.get("value").(*big.Int)
+}
+func (this _SimpleStore_st) Value ()(*big.Int) {
 	return this.get("value").(*big.Int)
 }

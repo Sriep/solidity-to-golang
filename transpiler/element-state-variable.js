@@ -74,6 +74,8 @@ module.exports = {
             goCode += this.codeGetSig(node, history, parent);
             goCode += " {\n";
             goCode += "\treturn this.get(\"" + node.name + "\").(";
+            if (node.literal.array_parts instanceof Array && node.literal.array_parts.length > 0)
+                goCode += gf.isDynamic(node.literal) ? "" : "*";
             goCode += gf.typeOf(node.literal, history, parent) + ")";
             if (node.array_parts !== null && node.literal.array_parts instanceof Array)
             {

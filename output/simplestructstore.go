@@ -151,8 +151,9 @@ type Contract struct {
 func (s *Contract) get(variableName string) (interface{}) {
     return s.svStorage[variableName]
 }
-func (s *Contract) set(variableName string, value interface{}) {
+func (s *Contract) set(variableName string, value interface{})  (interface{}) {
     s.svStorage[variableName] = value;
+    return s.svStorage[variableName]
 }
 func (s *Contract) createStorage() {
     if nil == s.svStorage {
@@ -192,19 +193,19 @@ func NewSimpleStructStore() (*_SimpleStructStore_st) {
 	p := new(_SimpleStructStore_st)
 	p.this = p
 	p.createStorage()
-	p.set("value",  *new(Point))
+	p.set("value",  new(Point))
 	return p
 }
 
 func (this _SimpleStructStore_st) Set(_x *big.Int, _y *big.Int) {
-	this.get("value").(Point).x=_x
-	this.get("value").(Point).y=_y
+	this.get("value").(*Point).x=_x
+	this.get("value").(*Point).y=_y
 }
 func (this _SimpleStructStore_st) GetX()( *big.Int) {
-	return this.get("value").(Point).x
+	return this.get("value").(*Point).x
 }
 func (this _SimpleStructStore_st) GetY()( *big.Int) {
-	return this.get("value").(Point).y
+	return this.get("value").(*Point).y
 }
 type Point struct {
 		x *big.Int

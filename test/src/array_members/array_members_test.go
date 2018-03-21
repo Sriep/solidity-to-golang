@@ -15,7 +15,6 @@ func TestSetGet(t *testing.T) {
     }
 
     for x := 0; x < 20 ; x++ {
-
         rtvLength := myContract.ArrayLength().Int64()
         if rtvLength != int64(x) {
             t.Fatalf("arrayLength returned %d instead of %d.", rtvLength, x);

@@ -90,6 +90,13 @@ module.exports = {
             default:
                 throw( new Error("Unrecognised statement type" + statemet.type));
         }
+        let preCode = "";
+        if (statHistory.previousStatments.length >0) {
+            for ( let statment of statHistory.previousStatments) {
+                preCode +=  "\t".repeat(statHistory.depth) +  statment + "\n"
+            }
+        }
+        goCode = preCode + goCode;
         goCode += "\n";
         return goCode;
     }

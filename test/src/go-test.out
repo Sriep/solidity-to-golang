@@ -1,5 +1,6 @@
+ok  	array_dyncon	16.872s
 ok  	array_members	(cached)
-ok  	array_ofconstarray	4.751s
+ok  	array_ofconstarray	(cached)
 ok  	constructor	(cached)
 ok  	simplearraystore	(cached)
 ok  	simplestore	(cached)
