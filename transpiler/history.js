@@ -74,6 +74,10 @@ module.exports = {
         contractData.functions = new Map;
         contractData.dataTypes = new Map;
 
+        contractData.externalInterface = new Map;
+        contractData.publicInterface = new Map;
+        contractData.internalInterface = new Map;
+
         contractData.bases = []; //var merged = new Map([...map1, ...map2, ...map3])
         for ( let i = 0 ; i < node.is.length ; i++ ) {
             contractData.bases.push(node.is[i].name);
@@ -116,7 +120,7 @@ module.exports = {
 
 
         if (this.sourceUnits.get(parent.name).identifiers.has(name)) {
-            throw(new Error("identifier " + name + " already declared in " + parent.name));
+            //throw(new Error("identifier " + name + " already declared in " + parent.name));
         }
         this.sourceUnits.get(parent.name).identifiers.set(name, node);
         let goId = "";
@@ -152,9 +156,9 @@ module.exports = {
             case "EnumDeclaration":
             case "StructDeclaration":
                 if (visibility === "public") {
-                    if (this.publicTypes.has(name))
-                        throw(new Error(name + "already defined as public type"));
-                    else
+                    if (this.publicTypes.has(name)) {
+
+                    } else
                         this.publicTypes.set(name, {node: node, parent: parent, goName: goId})
                 } else {
                     this.sourceUnits.get(parent.name).dataTypes.set(
@@ -162,15 +166,16 @@ module.exports = {
                 }
                 break;
             case "FunctionDeclaration":
-                 if (visibility === "public" || visibility === "external") {
-                    if (this.publicFunctions.has(name))
-                        throw(new Error(name + "already defined as public function"));
-                    else {
+                if (visibility === "public" || visibility === "external") {
+                    if (this.publicFunctions.has(name)) {
+
+                        //throw(new Error(name + "already defined as public function"));
+                    } else {
                         this.publicFunctions.set(
                             name, {node: node, parent: parent, goName: goId, localHistory: localHistory})
                     }
                 } else {
-                     this.sourceUnits.get(parent.name).functions.set(
+                    this.sourceUnits.get(parent.name).functions.set(
                         name, {node: node, parent: parent, goName: goId, localHistory: localHistory})
                 }
                 break;

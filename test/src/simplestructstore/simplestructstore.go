@@ -178,15 +178,21 @@ type _SimpleStructStore_pub interface {
 
 }
 type SimpleStructStore interface {
-	_SimpleStructStore_pub
+	Set(_x *big.Int, _y *big.Int)
+	GetX()( *big.Int)
+	GetY()( *big.Int)
 
 }
 type _SimpleStructStore_int interface {
-	_SimpleStructStore_pub
+	Set(_x *big.Int, _y *big.Int)
+	GetX()( *big.Int)
+	GetY()( *big.Int)
 
 }
 type _SimpleStructStore_pri interface {
-	_SimpleStructStore_int
+	Set(_x *big.Int, _y *big.Int)
+	GetX()( *big.Int)
+	GetY()( *big.Int)
 
 }
 func NewSimpleStructStore() (*_SimpleStructStore_st) {

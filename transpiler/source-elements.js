@@ -37,9 +37,6 @@ module.exports = {
 
         for (let node of nodeArray) {
             let SvName = node.name;
-            //if (!node.visibility || node.visibility === "public")
-             //   SvName = node.name.charAt(0).toUpperCase() + node.name.slice(1);
-
             if (node.type === "StateVariableDeclaration" && !node.is_constant) {
                 goCodeDerived += "\tp.set(\"" + SvName + "\", ";
                 if (node.value && node.value.value) {
@@ -58,25 +55,69 @@ module.exports = {
             }
         }
         history.stateVariablesInitCode[parent.name] = goCodeDerived;
-
         return goCodeBases + goCodeDerived;
     },
 
-
-
-    codePublicInterface: function(nodeArray, history, parent) {
+    getPublicInterface: function(nodeArray) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);
-        let goCode = "";
+        let pubInterface = new Map;
         for (let node of nodeArray) {
-            if (node.type === "StateVariableDeclaration" && node.visibility === "public") {
-                goCode += stateVariable.codeAccessorSig(node, history, parent)
-            } else if (node.type === "FunctionDeclaration") {
-                if (node.visibility === "public") {
-                    goCode += functionElement.codeSignature(node, history, parent);
-                }
+            if ( (node.type === "StateVariableDeclaration" && node.visibility === "public")
+                || (node.type === "FunctionDeclaration" && node.visibility === "public")){
+                pubInterface.set(node.name.charAt(0).toUpperCase() + node.name.slice(1), node);
             }
         }
+        return pubInterface;
+    },
+
+    getExternalInterface: function(nodeArray) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+        let extInterface = new Map;
+        for (let node of nodeArray) {
+            if (node.type === "FunctionDeclaration" && node.visibility === "external"){
+                extInterface.set(node.name.charAt(0).toUpperCase() + node.name.slice(1), node);
+            }
+        }
+        return extInterface;
+    },
+
+    getInternalInterface: function(nodeArray) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+        let intInterface = new Map;
+        for (let node of nodeArray) {
+            if (node.type === "FunctionDeclaration" && node.visibility === "internal"){
+                intInterface.set(node.name.charAt(0).toUpperCase() + node.name.slice(1), node);
+            }
+        }
+        return intInterface;
+    },
+/*
+    getPrivateInterface: function(nodeArray) {
+        assert(nodeArray);
+        assert(nodeArray instanceof Array);
+        let priInterface = new Map;
+        for (let node of nodeArray) {
+            if (node.type === "FunctionDeclaration" && node.visibility === "private"){
+                priInterface.set(node.name.charAt(0).toUpperCase() + node.name.slice(1), node);
+            }
+        }
+        return priInterface;
+    },
+*/
+    codeInterface: function (interfaces, history, parent) {
+        assert(interfaces instanceof Map);
+        let goCode = "";
+        interfaces.forEach( (value) => {
+            assert(value.type === "StateVariableDeclaration" ||  value.type === "FunctionDeclaration");
+            if (value.type === "StateVariableDeclaration" ) {
+                goCode += stateVariable.codeAccessorSig(value, history, parent)
+            } else {
+                goCode += functionElement.codeSignature(value, history, parent);
+            }
+        });
         return goCode;
     },
 
@@ -91,6 +132,7 @@ module.exports = {
         }
         return goCode;
     },
+
     codeInternalInterface: function(nodeArray, history,  parent) {
         assert(nodeArray);
         assert(nodeArray instanceof Array);

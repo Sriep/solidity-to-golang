@@ -93,6 +93,8 @@ module.exports = {
     },
 
     codeFunction: function(node, history, parent) {
+        if (!node.body)
+            return"";
         let goCode = "func (this ";
         goCode += gc.structPrefix +  parent.name + gc.structSuffix;
         goCode += ") ";

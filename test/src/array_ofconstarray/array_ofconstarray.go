@@ -178,15 +178,21 @@ type _ArrayMembers_pub interface {
 
 }
 type ArrayMembers interface {
-	_ArrayMembers_pub
+	MyArray (i0 *big.Int, i1 *big.Int)(*big.Int)
+	ArrayLength()( *big.Int)
+	Push(newItem [3]*big.Int)( *big.Int)
 
 }
 type _ArrayMembers_int interface {
-	_ArrayMembers_pub
+	MyArray (i0 *big.Int, i1 *big.Int)(*big.Int)
+	ArrayLength()( *big.Int)
+	Push(newItem [3]*big.Int)( *big.Int)
 
 }
 type _ArrayMembers_pri interface {
-	_ArrayMembers_int
+	MyArray (i0 *big.Int, i1 *big.Int)(*big.Int)
+	ArrayLength()( *big.Int)
+	Push(newItem [3]*big.Int)( *big.Int)
 
 }
 func NewArrayMembers() (*_ArrayMembers_st) {

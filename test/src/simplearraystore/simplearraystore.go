@@ -177,15 +177,18 @@ type _SimpleArrayStore_pub interface {
 
 }
 type SimpleArrayStore interface {
-	_SimpleArrayStore_pub
+	Set(_value *big.Int, ix *big.Int, iy *big.Int)
+	Get(ix *big.Int, iy *big.Int)( *big.Int)
 
 }
 type _SimpleArrayStore_int interface {
-	_SimpleArrayStore_pub
+	Set(_value *big.Int, ix *big.Int, iy *big.Int)
+	Get(ix *big.Int, iy *big.Int)( *big.Int)
 
 }
 type _SimpleArrayStore_pri interface {
-	_SimpleArrayStore_int
+	Set(_value *big.Int, ix *big.Int, iy *big.Int)
+	Get(ix *big.Int, iy *big.Int)( *big.Int)
 
 }
 func NewSimpleArrayStore() (*_SimpleArrayStore_st) {

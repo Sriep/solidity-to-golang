@@ -178,15 +178,21 @@ type _SimpleStore_pub interface {
 
 }
 type SimpleStore interface {
-	_SimpleStore_pub
+	Set(_value *big.Int)
+	Get()( *big.Int)
+	Value ()(*big.Int)
 
 }
 type _SimpleStore_int interface {
-	_SimpleStore_pub
+	Set(_value *big.Int)
+	Get()( *big.Int)
+	Value ()(*big.Int)
 
 }
 type _SimpleStore_pri interface {
-	_SimpleStore_int
+	Set(_value *big.Int)
+	Get()( *big.Int)
+	Value ()(*big.Int)
 
 }
 func NewSimpleStore() (*_SimpleStore_st) {

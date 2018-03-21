@@ -179,15 +179,24 @@ type _Fibonacci_pub interface {
 
 }
 type Fibonacci interface {
-	_Fibonacci_pub
+	FibRecurse(n *big.Int)( *big.Int)
+	FibWhile(n *big.Int)( *big.Int)
+	FibDo(n *big.Int)( *big.Int)
+	FibFor(n *big.Int)( *big.Int)
 
 }
 type _Fibonacci_int interface {
-	_Fibonacci_pub
+	FibRecurse(n *big.Int)( *big.Int)
+	FibWhile(n *big.Int)( *big.Int)
+	FibDo(n *big.Int)( *big.Int)
+	FibFor(n *big.Int)( *big.Int)
 
 }
 type _Fibonacci_pri interface {
-	_Fibonacci_int
+	FibRecurse(n *big.Int)( *big.Int)
+	FibWhile(n *big.Int)( *big.Int)
+	FibDo(n *big.Int)( *big.Int)
+	FibFor(n *big.Int)( *big.Int)
 
 }
 func NewFibonacci() (*_Fibonacci_st) {

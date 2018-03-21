@@ -34,6 +34,8 @@ module.exports = {
                 return this.codeCallExpression(node, history, parent, localHistory, statHistory);
             case "UpdateExpression":
                 return this.codeUpdateExpression(node, history, parent, localHistory, statHistory);
+            case "ArrayExpression":
+                return this.codeArrayExpression(node);
             default:
                 assert(false, "unknown expression type");
         }
@@ -56,16 +58,24 @@ module.exports = {
                 break;
             case "Identifier":
                 //right = this.getGoIdentifier(node.right, history, parent, localHistory);
-                left  = this.codeExpression(node.left, history, parent, localHistory);
-                right = this.codeExpression(node.right, history, parent, localHistory);
+                left  = this.codeExpression(node.left, history, parent, localHistory, statHistory);
+                right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
+
                 if (localHistory.variables.has(node.left.name)) {
                     if (localHistory.variables.get(node.left.name).isMemory) {
-                        goCode += left + node.operator + right;
+                        //goCode += left + node.operator + right;
+                        goCode += this.codeBigAssignment(left, node.operator, right);
                     } else {
                         localHistory.setNewAlias(node.left.name, right);
                     }
                 } else {
-                    goCode += "this.set(\"" + node.left.name + "\", " + right +")";
+                    if (node.operator === "=") {
+                        goCode += "this.set(\"" + node.left.name + "\", " + right +")";
+                    } else {
+                        goCode += "this.set(\"" + node.left.name + "\", ";
+                        goCode += this.codeBigBinaryExpression(left, node.operator.slice(0, -1), right);
+                        goCode += ")";
+                    }
                 }
                 return goCode;
             case "MemberExpression":
@@ -83,9 +93,7 @@ module.exports = {
         return goCode;
     },
 
-
-
-    codeDeclarativeAssignment: function(node, history, parent, localHistory, statHistory, declarations) {
+        codeDeclarativeAssignment: function(node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node.type === "AssignmentExpression");
 
         let goCode = "\t".repeat(statHistory.depth);
@@ -93,11 +101,13 @@ module.exports = {
         let right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
 
         if (node.left.storage_location === "storage") {
-            //goCode += node.left.name + " = \"" + right + "\"";
             localHistory.setNewAlias(node.left.name, right);
-
         } else {
-            goCode += node.left.name + " = " + right;
+            goCode += node.left.name + " = ";
+            if (node.right.type === "ArrayExpression") {
+                goCode += gf.typeOf(node.left.literal);
+            }
+            goCode += right;
         }
         return goCode;
     },
@@ -181,7 +191,7 @@ module.exports = {
             goCode += " " + node.operator + " ";
             goCode += right;
         } else {
-            goCode += this.codeBigBinaryExpression(left, node.operator, right, "Float");
+            goCode += this.codeBigBinaryExpression(left, node.operator, right);
         }
 
         return goCode;
@@ -204,8 +214,7 @@ module.exports = {
 
 
     // Assumes that left and right are already big objects of the same type
-    codeBigBinaryExpression: function(left, op, right, type) {
-        assert(type === "Int" || type === "Float" || type === "Rat");
+    codeBigBinaryExpression: function(left, op, right) {
         let goCode = "";
 
         let bigOp = gf.getBigOperator(op);
@@ -226,7 +235,38 @@ module.exports = {
                 goCode += " " + op + " 0";
                 return goCode;
             default:
-                assert(false, "unsupported big operator"); //todo
+                assert(false, "unsupported big operator " + op); //todo
+                return "";
+        }
+    },
+
+    codeBigAssignment: function(left, op, right) {
+        //assert(type === "Int" || type === "Float" || type === "Rat");
+        switch (op) {
+            case "=":
+                return left + "=" + right;
+            case "*=":
+                return left + ".Mul(" + left + ", " + right + ")";
+            case "/=":
+                return left + ".Div(" + left + ", " + right + ")";
+            case "%=":
+                return left + ".Mod(" + left + ", " + right + ")";
+            case "+=":
+                return left + ".Sub(" + left + ", " + right + ")";
+            case "-=":
+                return left + ".Add(" + left + ", " + right + ")";
+            case "<<=":
+                return left + ".Lsh(" + left + ", " + right + ")";
+            case ">>=":
+                return left + ".Rsh(" + left + ", " + right + ")";
+            case "&=":
+                return left + ".And(" + left + ", " + right + ")";
+            case "^=":
+                return left + ".Xor(" + left + ", " + right + ")";
+            case "|=":
+                return left + ".Or(" + left + ", " + right + ")";
+            default:
+                assert(false, "unsupported big operator " + op); //todo
                 return "";
         }
     },
@@ -418,5 +458,24 @@ module.exports = {
         }
         return goCode;
     },
+
+    codeArrayExpression: function(node) {
+        assert(node && node.type === "ArrayExpression");
+        let goCode = "";
+        goCode += "{";
+        if (node.elements instanceof Array)
+        for (let item of node.elements) {
+            if (item.type === "Identifier")
+                goCode += item.name;
+            else if (item.type === "Literal") {
+                goCode += item.value;
+            } else {
+                assert(false, "Unsupported");
+            }
+            goCode += ", ";
+        }
+        goCode += "}";
+        return goCode;
+    }
 
 };

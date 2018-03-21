@@ -178,15 +178,21 @@ type _ArrayPush_pub interface {
 
 }
 type ArrayPush interface {
-	_ArrayPush_pub
+	MyArray (i0 *big.Int, i1 *big.Int)(*big.Int)
+	ArrayLength(i *big.Int)( *big.Int)
+	Push(i *big.Int, value *big.Int)( *big.Int)
 
 }
 type _ArrayPush_int interface {
-	_ArrayPush_pub
+	MyArray (i0 *big.Int, i1 *big.Int)(*big.Int)
+	ArrayLength(i *big.Int)( *big.Int)
+	Push(i *big.Int, value *big.Int)( *big.Int)
 
 }
 type _ArrayPush_pri interface {
-	_ArrayPush_int
+	MyArray (i0 *big.Int, i1 *big.Int)(*big.Int)
+	ArrayLength(i *big.Int)( *big.Int)
+	Push(i *big.Int, value *big.Int)( *big.Int)
 
 }
 func NewArrayPush() (*_ArrayPush_st) {

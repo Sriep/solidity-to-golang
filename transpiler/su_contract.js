@@ -1,6 +1,7 @@
 'use strict';
 const assert = require("assert");
 const gc = require("./gc.js");
+const gf = require("./gf.js");
 const sourceElements = require("./source-elements.js");
 const functionElement = require("./element-function.js");
 
@@ -35,8 +36,10 @@ module.exports = {
         let goCode = "type ";
         goCode += gc.publicIPrefix +  node.name  + gc.publicISuffix;
         goCode += " interface {\n";
-        goCode += this.codeBases(node, history, gc.publicIPrefix, gc.publicISuffix);
-        goCode += sourceElements.codePublicInterface(node.body, history, node);
+        let pubInterface = this.getBasesInterface(node, history, "publicInterface");
+        pubInterface = gf.mergeInterfaces(pubInterface, sourceElements.getPublicInterface(node.body, history, node));
+        history.sourceUnits.get(node.name).publicInterface = pubInterface;
+        goCode += sourceElements.codeInterface(pubInterface, history, node);
         goCode += "\n}\n";
         return goCode;
     },
@@ -45,9 +48,11 @@ module.exports = {
         let goCode = "type ";
         goCode +=   node.name;
         goCode += " interface {\n";
-        goCode += this.codeBases(node, history, "", "");
-        goCode += "\t" + gc.publicIPrefix +  node.name  + gc.publicISuffix + "\n";
-        goCode += sourceElements.codeExternalInterface(node.body, history, node.name);
+        let externalInterface  = this.getBasesInterface(node, history, "externalInterface");
+        externalInterface = gf.mergeInterfaces(externalInterface, sourceElements.getExternalInterface(node.body, history, node));
+        externalInterface = gf.mergeInterfaces(externalInterface, sourceElements.getPublicInterface(node.body, history, node));
+        history.sourceUnits.get(node.name).externalInterface = externalInterface;
+        goCode += sourceElements.codeInterface(externalInterface, history, node);
         goCode += "\n}\n";
         return goCode;
     },
@@ -56,9 +61,12 @@ module.exports = {
         let goCode = "type ";
         goCode += gc.internalIPrefix +  node.name  + gc.internalISuffix;
         goCode += " interface {\n";
-        goCode += this.codeBases(node, history, gc.internalIPrefix, gc.internalISuffix);
-        goCode += "\t" + gc.publicIPrefix +  node.name  + gc.publicISuffix + "\n";
-        goCode += sourceElements.codeInternalInterface(node.body, history, node.name);
+        let internalInterface  = this.getBasesInterface(node, history, "internalInterface");
+        internalInterface = gf.mergeInterfaces(internalInterface, sourceElements.getExternalInterface(node.body, history, node));
+        internalInterface = gf.mergeInterfaces(internalInterface, sourceElements.getPublicInterface(node.body, history, node));
+        internalInterface = gf.mergeInterfaces(internalInterface, sourceElements.getInternalInterface(node.body, history, node));
+        history.sourceUnits.get(node.name).internalInterface = internalInterface;
+        goCode += sourceElements.codeInterface(internalInterface, history, node);
         goCode += "\n}\n";
         return goCode;
     },
@@ -67,9 +75,12 @@ module.exports = {
         let goCode = "type ";
         goCode += gc.privateIPrefix +  node.name  + gc.privateISuffix;
         goCode += " interface {\n";
-        goCode += this.codeBases(node, history, gc.privateIPrefix, gc.privateISuffix);
-        goCode += "\t" + gc.internalIPrefix +  node.name  + gc.internalISuffix + "\n";
-        goCode += sourceElements.codePrivateInterface(node.body, history, node.name);
+        let privateInterface  = this.getBasesInterface(node, history, "internalInterface");
+        privateInterface = gf.mergeInterfaces(privateInterface, sourceElements.getPublicInterface(node.body, history, node));
+        privateInterface = gf.mergeInterfaces(privateInterface, sourceElements.getInternalInterface(node.body, history, node));
+        privateInterface = gf.mergeInterfaces(privateInterface, sourceElements.getExternalInterface(node.body, history, node));
+        history.sourceUnits.get(node.name).privateInterface = privateInterface;
+        goCode += sourceElements.codeInterface(privateInterface, history, node);
         goCode += "\n}\n";
         return goCode;
     },
@@ -78,9 +89,9 @@ module.exports = {
         let goCode = "type ";
         goCode += gc.structPrefix + node.name + gc.structSuffix;
         goCode += " struct {\n";
-        //goCode += this.codeBases(node, history, gc.structPrefix, gc.structSuffix);
-        goCode += sourceElements.codeDataStruct(node.body, history, node, abi);
         goCode += "\tContract\n";
+        goCode += this.codeBases(node, history, gc.structPrefix, gc.structSuffix);
+        goCode += sourceElements.codeDataStruct(node.body, history, node, abi);
         goCode += "\tthis *" + gc.structPrefix + node.name + gc.structSuffix + "\n";
         goCode += "}\n";
         return goCode;
@@ -128,6 +139,32 @@ module.exports = {
 
     codeDeclarations: function(node, history) {
         return sourceElements.codeDeclarations(node.body, history, node);
+    },
+
+    getBasesInterface: function(node, history, interfaceType)  {
+        let basesInterface = new Map;
+        if (node.is instanceof Array) {
+            if (!history.validInheritance(node.is))
+                return;
+            for (let base of node.is) {
+                console.log("derived from-" + base.name);
+                gf.mergeInterfaces(basesInterface, history.sourceUnits.get(base.name)[interfaceType]);
+               /* switch (visibility) {
+                    case "external":
+                        gf.mergeInterfaces(basesInterface, history.sourceUnits.get(base.name).externalInterface);
+                        break;
+                    case "public":
+                        gf.mergeInterfaces(basesInterface, history.sourceUnits.get(base.name).publicInterface);
+                        break;
+                    case "internal":
+                        gf.mergeInterfaces(basesInterface, history.sourceUnits.get(base.name).internalInterface);
+                        break;
+                    default:
+                        assert(false, "Invalid inheritence type in getBaseInterface");
+                }*/
+            }
+        }
+        return basesInterface;
     },
 
     codeBases: function(node, history, pefix, suffix) {

@@ -256,7 +256,19 @@ const gf = {
                 assert(false, "not impimented big operator");
                 return "";
         }
+    },
+
+    mergeInterfaces: function(first, second) {
+        second.forEach((value, key) => {
+            if (first.has(key)) {
+                first[key] = value
+            } else  {
+                first.set(key, value)
+            }
+        });
+        return first;
     }
+
 
 };
 module.exports = gf;
