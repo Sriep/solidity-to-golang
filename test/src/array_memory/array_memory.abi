@@ -1,0 +1,1 @@
+{"interface":[{"constant":false,"inputs":[{"name":"array","type":"[][2]*big.Int"}],"name":"SumArray","outputs":[{"type":"[2]*big.Int"}],"payable":"false","stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"NewMemArray","outputs":[],"payable":"false","stateMutability":"nonpayable","type":"constructor"}]}
