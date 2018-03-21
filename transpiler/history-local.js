@@ -6,6 +6,11 @@ module.exports = {
     variables: new Map(),
     constants: new Map(),
 
+    clear: function() {
+        this.variables = new Map();
+        this.constants = new Map();
+    },
+
     setNewAlias: function(variable, newValue) {
         if (!this.variables.has(variable)) {
             assert(false, "setting value to unknown alias")

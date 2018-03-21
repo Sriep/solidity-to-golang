@@ -104,7 +104,9 @@ module.exports = {
     },
 
     codeFunctionBody: function(node, history, parent) {
-        return block.codeFunctionBlock(node.body.body, history, parent, localHistory, 1);
+        let goCode = block.codeFunctionBlock(node.body.body, history, parent, localHistory, 1);
+        localHistory.clear();
+        return goCode;
     }
 
 };

@@ -216,7 +216,7 @@ module.exports = {
 
     codeUpdateExpression: function(node, history, parent, localHistory, statHistory) {
         assert(node && node.type === "UpdateExpression");
-        let goCode = "";
+        let goCode = "\t".repeat(statHistory.depth);
         let argument = this.codeExpression(node.argument,history, parent, localHistory, statHistory);
         goCode += argument + ".";
 
