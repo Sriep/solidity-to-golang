@@ -69,11 +69,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="true">
+          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+                <state relative-caret-position="238">
+                  <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
                   <folding />
                 </state>
               </provider>
@@ -82,8 +82,8 @@
           <file leaf-file-name="fibonacci.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="179">
-                  <caret line="222" column="8" lean-forward="false" selection-start-line="222" selection-start-column="8" selection-end-line="222" selection-end-column="8" />
+                <state relative-caret-position="165">
+                  <caret line="207" column="19" lean-forward="false" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
@@ -99,11 +99,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="false">
+          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="505">
-                  <caret line="36" column="1" lean-forward="false" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+                <state relative-caret-position="148">
+                  <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
                   <folding />
                 </state>
               </provider>
@@ -176,8 +176,8 @@
           <file leaf-file-name="fibonacci.sol" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test-sols/fibonacci.sol">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
-                  <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+                <state relative-caret-position="528">
+                  <caret line="60" column="1" lean-forward="false" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -252,9 +252,10 @@
         <option value="$PROJECT_DIR$/src/array_members/array_members.go" />
         <option value="$PROJECT_DIR$/src/array_dyncon/array_dyncon.go" />
         <option value="$PROJECT_DIR$/test-sols/simplestore_test.go" />
+        <option value="$PROJECT_DIR$/src/fibonacci/fibonacci_test.go" />
         <option value="$PROJECT_DIR$/src/fibonacci/fibonacci.go" />
         <option value="$PROJECT_DIR$/test-sols/fibonacci_test.go" />
-        <option value="$PROJECT_DIR$/src/fibonacci/fibonacci_test.go" />
+        <option value="$PROJECT_DIR$/test-sols/fibonacci.sol" />
       </list>
     </option>
   </component>
@@ -395,9 +396,6 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="array_dyncon_test_go - 2018.03.20 at 23h 44m 56s.xml">
-      <configuration name="array_dyncon_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="array_dyncon_test_go - 2018.03.20 at 23h 44m 59s.xml">
       <configuration name="array_dyncon_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -423,6 +421,9 @@
       <configuration name="fibonacci_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
     <history-entry file="fibonacci_test_go - 2018.03.21 at 12h 25m 00s.xml">
+      <configuration name="fibonacci_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="fibonacci_test_go - 2018.03.21 at 14h 11m 53s.xml">
       <configuration name="fibonacci_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
@@ -499,7 +500,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/fibonacci/fibonacci.go</url>
-          <line>245</line>
+          <line>273</line>
           <properties />
           <option name="timeStamp" value="79" />
         </line-breakpoint>
@@ -862,34 +863,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="36" column="1" lean-forward="false" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="222" column="8" lean-forward="false" selection-start-line="222" selection-start-column="8" selection-end-line="222" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-sols/fibonacci.sol">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        <state relative-caret-position="165">
+          <caret line="207" column="19" lean-forward="false" selection-start-line="207" selection-start-column="19" selection-end-line="207" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="37" lean-forward="false" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
+        <state relative-caret-position="238">
+          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/fibonacci.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="60" column="1" lean-forward="false" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
           <folding />
         </state>
       </provider>

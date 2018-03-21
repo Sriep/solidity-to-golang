@@ -174,8 +174,9 @@ module.exports = {
             right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
         //let right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
 
-        if (node.left.type === "BinaryExpression" || node.left.type === "UnaryExpression" ) {
-            assert(node.right.type === "BinaryExpression" || node.right.type === "UnaryExpression");
+        //if (node.left.type === "BinaryExpression" || node.left.type === "UnaryExpression" ) {
+         if (this.isLogicalOperation(node.left, history, parent, localHistory)) {
+            //assert(node.right.type === "BinaryExpression" || node.right.type === "UnaryExpression");
             goCode += left;
             goCode += " " + node.operator + " ";
             goCode += right;
@@ -185,6 +186,22 @@ module.exports = {
 
         return goCode;
     },
+
+    isLogicalOperation: function(node, history, parent, localHistory) {
+         switch (node.type) {
+             case "BinaryExpression":
+                 return ["<", "<=", ">", ">=", "||", "&&", "==", "!=", "!"].indexOf(node.operator) >= 0;
+             case "UnaryExpression":
+                 return false;
+             case "Literal":
+                 return node.value === true || node.value === false;
+             case "Identifier":
+                 return "bool" === history.findIdData(node.name, parent, localHistory).dataType;
+             default:
+                 return false;
+         }
+    },
+
 
     // Assumes that left and right are already big objects of the same type
     codeBigBinaryExpression: function(left, op, right, type) {

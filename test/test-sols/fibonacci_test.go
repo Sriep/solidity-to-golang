@@ -12,10 +12,22 @@ func TestSetGet(t *testing.T) {
 	for i  := 0; i < 10; i++ {
 		bigI := big.NewInt(int64(i))
 		ithFib := fib(i);
+
 		bigFibFor := fibContract.FibFor(bigI)
 		if ithFib != bigFibFor.Int64() {
-			t.Fatalf("%dth fibonacci returned %d instead of %d.", i, bigFibFor.Uint64(), ithFib)
+			t.Fatalf("%dth for fibonacci returned %d instead of %d.", i, bigFibFor.Uint64(), ithFib)
 		}
+
+		bigFibWhile := fibContract.FibWhile(bigI)
+		if ithFib != bigFibWhile.Int64() {
+			t.Fatalf("%dth while fibonacci returned %d instead of %d.", i, bigFibWhile.Uint64(), ithFib)
+		}
+
+		bigFibDo := fibContract.FibDo(bigI)
+		if ithFib != bigFibDo.Int64() {
+			t.Fatalf("%dth do fibonacci returned %d instead of %d.", i, bigFibDo.Uint64(), ithFib)
+		}
+
 	}
 }
 
