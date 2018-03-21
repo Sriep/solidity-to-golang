@@ -5,7 +5,6 @@ import (
     "math/big"
 )
 
-
 func TestSetGet(t *testing.T) {
 
 myStore := NewSimpleStore()

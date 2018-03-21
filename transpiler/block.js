@@ -40,8 +40,9 @@ module.exports = {
         switch (statement.type) {
             case "BlockStatement":
                 goCode += "{\n";
-                statHistory.depth +=1;
+                statHistory.depth++;
                 goCode += this.code(statement.body, history, parent, localHistory, statHistory, declarations);
+                statHistory.depth--;
                 goCode += "\n" +"\t".repeat(statHistory.depth) + "}";
                 break;
             case "VariableDeclaration":
@@ -60,7 +61,7 @@ module.exports = {
                 break;
             case "IfStatement":
                 const ifStatement = require("./statement-if.js");
-                goCode += ifStatement.code(statement, history, parent, localHistory, statHistory, declarations);
+                goCode += ifStatement.code(statement, history, parent, localHistory, statHistory, declarations, false);
                 break;
             case "DoWhileStatement":
                 goCode += iterationStatement.codeDoWhile(statement, history, parent, localHistory, statHistory, declarations);

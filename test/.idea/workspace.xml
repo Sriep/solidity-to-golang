@@ -14,27 +14,15 @@
     <SUITE FILE_PATH="coverage/test$array_members_test_go.coverage" NAME="array_members_test.go Coverage Results" MODIFIED="1521495199319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.82710624">
+    <splitter split-orientation="horizontal" split-proportion="0.5505618">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="simplearraystore.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/simplearraystore/simplearraystore.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="86">
-                  <caret line="182" column="38" lean-forward="false" selection-start-line="182" selection-start-column="38" selection-end-line="182" selection-end-column="38" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="array_members.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/array_members/array_members.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="426">
+                <state relative-caret-position="3434">
                   <caret line="206" column="36" lean-forward="false" selection-start-line="206" selection-start-column="36" selection-end-line="206" selection-end-column="36" />
-                  <folding>
-                    <element signature="e#22#78#0" expanded="true" />
-                  </folding>
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -42,7 +30,7 @@
           <file leaf-file-name="testing.go" pinned="false" current-in-tab="false">
             <entry file="file://C:/Go/src/testing/testing.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-8683">
+                <state relative-caret-position="12223">
                   <caret line="735" column="0" lean-forward="false" selection-start-line="735" selection-start-column="0" selection-end-line="735" selection-end-column="0" />
                   <folding />
                 </state>
@@ -52,7 +40,7 @@
           <file leaf-file-name="panic.go" pinned="false" current-in-tab="false">
             <entry file="file://C:/Go/src/runtime/panic.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="195">
+                <state relative-caret-position="9962">
                   <caret line="590" column="0" lean-forward="false" selection-start-line="590" selection-start-column="0" selection-end-line="590" selection-end-column="0" />
                   <folding />
                 </state>
@@ -71,31 +59,51 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="array_dyncon.go" pinned="false" current-in-tab="true">
+          <file leaf-file-name="array_dyncon.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/array_dyncon/array_dyncon.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="409">
-                  <caret line="206" column="118" lean-forward="false" selection-start-line="206" selection-start-column="118" selection-end-line="206" selection-end-column="118" />
+                <state relative-caret-position="154">
+                  <caret line="167" column="2" lean-forward="false" selection-start-line="167" selection-start-column="2" selection-end-line="167" selection-end-column="2" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="array_members_test.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test-sols/array_members_test.go">
+          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
-                  <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+                <state relative-caret-position="340">
+                  <caret line="23" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="array_members.abi" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/array_members/array_members.abi">
+          <file leaf-file-name="fibonacci.go" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state relative-caret-position="182">
+                  <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="int.go" pinned="false" current-in-tab="false">
+            <entry file="file://C:/Go/src/math/big/int.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="272">
+                  <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="505">
+                  <caret line="36" column="1" lean-forward="false" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
                   <folding />
                 </state>
               </provider>
@@ -104,18 +112,8 @@
           <file leaf-file-name="array_dyncon_test.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/array_dyncon/array_dyncon_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="256">
+                <state relative-caret-position="493">
                   <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="array_ofconstarray.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="348">
-                  <caret line="200" column="0" lean-forward="false" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -128,20 +126,8 @@
           <file leaf-file-name="array_members.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/array_members/array_members.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="426">
+                <state relative-caret-position="3434">
                   <caret line="206" column="0" lean-forward="false" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#22#78#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="array_members_test.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/array_members/array_members_test.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="93">
-                  <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -152,6 +138,16 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="612">
                   <caret line="39" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="simplestore.sol" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test-sols/simplestore.sol">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -177,21 +173,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="array_ofconstarray_test.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray_test.go">
+          <file leaf-file-name="fibonacci.sol" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/test-sols/fibonacci.sol">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="191">
-                  <caret line="25" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="simplestructstore_test.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test-sols/simplestructstore_test.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="13" column="40" lean-forward="false" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+                <state relative-caret-position="323">
+                  <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -200,8 +186,8 @@
           <file leaf-file-name="simplestore_test.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test-sols/simplestore_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="2" />
                   <folding />
                 </state>
               </provider>
@@ -217,7 +203,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="array_dyncon.sol" pinned="false" current-in-tab="true">
+          <file leaf-file-name="array_dyncon.sol" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test-sols/array_dyncon.sol">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="136">
@@ -255,7 +241,6 @@
         <option value="$PROJECT_DIR$/src/array_members/array_members_test.go" />
         <option value="$PROJECT_DIR$/test-sols/simplearraystore_test.go" />
         <option value="$PROJECT_DIR$/test-sols/simplestructstore_test.go" />
-        <option value="$PROJECT_DIR$/test-sols/simplestore_test.go" />
         <option value="$PROJECT_DIR$/test-sols/array_ofconstarray.sol" />
         <option value="$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray_test.go" />
         <option value="$PROJECT_DIR$/test-sols/array_ofconstarray_test.go" />
@@ -266,6 +251,10 @@
         <option value="$PROJECT_DIR$/test-sols/array_dyncon_test.go" />
         <option value="$PROJECT_DIR$/src/array_members/array_members.go" />
         <option value="$PROJECT_DIR$/src/array_dyncon/array_dyncon.go" />
+        <option value="$PROJECT_DIR$/test-sols/simplestore_test.go" />
+        <option value="$PROJECT_DIR$/src/fibonacci/fibonacci.go" />
+        <option value="$PROJECT_DIR$/src/fibonacci/fibonacci_test.go" />
+        <option value="$PROJECT_DIR$/test-sols/fibonacci_test.go" />
       </list>
     </option>
   </component>
@@ -275,9 +264,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="24" />
-    <option name="y" value="89" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="54" />
+    <option name="y" value="100" />
     <option name="width" value="1684" />
     <option name="height" value="1121" />
   </component>
@@ -296,6 +285,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -312,13 +302,7 @@
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="array_dyncon" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="array_members" type="462c0819:PsiDirectoryNode" />
+              <item name="fibonacci" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
@@ -330,7 +314,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -350,7 +333,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.array_dyncon_test.go">
+  <component name="RunManager" selected="Go Test.fibonacci_test.go">
     <configuration name="go build array_ofconstarray.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="test" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -383,28 +366,28 @@
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray_test.go" />
     </configuration>
-    <configuration name="simplearraystore_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+    <configuration name="fibonacci_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="test" />
-      <working_directory value="$PROJECT_DIR$/src/simplearraystore" />
+      <working_directory value="$PROJECT_DIR$/src/fibonacci" />
       <go_parameters value="-i" />
       <framework value="gotest" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/src/simplearraystore/simplearraystore_test.go" />
+      <filePath value="$PROJECT_DIR$/src/fibonacci/fibonacci_test.go" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Go Test.simplearraystore_test.go" />
-      <item index="1" class="java.lang.String" itemvalue="Go Test.array_members_test.go" />
-      <item index="2" class="java.lang.String" itemvalue="Go Build.go build array_ofconstarray.go" />
-      <item index="3" class="java.lang.String" itemvalue="Go Test.array_ofconstarray_test.go" />
-      <item index="4" class="java.lang.String" itemvalue="Go Test.array_dyncon_test.go" />
+      <item index="0" class="java.lang.String" itemvalue="Go Test.array_members_test.go" />
+      <item index="1" class="java.lang.String" itemvalue="Go Build.go build array_ofconstarray.go" />
+      <item index="2" class="java.lang.String" itemvalue="Go Test.array_ofconstarray_test.go" />
+      <item index="3" class="java.lang.String" itemvalue="Go Test.array_dyncon_test.go" />
+      <item index="4" class="java.lang.String" itemvalue="Go Test.fibonacci_test.go" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Go Test.array_dyncon_test.go" />
-        <item index="1" class="java.lang.String" itemvalue="Go Test.array_ofconstarray_test.go" />
-        <item index="2" class="java.lang.String" itemvalue="Go Build.go build array_ofconstarray.go" />
-        <item index="3" class="java.lang.String" itemvalue="Go Test.array_members_test.go" />
-        <item index="4" class="java.lang.String" itemvalue="Go Test.simplearraystore_test.go" />
+        <item index="0" class="java.lang.String" itemvalue="Go Test.fibonacci_test.go" />
+        <item index="1" class="java.lang.String" itemvalue="Go Test.array_dyncon_test.go" />
+        <item index="2" class="java.lang.String" itemvalue="Go Test.array_ofconstarray_test.go" />
+        <item index="3" class="java.lang.String" itemvalue="Go Build.go build array_ofconstarray.go" />
+        <item index="4" class="java.lang.String" itemvalue="Go Test.array_members_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -412,15 +395,6 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="array_dyncon_test_go - 2018.03.20 at 23h 41m 31s.xml">
-      <configuration name="array_dyncon_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="array_dyncon_test_go - 2018.03.20 at 23h 42m 02s.xml">
-      <configuration name="array_dyncon_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="array_dyncon_test_go - 2018.03.20 at 23h 43m 43s.xml">
-      <configuration name="array_dyncon_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="array_dyncon_test_go - 2018.03.20 at 23h 44m 56s.xml">
       <configuration name="array_dyncon_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -442,6 +416,15 @@
     <history-entry file="array_dyncon_test_go - 2018.03.21 at 00h 29m 12s.xml">
       <configuration name="array_dyncon_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="fibonacci_test_go - 2018.03.21 at 12h 19m 04s.xml">
+      <configuration name="fibonacci_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="fibonacci_test_go - 2018.03.21 at 12h 22m 15s.xml">
+      <configuration name="fibonacci_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="fibonacci_test_go - 2018.03.21 at 12h 25m 00s.xml">
+      <configuration name="fibonacci_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -453,10 +436,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="24" y="89" width="1684" height="1121" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16687192" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14605543" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -465,7 +448,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42236024" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42213517" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -492,35 +475,36 @@
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/array_members/array_members_test.go</url>
           <line>31</line>
-          <properties />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/array_members/array_members_test.go</url>
           <line>12</line>
-          <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/array_dyncon/array_dyncon_test.go</url>
           <line>35</line>
-          <properties />
           <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/array_dyncon/array_dyncon_test.go</url>
           <line>41</line>
-          <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/src/array_dyncon/array_dyncon_test.go</url>
           <line>28</line>
-          <properties />
           <option name="timeStamp" value="71" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/src/fibonacci/fibonacci.go</url>
+          <line>217</line>
+          <properties />
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="75" />
+      <option name="time" value="80" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -534,49 +518,10 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test-sols/simplearraystore.sol">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/simplearraystore/simplearraystore.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3298">
-          <caret line="200" column="20" lean-forward="false" selection-start-line="200" selection-start-column="20" selection-end-line="200" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/runtime/iface.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4199">
-          <caret line="247" column="25" lean-forward="false" selection-start-line="247" selection-start-column="25" selection-end-line="247" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/simplearraystore/simplearraystore_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/go-test.out">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test-sols/simplearraystore_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="12" column="48" lean-forward="true" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -599,7 +544,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4199">
           <caret line="247" column="25" lean-forward="true" selection-start-line="247" selection-start-column="25" selection-end-line="247" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -622,7 +566,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="12" column="48" lean-forward="true" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -674,7 +617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4080">
           <caret line="240" column="20" lean-forward="false" selection-start-line="240" selection-start-column="20" selection-end-line="240" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,7 +632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2529">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -698,15 +639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="22" column="2" lean-forward="false" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/math/big/int.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="374" column="0" lean-forward="false" selection-start-line="374" selection-start-column="0" selection-end-line="374" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -714,7 +646,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -722,7 +653,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="899" column="0" lean-forward="false" selection-start-line="899" selection-start-column="0" selection-end-line="899" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -730,9 +660,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="205" column="1" lean-forward="false" selection-start-line="205" selection-start-column="1" selection-end-line="205" selection-end-column="1" />
-          <folding>
-            <marker date="1521596379456" expanded="true" signature="4260:4354" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -748,21 +675,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-sols/simplestore_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/array_members/array_members_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
+        <state relative-caret-position="221">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
@@ -772,7 +690,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -780,7 +697,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -794,7 +710,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="374">
           <caret line="25" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
           <folding />
         </state>
@@ -802,7 +718,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/simplearraystore/simplearraystore.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
+        <state relative-caret-position="3026">
           <caret line="182" column="38" lean-forward="false" selection-start-line="182" selection-start-column="38" selection-end-line="182" selection-end-column="38" />
           <folding />
         </state>
@@ -812,22 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-sols/array_ofconstarray_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="39" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-sols/constructor_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -850,7 +750,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
+        <state relative-caret-position="3332">
           <caret line="200" column="0" lean-forward="false" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
           <folding />
         </state>
@@ -874,7 +774,7 @@
     </entry>
     <entry file="file://C:/Go/src/runtime/panic.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="9962">
           <caret line="590" column="0" lean-forward="false" selection-start-line="590" selection-start-column="0" selection-end-line="590" selection-end-column="0" />
           <folding />
         </state>
@@ -892,7 +792,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/array_dyncon/array_dyncon_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
+        <state relative-caret-position="493">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
@@ -900,26 +800,96 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/array_members/array_members.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
+        <state relative-caret-position="3434">
           <caret line="206" column="36" lean-forward="false" selection-start-line="206" selection-start-column="36" selection-end-line="206" selection-end-column="36" />
-          <folding>
-            <element signature="e#22#78#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/Go/src/testing/testing.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8683">
+        <state relative-caret-position="12223">
           <caret line="735" column="0" lean-forward="false" selection-start-line="735" selection-start-column="0" selection-end-line="735" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/array_ofconstarray_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="39" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/simplestore.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/simplestore_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/constructor_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/fibonacci.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/array_dyncon/array_dyncon.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="206" column="118" lean-forward="false" selection-start-line="206" selection-start-column="118" selection-end-line="206" selection-end-column="118" />
+        <state relative-caret-position="154">
+          <caret line="167" column="2" lean-forward="false" selection-start-line="167" selection-start-column="2" selection-end-line="167" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/math/big/int.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="368" column="0" lean-forward="false" selection-start-line="368" selection-start-column="0" selection-end-line="368" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="36" column="1" lean-forward="false" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fibonacci/fibonacci.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="206" column="0" lean-forward="true" selection-start-line="206" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
           <folding />
         </state>
       </provider>

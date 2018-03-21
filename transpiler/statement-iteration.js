@@ -11,7 +11,17 @@ module.exports = {
         let goCode = "";
         goCode += "\t".repeat(statHistory.depth) + "for ";
         goCode += expression.codeExpression(node.test, history, parent, localHistory, statHistory, declarations);
-        goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory+1, declarations);
+
+        if (node.body.type === "BlockStatement") {
+            goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory, declarations);
+        } else {
+            goCode += " {\n";
+            statHistory.depth++;
+            goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory, declarations);
+            statHistory.depth--;
+            goCode += "\n" +"\t".repeat(statHistory.depth) + "}";
+        }
+
         return goCode;
     },
 
@@ -21,7 +31,17 @@ module.exports = {
         let goCode = "";
         goCode += "\t".repeat(statHistory.depth) + "for __ok := true; __ok; __ok = ";
         goCode += expression.codeExpression(node.test, history, parent, localHistory, statHistory, declarations);
-        goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory+1, declarations);
+
+        if (node.body.type === "BlockStatement") {
+            goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory, declarations);
+        } else {
+            goCode += " {\n";
+            statHistory.depth++;
+            goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory, declarations);
+            statHistory.depth--;
+            goCode += "\n" +"\t".repeat(statHistory.depth) + "}";
+        }
+
         return goCode;
     },
 
@@ -38,7 +58,17 @@ module.exports = {
         goCode += " ; ";
         if (node.update)
             goCode += expression.codeExpression(node.update, history, parent, localHistory, statHistory, declarations);
-        goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory+1, declarations);
+
+        if (node.body.type === "BlockStatement") {
+            goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory, declarations);
+        } else {
+            goCode += " {\n";
+            statHistory.depth++;
+            goCode += block.codeStatement(node.body, history, parent, localHistory, statHistory, declarations);
+            statHistory.depth--;
+            goCode += "\n" +"\t".repeat(statHistory.depth) + "}";
+        }
+
         return goCode;
     }
 

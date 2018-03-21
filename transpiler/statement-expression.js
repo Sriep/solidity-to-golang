@@ -15,7 +15,7 @@ module.exports = {
             case "AssignmentExpression":
                 return this.codeAssignment(node, history, parent, localHistory, statHistory, declarations);
             case "DeclarativeExpression":
-                return this.codeDeclaration(node, history, parent, localHistory,depth, declarations);
+                return this.codeDeclaration(node, history, parent, localHistory,statHistory , declarations);
             case "BinaryExpression":
                 return this.codeBinary(node, history, parent, localHistory, statHistory);
             case "Literal":
@@ -55,7 +55,9 @@ module.exports = {
                 left = this.codeSequence(node.left, history, parent, localHistory, statHistory);
                 break;
             case "Identifier":
-                right = this.getGoIdentifier(node.right, history, parent, localHistory);
+                //right = this.getGoIdentifier(node.right, history, parent, localHistory);
+                left  = this.codeExpression(node.left, history, parent, localHistory);
+                right = this.codeExpression(node.right, history, parent, localHistory);
                 if (localHistory.variables.has(node.left.name)) {
                     if (localHistory.variables.get(node.left.name).isMemory) {
                         goCode += left + node.operator + right;
@@ -104,7 +106,7 @@ module.exports = {
         assert(node && node.type === "DeclarativeExpression");
         if (!declarations)
             assert(declarations);
-        let goCode = "\t";
+        let goCode = "\t".repeat(statHistory.depth);
 
         let dataType = gf.typeOf(node.literal, history, parent, localHistory);
         let isMemory;
@@ -203,8 +205,8 @@ module.exports = {
                 goCode += bigOp + "(" + left + ", " + right + ")";
                 return goCode;
             case "Cmp":
-                goCode += "0 " + op + " ";
                 goCode += left + ".Cmp(" + right + ")";
+                goCode += " " + op + " 0";
                 return goCode;
             default:
                 assert(false, "unsupported big operator"); //todo
@@ -344,7 +346,8 @@ module.exports = {
 
     getGoIdentifier: function(node, history, parent, localHistory){
         let goCode = "";
-        assert(node && node.type === "Identifier");
+        if (!node && node.type === "Identifier")
+            assert(node && node.type === "Identifier");
 
         if (history.getStorageType(node.name, parent, localHistory) === "stateVariable") {
             goCode += "this.get(\"" + node.name + "\")";

@@ -18,7 +18,7 @@ module.exports = {
 
     stateVariablesInitCode: new Map(),
     sourceUnits: new Map(),
-
+/*
     expandType: function(typeName, parent) {
         if (dic.valueTypes.has(typeName)) {
             return dic.valueTypes.get(typeName);
@@ -37,7 +37,7 @@ module.exports = {
             }
         }
     },
-
+*/
     validInheritance: function(bases) {
         assert(bases instanceof Array);
         for ( let i = 0 ; i < bases.length ; i++ ) {
@@ -236,5 +236,7 @@ module.exports = {
                 return localHistory.constants.get(id)
             }
         }
+        assert(false, "cannot find identifier");
     }
+
 };

@@ -7,7 +7,7 @@ module.exports = {
     code: function (node, history, parent, localHistory, statHistory) {
         assert(node.type === "ReturnStatement");
 
-        let goCode = "\t";
+        let goCode = "\t".repeat(statHistory.depth);;
         goCode += "return ";
         if (node.argument) {
             goCode += expression.codeExpression(node.argument, history, parent, localHistory, statHistory);
