@@ -92,6 +92,7 @@ module.exports = {
                 throw( new Error("Unrecognised statement type" + statemet.type));
         }
         let preCode = "";
+        // When need to split statements across multiple lines. Used for push.
         if (statHistory.previousStatments.length >0) {
             for ( let statment of statHistory.previousStatments) {
                 preCode +=  "\t".repeat(statHistory.depth) +  statment + "\n"

@@ -23,7 +23,7 @@ module.exports = {
             case "Identifier":
                 return gf.getIdentifier(node.name, history, parent, localHistory, statHistory);
             case "UnaryExpression":
-                return this.codeUnary(node, history, parent, localHistory, statHistory);
+                return this.codeUnaryExpression(node, history, parent, localHistory, statHistory);
             case "MemberExpression":
                 return this.codeMember(node, history, parent, localHistory, statHistory);
             case "SequenceExpression":
@@ -88,8 +88,8 @@ module.exports = {
         right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
         if (node.operator !== "=")
             assert(node.operator === "=");
-
-        goCode += left + node.operator + right;
+        goCode += this.codeBigAssignment(left, node.operator, right);
+        //goCode += left + node.operator + right;
         return goCode;
     },
 
@@ -143,27 +143,67 @@ module.exports = {
         return goCode;
     },
 
-    codeUnary: function(node, history, parent, localHistory, ) {
+    codeUnaryExpression: function(node, history, parent, localHistory ) {
         assert(node && node.type === "UnaryExpression");
         let goCode = "";
+
+        let argument ="";
         switch (node.argument.type) {
             case "BinaryExpression":
-                assert(node.operator === "!", "unknown binary operator");
-                goCode += node.operator + "(";
-                goCode += this.codeBinary(node.argument, history, parent, localHistory) + ")";
+                argument += "(";
+                argument += this.codeBinary(node.argument, history, parent, localHistory) + ")";
                 break;
             case "Literal":
-                assert(node.operator === "-" || node.operator === "+" , "unknown binary operator");
-                goCode += node.operator + gf.getValue(node.argument, history, parent, localHistory);
+                argument += gf.getValue(node.argument, history, parent, localHistory);
                 break;
             case"Identifier":
-                assert(node.operator === "-" || node.operator === "+" , "unknown binary operator");
-                goCode += (node.operator) + gf.getIdentifier(node.argumnet.name, history, parent, localHistory);
+                argument +=  gf.getIdentifier(node.argument.name, history, parent, localHistory);
                 break;
             default:
                 assert(false, "unknown UnitaryExpression");
         }
+
+        switch (node.operator) {
+            case "!":
+                goCode += node.operator + argument;
+                break;
+            case "-":
+                goCode += "new(big.Int).Neg(" + argument + ")";
+                break;
+            case "+":
+                goCode += argument;
+                break;
+            case "~":
+                goCode += "new(big.Int).Not(" + argument + ")";
+                break;
+            case "delete":
+                goCode = this.codeDelete(node.argument, history, parent, localHistory, argument);
+                break;
+            default:
+                assert(false, "unknown unary operator" + node.operator);
+        }
         return goCode;
+    },
+
+    codeDelete: function(node, history, parent, localHistory, arg) {//todo handle structs
+        assert(node, node.type === "Identifier", "deleting non identifier");
+        let idType = history.getStorageType(node.name, parent, localHistory);
+        let data = history.findIdData(node.name, history, parent, localHistory);
+        let emptyVal = "";
+        if (data.node.literal.literal.type === "MappingExpression") {
+            emptyVal += " *make(" + data.dataType + ")"
+        } else {
+            emptyVal += " ";
+            emptyVal += gf.isDynamic(data.node.literal) ? "*" : "";
+            emptyVal += "new(" + data.dataType + ")";
+        }
+
+        if (idType === "stateVariable") {
+            return  "this.set(\"" + node.name + "\"," + emptyVal +")";
+        } else if (idType === "memory" || idType === "alias") {
+            return arg + " = " + emptyVal;
+        }
+        assert(false, "don't how to delete " + idType);
     },
 
     codeBinary: function(node, history, parent, localHistory, statHistory) {
@@ -240,11 +280,12 @@ module.exports = {
         }
     },
 
-    codeBigAssignment: function(left, op, right) {
+    codeBigAssignment: function(left, op, right, type) {
+        type = type ? type : "Int";
         //assert(type === "Int" || type === "Float" || type === "Rat");
         switch (op) {
             case "=":
-                return left + "=" + right;
+                return left + "= new(big." + type + ").Set(" + right + ")";
             case "*=":
                 return left + ".Mul(" + left + ", " + right + ")";
             case "/=":
@@ -372,10 +413,12 @@ module.exports = {
         let goCode = "";
         if (!node && node.type === "Identifier")
             assert(node && node.type === "Identifier");
-
-        if (history.getStorageType(node.name, parent, localHistory) === "stateVariable") {
+        let storageType = history.getStorageType(node.name, parent, localHistory);
+        if (storageType === "stateVariable") {
             goCode += "this.get(\"" + node.name + "\")";
             goCode += gf.getSVTypeAssertion(node, history, parent, localHistory);
+        } else if (storageType === "constant") {
+            goCode += gf.getIdentifier(node.name, history, parent, localHistory); //todo getIdentifier and findIdData seem to be doing same thing
         } else {
             goCode += history.findIdData(node.name, parent, localHistory).goName;
         }

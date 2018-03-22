@@ -127,11 +127,19 @@ const gf = {
             case "Literal":
                 return this.getLiteral(node.value);
             case "MemberExpression":
-                return this.getMemberValue(node, history, parent, localHistory); //todo
+                return this.getMemberValue(node, history, parent, localHistory);
+            case "UnaryExpression":
+                return this.codeUnaryExpression(node, history, parent, localHistory);
             default:
                 assert(false, "unimplemented value type");
                 return ""; // todo ??????
         }
+    },
+
+    codeUnaryExpression: function(node, history, parent, localHistory) {
+        assert(node && node.type === "UnaryExpression");
+        let expression = require("./statement-expression.js");
+        return expression.codeUnaryExpression(node, history, parent, localHistory);
     },
 
     getMemberValue: function(node, history, parent, localHistory) {
@@ -183,7 +191,7 @@ const gf = {
         }  else if (history.publicStateVariables.has(id)) {
             return history.publicStateVariables.get(id).goName;
         } else if (history.publicConstants.has(id)) {
-            return history.publicConstants.get(id).value;
+            return history.publicConstants.get(id);
 
         } else if (history.sourceUnits.get(parent.name).functions.has(id)) {
             return history.sourceUnits.get(parent.name).functions.get(id).goName;
@@ -192,7 +200,7 @@ const gf = {
         }  else if (history.sourceUnits.get(parent.name).stateVariables.has(id)) {
             return history.sourceUnits.get(parent.name).stateVariables.get(id).goName;
         } else if (history.sourceUnits.get(parent.name).constants.has(id)) {
-            return history.sourceUnits.get(parent.name).constants.get(id).value;
+            return history.sourceUnits.get(parent.name).constants.get(id);
         
         } else if (localHistory) {
             if (localHistory.variables.has(id)) {

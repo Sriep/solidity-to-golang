@@ -204,8 +204,8 @@ func NewSimpleStructStore() (*_SimpleStructStore_st) {
 }
 
 func (this _SimpleStructStore_st) Set(_x *big.Int, _y *big.Int) {
-	this.get("value").(*Point).x=_x
-	this.get("value").(*Point).y=_y
+	this.get("value").(*Point).x= new(big.Int).Set(_x)
+	this.get("value").(*Point).y= new(big.Int).Set(_y)
 }
 func (this _SimpleStructStore_st) GetX()( *big.Int) {
 	return this.get("value").(*Point).x

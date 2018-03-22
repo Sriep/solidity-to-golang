@@ -236,9 +236,9 @@ func (this _Fibonacci_st) FibWhile(n *big.Int)( *big.Int) {
 
 	i = big.NewInt(3)
 	for i.Cmp(new(big.Int).Add(n, big.NewInt(1))) < 0{
-		xp1=new(big.Int).Add(xm1, x)
-		xm1=x
-		x=xp1
+		xp1= new(big.Int).Set(new(big.Int).Add(xm1, x))
+		xm1= new(big.Int).Set(x)
+		x= new(big.Int).Set(xp1)
 		i.Add(i, big.NewInt(1))
 
 	}
@@ -264,9 +264,9 @@ func (this _Fibonacci_st) FibDo(n *big.Int)( *big.Int) {
 
 	i = big.NewInt(3)
 	for __ok := true; __ok; __ok = !(new(big.Int).Add(n, big.NewInt(1)).Cmp(i) <= 0){
-		xp1=new(big.Int).Add(xm1, x)
-		xm1=x
-		x=xp1
+		xp1= new(big.Int).Set(new(big.Int).Add(xm1, x))
+		xm1= new(big.Int).Set(x)
+		x= new(big.Int).Set(xp1)
 		i.Add(i, big.NewInt(1))
 
 	}
@@ -290,9 +290,9 @@ func (this _Fibonacci_st) FibFor(n *big.Int)( *big.Int) {
 	x = big.NewInt(1)
 
 	for 	i = big.NewInt(3) ; i.Cmp(n) <= 0 ; 	i.Add(i, big.NewInt(1)){
-		xp1=new(big.Int).Add(xm1, x)
-		xm1=x
-		x=xp1
+		xp1= new(big.Int).Set(new(big.Int).Add(xm1, x))
+		xm1= new(big.Int).Set(x)
+		x= new(big.Int).Set(xp1)
 
 	}
 

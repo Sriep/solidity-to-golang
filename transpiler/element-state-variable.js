@@ -73,14 +73,19 @@ module.exports = {
             goCode += ") ";
             goCode += this.codeGetSig(node, history, parent);
             goCode += " {\n";
-            goCode += "\treturn this.get(\"" + node.name + "\").(";
-            if (node.literal.array_parts instanceof Array && node.literal.array_parts.length > 0)
-                goCode += gf.isDynamic(node.literal) ? "" : "*";
-            goCode += gf.typeOf(node.literal, history, parent) + ")";
-            if (node.array_parts !== null && node.literal.array_parts instanceof Array)
-            {
-                for ( let i = node.literal.array_parts.length-1 ; i >=0  ; i-- ) {
-                    goCode += "[i" + i + ".Uint64()]";
+            goCode += "\treturn ";
+            if (node.is_constant) {
+                goCode += gf.getIdentifier(node.name, history, parent);
+            } else {
+                goCode += "this.get(\"" + node.name + "\").(";
+                if (node.literal.array_parts instanceof Array && node.literal.array_parts.length > 0)
+                    goCode += gf.isDynamic(node.literal) ? "" : "*";
+                goCode += gf.typeOf(node.literal, history, parent) + ")";
+                if (node.array_parts !== null && node.literal.array_parts instanceof Array)
+                {
+                    for ( let i = node.literal.array_parts.length-1 ; i >=0  ; i-- ) {
+                        goCode += "[i" + i + ".Uint64()]";
+                    }
                 }
             }
             goCode += "\n}\n";
