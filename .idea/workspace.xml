@@ -8,21 +8,8 @@
     <bookmark url="file://$PROJECT_DIR$/transpiler/gf.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Pass linestore. Implement delete, fix constants.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/linestore.sol" />
+    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/workspace.xml" afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/.~lock.utets.csv#" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/test/src/fibonacci/fibonacci.go" afterPath="$PROJECT_DIR$/test/src/fibonacci/fibonacci.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/go-test.out" afterPath="$PROJECT_DIR$/test/src/go-test.out" />
-      <change beforePath="$PROJECT_DIR$/test/src/polymorphism/polymorphism_test.go" afterPath="$PROJECT_DIR$/test/src/polymorphism/polymorphism_test.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" afterPath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore.go" afterPath="$PROJECT_DIR$/test/src/simplestructstore/simplestructstore.go" />
-      <change beforePath="$PROJECT_DIR$/test/test-sols/polymorphism_test.go" afterPath="$PROJECT_DIR$/test/test-sols/polymorphism_test.go" />
-      <change beforePath="$PROJECT_DIR$/transpiler/block.js" afterPath="$PROJECT_DIR$/transpiler/block.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-state-variable.js" afterPath="$PROJECT_DIR$/transpiler/element-state-variable.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/gf.js" afterPath="$PROJECT_DIR$/transpiler/gf.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-expression.js" afterPath="$PROJECT_DIR$/transpiler/statement-expression.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -584,7 +571,7 @@
       <workItem from="1521456381412" duration="31801000" />
       <workItem from="1521543676547" duration="39255000" />
       <workItem from="1521625554959" duration="42422000" />
-      <workItem from="1521717590618" duration="15625000" />
+      <workItem from="1521717590618" duration="15640000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -866,7 +853,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521674305791</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Pass linestore. Implement delete, fix constants.">
+      <created>1521745998654</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1521745998654</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -884,7 +878,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="495336000" />
+    <option name="totallyTimeSpent" value="495351000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -897,6 +891,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2938296" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
