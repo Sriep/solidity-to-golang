@@ -200,7 +200,7 @@ func NewSimpleArrayStore() (*_SimpleArrayStore_st) {
 }
 
 func (this _SimpleArrayStore_st) Set(_value *big.Int, ix *big.Int, iy *big.Int) {
-	this.get("value").(*[20][20]*big.Int)[iy.Uint64()][ix.Uint64()]= new(big.Int).Set(_value)
+	this.get("value").(*[20][20]*big.Int)[iy.Uint64()][ix.Uint64()]=_value
 }
 func (this _SimpleArrayStore_st) Get(ix *big.Int, iy *big.Int)( *big.Int) {
 	return this.get("value").(*[20][20]*big.Int)[iy.Uint64()][ix.Uint64()]

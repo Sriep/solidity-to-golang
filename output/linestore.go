@@ -223,7 +223,7 @@ func (this _LineStore_st) Line (i0 *big.Int)(Point) {
 func (this _LineStore_st) NewLine(M *big.Int, C *big.Int) {
 	var i *big.Int
 		var newPoint Point
-this.set("line",0 *new([]Point))
+this.set("line", *new([]Point))
 	for 	i = new(big.Int).Neg(big.NewInt(5)) ; i.Cmp(big.NewInt(5)) < 0 ; 	i.Add(i, big.NewInt(1)){
 
 		newPoint.x= new(big.Int).Set(i)

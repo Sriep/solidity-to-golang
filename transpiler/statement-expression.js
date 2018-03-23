@@ -1,6 +1,7 @@
 'use strict';
 const assert = require("assert");
 const gf = require("./gf.js");
+const dic = require("./soltogo-dictionary.js");
 
 module.exports = {
 
@@ -40,6 +41,8 @@ module.exports = {
                 assert(false, "unknown expression type");
         }
     },
+ //   this.get("name").( map[*big.Int]string)[_number]= _name
+//this.get("name").(* map[*big.Int]string)[_number.Uint64()]= new(big.Int).Set(_name)
 
     codeAssignment: function(node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node.type === "AssignmentExpression");
@@ -88,7 +91,18 @@ module.exports = {
         right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
         if (node.operator !== "=")
             assert(node.operator === "=");
-        goCode += this.codeBigAssignment(left, node.operator, right);
+
+        if (statHistory.lastType) {
+            let baseType = gf.baseType(statHistory.lastType.dataType);
+            if (dic.numericTypes.has(baseType)) {
+                goCode += this.codeBigAssignment(left, node.operator, right);
+            } else {
+                goCode += left + node.operator + right;
+            }
+        } else {
+            goCode += this.codeBigAssignment(left, node.operator, right);
+        }
+
         //goCode += left + node.operator + right;
         return goCode;
     },
@@ -143,7 +157,7 @@ module.exports = {
         return goCode;
     },
 
-    codeUnaryExpression: function(node, history, parent, localHistory ) {
+    codeUnaryExpression: function(node, history, parent, localHistory, statHistory) {
         assert(node && node.type === "UnaryExpression");
         let goCode = "";
 
@@ -157,7 +171,7 @@ module.exports = {
                 argument += gf.getValue(node.argument, history, parent, localHistory);
                 break;
             case"Identifier":
-                argument +=  gf.getIdentifier(node.argument.name, history, parent, localHistory);
+                argument +=  gf.getIdentifier(node.argument.name, history, parent, localHistory, statHistory);
                 break;
             default:
                 assert(false, "unknown UnitaryExpression");
@@ -362,7 +376,7 @@ module.exports = {
             goCode += "this.set(\"" + node.callee.object.name + "\", ";
             goCode += "append(";
             if (node.callee.object.type === "Identifier") {
-                goCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory);
+                goCode += this.getGoIdentifier(node.callee.object, history, parent, localHistory, statHistory);
             } else {
                 goCode = this.codeExpression(node.callee.object, history, parent, localHistory, statHistory);
             }
@@ -409,7 +423,7 @@ module.exports = {
         return goCode;
     },
 
-    getGoIdentifier: function(node, history, parent, localHistory){
+    getGoIdentifier: function(node, history, parent, localHistory, statHistory){
         let goCode = "";
         if (!node && node.type === "Identifier")
             assert(node && node.type === "Identifier");
@@ -422,25 +436,48 @@ module.exports = {
         } else {
             goCode += history.findIdData(node.name, parent, localHistory).goName;
         }
+        if (statHistory)
+            statHistory.nestedIds.push(history.findIdData(node.name, parent, localHistory));
+
         return goCode;
     },
-
-    codeMember: function(node, history, parent, localHistory, statHistory, reversing) {
+ //   this.get("name").( map[*big.Int]string)[_number]= _name
+//this.get("name").(* map[*big.Int]string)[_number.Uint64()]= new(big.Int).Set(_name)
+    codeMember: function(node, history, parent, localHistory, statHistory, reversing, nested) {
         assert(node && node.type === "MemberExpression");
+
         let goCode = "";
         let object="";
 
         if (node.object.type === "Identifier") {
-            object += this.getGoIdentifier(node.object, history, parent, localHistory);
+            object += this.getGoIdentifier(node.object, history, parent, localHistory, statHistory);
+            statHistory.nestedMembers.push(history.findIdData(node.object.name, parent, localHistory));
         } else if (node.object.type === "MemberExpression") {
-            object = this.codeMember(node.object, history, parent, localHistory, statHistory, node.computed);
+            object = this.codeMember(node.object, history, parent, localHistory, statHistory, node.computed, true);
         } else {
             object = this.codeExpression(node.object, history, parent, localHistory, statHistory);
+            assert(statHistory.nestedIds.length > 0);
+            statHistory.nestedMembers.push(statHistory.nestedIds[0]);
         }
         goCode += object;
 
-        // node.computed true means an array, false then a structure
+        // node.computed true means an array or map, false then a structure
         if (node.computed) {
+            //Maps handle memebrs different to arrays. If this is the first memebr of map, then
+            //its the map index not an array.
+            if (!nested) {
+                assert(statHistory.nestedMembers.length > 0);
+                statHistory.lastType = statHistory.nestedMembers[statHistory.nestedMembers.length-1];
+                let typeObj = gf.typeFormat(statHistory.nestedMembers.pop().dataType);
+                if (!nested && typeObj === "map") {
+                    goCode += "[";
+                    goCode += this.codeExpression(node.property, history, parent, localHistory, statHistory);
+                    goCode += "]";
+                    if (statHistory.prevProperties && statHistory.prevProperties.length > 0)
+                        statHistory.prevProperties.pop();
+                    return goCode;
+                }
+            }
             //Need to reverse the order of arrays as Solidity uses different order to Go
             //Member expressions could be nested
             let previous = "";

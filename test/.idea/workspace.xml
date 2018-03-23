@@ -14,14 +14,14 @@
     <SUITE FILE_PATH="coverage/test$array_members_test_go.coverage" NAME="array_members_test.go Coverage Results" MODIFIED="1521495199319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6085053">
+    <splitter split-orientation="horizontal" split-proportion="0.61219704">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="testing.go" pinned="false" current-in-tab="false">
             <entry file="file://C:/Go/src/testing/testing.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="306">
-                  <caret line="734" column="24" lean-forward="false" selection-start-line="734" selection-start-column="24" selection-end-line="734" selection-end-column="24" />
+                <state relative-caret-position="179">
+                  <caret line="594" column="17" lean-forward="false" selection-start-line="594" selection-start-column="17" selection-end-line="594" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -42,8 +42,8 @@
           <file leaf-file-name="linestore_test.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/linestore/linestore_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
-                  <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+                <state relative-caret-position="374">
+                  <caret line="28" column="17" lean-forward="false" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
                   <folding>
                     <element signature="e#19#52#0" expanded="true" />
                   </folding>
@@ -51,61 +51,61 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="linestore.go" pinned="false" current-in-tab="true">
+          <file leaf-file-name="number_map_test.go" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/test-sols/number_map_test.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="391">
+                  <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="number_map.go" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/number_map/number_map.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="420">
+                  <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="number_map_test.go" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/number_map/number_map_test.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="340">
+                  <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="simplearraystore_test.go" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/simplearraystore/simplearraystore_test.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="102">
+                  <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="polymorphism_test.go" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test-sols/polymorphism_test.go">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="2" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="linestore.go" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/linestore/linestore.go">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="97">
-                  <caret line="205" column="24" lean-forward="true" selection-start-line="205" selection-start-column="24" selection-end-line="205" selection-end-column="24" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="linestore.abi" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/linestore/linestore.abi">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="array_ofconstarray_test.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test-sols/array_ofconstarray_test.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="408">
-                  <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="29" selection-end-column="9" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="builtin.go" pinned="false" current-in-tab="false">
-            <entry file="file://C:/Go/src/builtin/builtin.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="331">
-                  <caret line="74" column="5" lean-forward="false" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="fibonacci_test.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test-sols/fibonacci_test.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="323">
-                  <caret line="22" column="4" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="array_memory_test.go" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test-sols/array_memory_test.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="24" column="2" lean-forward="false" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+                  <caret line="205" column="24" lean-forward="false" selection-start-line="205" selection-start-column="24" selection-end-line="205" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
@@ -165,11 +165,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="linestore.sol" pinned="false" current-in-tab="true">
+          <file leaf-file-name="linestore.sol" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/test-sols/linestore.sol">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+                <state relative-caret-position="255">
+                  <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="number_map.sol" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/test-sols/number_map.sol">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="119">
+                  <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -178,8 +188,8 @@
           <file leaf-file-name="asm_amd64.s" pinned="false" current-in-tab="false">
             <entry file="file://C:/Go/src/runtime/asm_amd64.s">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="2352" column="23" lean-forward="false" selection-start-line="2352" selection-start-column="23" selection-end-line="2352" selection-end-column="23" />
+                <state relative-caret-position="187">
+                  <caret line="2360" column="0" lean-forward="false" selection-start-line="2360" selection-start-column="0" selection-end-line="2360" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -195,14 +205,12 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="polymorphism_test.go" pinned="false" current-in-tab="false">
+          <file leaf-file-name="polymorphism_test.go" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/polymorphism/polymorphism_test.go">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="2" />
-                  <folding>
-                    <element signature="e#22#61#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="51">
+                  <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -282,6 +290,10 @@
         <option value="$PROJECT_DIR$/test-sols/linestore_test.go" />
         <option value="$PROJECT_DIR$/src/linestore/linestore_test.go" />
         <option value="$PROJECT_DIR$/src/linestore/linestore.go" />
+        <option value="$PROJECT_DIR$/test-sols/number_map.sol" />
+        <option value="$PROJECT_DIR$/src/number_map/number_map.go" />
+        <option value="$PROJECT_DIR$/src/number_map/number_map_test.go" />
+        <option value="$PROJECT_DIR$/test-sols/number_map_test.go" />
       </list>
     </option>
   </component>
@@ -292,8 +304,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="54" />
-    <option name="y" value="100" />
+    <option name="x" value="88" />
+    <option name="y" value="11" />
     <option name="width" value="1684" />
     <option name="height" value="1121" />
   </component>
@@ -330,7 +342,13 @@
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="linestore" type="462c0819:PsiDirectoryNode" />
+              <item name="array_ofconstarray" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="number_map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
@@ -361,15 +379,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.linestore_test.go">
-    <configuration name="array_dyncon_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
-      <module name="test" />
-      <working_directory value="$PROJECT_DIR$/src/array_dyncon" />
-      <go_parameters value="-i" />
-      <framework value="gotest" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/src/array_dyncon/array_dyncon_test.go" />
-    </configuration>
+  <component name="RunManager" selected="Go Test.number_map_test.go">
     <configuration name="array_memory_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="test" />
       <working_directory value="$PROJECT_DIR$/src/array_memory" />
@@ -394,6 +404,14 @@
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/src/linestore/linestore_test.go" />
     </configuration>
+    <configuration name="number_map_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+      <module name="test" />
+      <working_directory value="$PROJECT_DIR$/src/number_map" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/src/number_map/number_map_test.go" />
+    </configuration>
     <configuration name="polymorphism_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="test" />
       <working_directory value="$PROJECT_DIR$/src/polymorphism" />
@@ -403,19 +421,19 @@
       <filePath value="$PROJECT_DIR$/src/polymorphism/polymorphism_test.go" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Go Test.array_dyncon_test.go" />
-      <item index="1" class="java.lang.String" itemvalue="Go Test.fibonacci_test.go" />
-      <item index="2" class="java.lang.String" itemvalue="Go Test.array_memory_test.go" />
-      <item index="3" class="java.lang.String" itemvalue="Go Test.polymorphism_test.go" />
-      <item index="4" class="java.lang.String" itemvalue="Go Test.linestore_test.go" />
+      <item index="0" class="java.lang.String" itemvalue="Go Test.fibonacci_test.go" />
+      <item index="1" class="java.lang.String" itemvalue="Go Test.array_memory_test.go" />
+      <item index="2" class="java.lang.String" itemvalue="Go Test.polymorphism_test.go" />
+      <item index="3" class="java.lang.String" itemvalue="Go Test.linestore_test.go" />
+      <item index="4" class="java.lang.String" itemvalue="Go Test.number_map_test.go" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Go Test.linestore_test.go" />
-        <item index="1" class="java.lang.String" itemvalue="Go Test.polymorphism_test.go" />
-        <item index="2" class="java.lang.String" itemvalue="Go Test.array_memory_test.go" />
-        <item index="3" class="java.lang.String" itemvalue="Go Test.fibonacci_test.go" />
-        <item index="4" class="java.lang.String" itemvalue="Go Test.array_dyncon_test.go" />
+        <item index="0" class="java.lang.String" itemvalue="Go Test.number_map_test.go" />
+        <item index="1" class="java.lang.String" itemvalue="Go Test.linestore_test.go" />
+        <item index="2" class="java.lang.String" itemvalue="Go Test.polymorphism_test.go" />
+        <item index="3" class="java.lang.String" itemvalue="Go Test.array_memory_test.go" />
+        <item index="4" class="java.lang.String" itemvalue="Go Test.fibonacci_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -423,35 +441,35 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 00m 41s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 26m 52s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 06m 21s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 26m 59s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 06m 34s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 28m 11s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 06m 46s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 28m 25s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 07m 44s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 28m 47s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 08m 07s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 29m 10s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 10m 00s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 29m 16s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 28m 21s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 29m 27s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 34m 31s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 30m 28s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="linestore_test_go - 2018.03.22 at 18h 37m 13s.xml">
-      <configuration name="linestore_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="number_map_test_go - 2018.03.23 at 00h 30m 44s.xml">
+      <configuration name="number_map_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -554,7 +572,7 @@
           <option name="timeStamp" value="136" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="137" />
+      <option name="time" value="146" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -568,42 +586,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/simplearraystore/simplearraystore_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/simplestore/simplestore.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2529">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/simplestructstore/simplestructstore_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="2" lean-forward="false" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/internal/race/norace.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/time/time.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="899" column="0" lean-forward="false" selection-start-line="899" selection-start-column="0" selection-end-line="899" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/simplestructstore/simplestructstore.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -644,6 +626,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="25" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -665,13 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3332">
-          <caret line="200" column="0" lean-forward="false" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -783,16 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/polymorphism/polymorphism_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="2" />
-          <folding>
-            <element signature="e#22#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test-sols/constructor_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -837,16 +803,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-sols/polymorphism_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-          <folding>
-            <element signature="e#22#61#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -898,34 +854,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="2352" column="23" lean-forward="false" selection-start-line="2352" selection-start-column="23" selection-end-line="2352" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test-sols/linestore.sol">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/runtime/panic.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="567" column="49" lean-forward="true" selection-start-line="567" selection-start-column="49" selection-end-line="567" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/testing/testing.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="734" column="24" lean-forward="false" selection-start-line="734" selection-start-column="24" selection-end-line="734" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -948,20 +880,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/linestore/linestore.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="205" column="24" lean-forward="false" selection-start-line="205" selection-start-column="24" selection-end-line="205" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/linestore/linestore_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="374">
+          <caret line="28" column="17" lean-forward="false" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
           <folding>
             <element signature="e#19#52#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/linestore/linestore.go">
+    <entry file="file://$PROJECT_DIR$/test-sols/polymorphism_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="205" column="24" lean-forward="true" selection-start-line="205" selection-start-column="24" selection-end-line="205" selection-end-column="24" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/linestore.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/simplearraystore/simplearraystore_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/number_map.sol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/array_ofconstarray/array_ofconstarray.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="191" column="29" lean-forward="false" selection-start-line="191" selection-start-column="29" selection-end-line="191" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="2360" column="0" lean-forward="false" selection-start-line="2360" selection-start-column="0" selection-end-line="2360" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/polymorphism/polymorphism_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/number_map/number_map.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/testing/testing.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="594" column="17" lean-forward="false" selection-start-line="594" selection-start-column="17" selection-end-line="594" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/number_map/number_map_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-sols/number_map_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
           <folding />
         </state>
       </provider>

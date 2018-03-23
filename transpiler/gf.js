@@ -93,9 +93,8 @@ const gf = {
         if (history.getStorageType(idNode.name, parent, localHistory) === "stateVariable") {
             let idData = history.findIdData(idNode.name, parent, localHistory);
             assert(idData, "cant find data on identifier" + idNode.name);
-
             goCode = ".(";
-            if (idData.dataType.substring(0,2) !== "[]")
+            if (idData.dataType.substring(0,2) !== "[]" && idData.dataType.substring(0,3) !== "map")
                 goCode += "*";
             goCode += idData.dataType;
             goCode += ")";
@@ -179,7 +178,9 @@ const gf = {
         }
     },
 
-    getIdentifier: function(id, history, parent, localHistory) {
+    getIdentifier: function(id, history, parent, localHistory, statHistory) {
+        if (statHistory)
+            statHistory.nestedIds.push(history.findIdData(id, parent, localHistory));
         if (!history)
             assert(false);
         if  (!history.sourceUnits.get(parent.name))
@@ -275,7 +276,27 @@ const gf = {
             }
         });
         return first;
+    },
+
+    typeFormat: function(type) {
+        let trimmedType = type.trim();
+        if (dic.valueTypes.has(trimmedType))
+            return "value";
+        if (trimmedType.substring(0,3) === "map")
+            return "map";
+        if (trimmedType.substring(0,2) === "[]")
+            return "dynamic array";
+        if (trimmedType.substring(0, 1) === "[")
+            return "fixed array";
+        return "struct";
+    },
+
+    baseType: function(type) {
+        let endOf = type.substring(type.lastIndexOf("]") + 1);
+        console.log("base type " + endOf);
+        return endOf;
     }
+
 
 
 };

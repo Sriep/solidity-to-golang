@@ -25,6 +25,25 @@ module.exports = {
         [ "bytes" , "string" ] //todo sort out bytes and strings
     ]),
 
+    numericTypes:  new Set([
+        [ "uint"  ],
+        [ "uint8" ],
+        [ "uint16" ],
+        [ "uint32"  ],
+        [ "uint64" ],
+        [ "uint128" ],
+        [ "uint256" ],
+        [ "int" ],
+        [ "int8" ],
+        [ "int16" ],
+        [ "int32" ],
+        [ "int64" ],
+        [ "int128" ],
+        [ "int256" ],
+        [ "fixed" ],
+        [ "ufixed" ]
+    ]),
+
     goValueTypes : new Set([
         ["bool"], ["*big.Int"], ["*big.Float"], ["float64"], ["byte"]
     ])

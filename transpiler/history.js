@@ -113,6 +113,8 @@ module.exports = {
     addIdName: function(node, name, visibility, nodeType, parent, dataType) {
         assert(parent && this.sourceUnits.has(parent.name));
         assert(this.sourceUnits.get(parent.name).identifiers);
+        if (dataType)
+            dataType = dataType.trim();
         let localHistory = require("./history-local.js");
 
         if (dic.valueTypes.has(name))

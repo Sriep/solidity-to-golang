@@ -44,7 +44,7 @@ module.exports = {
                 } else {
                     let dataType = gf.typeOf(node.literal, history, parent);
                     if (node.literal.literal.type === "MappingExpression") {
-                        goCodeDerived += " *make(" + dataType + ")"
+                        goCodeDerived += " make(" + dataType + ")"
                     } else {
                         goCodeDerived += " ";
                         goCodeDerived += gf.isDynamic(node.literal) ? "*" : "";
