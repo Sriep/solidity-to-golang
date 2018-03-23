@@ -5,7 +5,7 @@ ok  	array_ofconstarray	(cached)
 ok  	constructor	(cached)
 ok  	fibonacci	(cached)
 ok  	linestore	(cached)
-ok  	number_map	(cached)
+ok  	number_map	5.069s
 ok  	polymorphism	(cached)
 ok  	simplearraystore	(cached)
 ok  	simplestore	(cached)

@@ -2,7 +2,10 @@
 pragma solidity ^0.4.18;
 contract  NumberMap {
 
+    mapping (uint => uint[]) public name2;
+
     mapping (uint => string) public name;
+
 
     function add(uint _number, string _name) external {
         name[_number] = _name;

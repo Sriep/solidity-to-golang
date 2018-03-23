@@ -115,8 +115,9 @@ module.exports = {
         } else if (node.array_parts !== null
             && node.array_parts instanceof Array
             && node.array_parts.length > 0){
-            for ( let i = node.array_parts.length + pos -1 ; i >= 0 ; i-- ) {
-                goCode += "[i" + i + ".Uint64()]";
+            for ( let i = node.array_parts.length -1 ; i >= 0 ; i-- ) {
+                let indexPos = i+pos;
+                goCode += "[i" + indexPos + ".Uint64()]";
             }
         } else {
             // Should mean that we are looking at the type of a map value

@@ -172,28 +172,24 @@ type _NumberMap_st struct {
 	this *_NumberMap_st
 }
 type _NumberMap_pub interface {
-	Test (i0 *big.Int, i1 *big.Int, i2 *big.Int)(*big.Int)
-	Test2 (i0 *big.Int, i1 *big.Int, i2 *big.Int, i3 *big.Int)(*big.Int)
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 
 }
 type NumberMap interface {
 	Add(_number *big.Int, _name string)
-	Test (i0 *big.Int, i1 *big.Int, i2 *big.Int)(*big.Int)
-	Test2 (i0 *big.Int, i1 *big.Int, i2 *big.Int, i3 *big.Int)(*big.Int)
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 
 }
 type _NumberMap_int interface {
 	Add(_number *big.Int, _name string)
-	Test (i0 *big.Int, i1 *big.Int, i2 *big.Int)(*big.Int)
-	Test2 (i0 *big.Int, i1 *big.Int, i2 *big.Int, i3 *big.Int)(*big.Int)
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 
 }
 type _NumberMap_pri interface {
-	Test (i0 *big.Int, i1 *big.Int, i2 *big.Int)(*big.Int)
-	Test2 (i0 *big.Int, i1 *big.Int, i2 *big.Int, i3 *big.Int)(*big.Int)
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 	Add(_number *big.Int, _name string)
 
@@ -202,17 +198,13 @@ func NewNumberMap() (*_NumberMap_st) {
 	p := new(_NumberMap_st)
 	p.this = p
 	p.createStorage()
-	p.set("test",  make( map[*big.Int][][3]*big.Int))
-	p.set("test2",  make( map[*big.Int] map[*big.Int][4][]*big.Int))
+	p.set("name2",  make( map[*big.Int][]*big.Int))
 	p.set("name",  make( map[*big.Int]string))
 	return p
 }
 
-func (this _NumberMap_st) Test (i0 *big.Int, i1 *big.Int, i2 *big.Int)(*big.Int) {
-	return this.get("test").( map[*big.Int][][3]*big.Int)[i0][i2.Uint64()][i1.Uint64()][i0.Uint64()]
-}
-func (this _NumberMap_st) Test2 (i0 *big.Int, i1 *big.Int, i2 *big.Int, i3 *big.Int)(*big.Int) {
-	return this.get("test2").( map[*big.Int] map[*big.Int][4][]*big.Int)[i0][i1][i3.Uint64()][i2.Uint64()][i1.Uint64()][i0.Uint64()]
+func (this _NumberMap_st) Name2 (i0 *big.Int, i1 *big.Int)(*big.Int) {
+	return this.get("name2").( map[*big.Int][]*big.Int)[i0][i1.Uint64()][i0.Uint64()]
 }
 func (this _NumberMap_st) Name (i0 *big.Int)(string) {
 	return this.get("name").( map[*big.Int]string)[i0]

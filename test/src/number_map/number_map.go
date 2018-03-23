@@ -172,20 +172,24 @@ type _NumberMap_st struct {
 	this *_NumberMap_st
 }
 type _NumberMap_pub interface {
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 
 }
 type NumberMap interface {
 	Add(_number *big.Int, _name string)
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 
 }
 type _NumberMap_int interface {
 	Add(_number *big.Int, _name string)
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 
 }
 type _NumberMap_pri interface {
+	Name2 (i0 *big.Int, i1 *big.Int)(*big.Int)
 	Name (i0 *big.Int)(string)
 	Add(_number *big.Int, _name string)
 
@@ -194,10 +198,14 @@ func NewNumberMap() (*_NumberMap_st) {
 	p := new(_NumberMap_st)
 	p.this = p
 	p.createStorage()
+	p.set("name2",  make( map[*big.Int][]*big.Int))
 	p.set("name",  make( map[*big.Int]string))
 	return p
 }
 
+func (this _NumberMap_st) Name2 (i0 *big.Int, i1 *big.Int)(*big.Int) {
+	return this.get("name2").( map[*big.Int][]*big.Int)[i0][i1.Uint64()]
+}
 func (this _NumberMap_st) Name (i0 *big.Int)(string) {
 	return this.get("name").( map[*big.Int]string)[i0]
 }
