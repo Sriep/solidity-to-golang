@@ -8,22 +8,8 @@
     <bookmark url="file://$PROJECT_DIR$/transpiler/gf.js" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="Pass number_map. Some fixes with map. Still problem with complex maps.">
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/number_map.sol" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/test/test-sols/number_map_test.go" />
+    <list default="true" id="04049231-e73e-42d0-a90e-183f7ffb4c4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/output/array_ofconstarray.go" afterPath="$PROJECT_DIR$/output/array_ofconstarray.go" />
-      <change beforePath="$PROJECT_DIR$/output/linestore.go" afterPath="$PROJECT_DIR$/output/linestore.go" />
-      <change beforePath="$PROJECT_DIR$/test/.idea/workspace.xml" afterPath="$PROJECT_DIR$/test/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/test/src/go-test.out" afterPath="$PROJECT_DIR$/test/src/go-test.out" />
-      <change beforePath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" afterPath="$PROJECT_DIR$/test/src/simplearraystore/simplearraystore.go" />
-      <change beforePath="$PROJECT_DIR$/transpiler/element-state-variable.js" afterPath="$PROJECT_DIR$/transpiler/element-state-variable.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/gf.js" afterPath="$PROJECT_DIR$/transpiler/gf.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/history.js" afterPath="$PROJECT_DIR$/transpiler/history.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/soltogo-dictionary.js" afterPath="$PROJECT_DIR$/transpiler/soltogo-dictionary.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/source-elements.js" afterPath="$PROJECT_DIR$/transpiler/source-elements.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-expression.js" afterPath="$PROJECT_DIR$/transpiler/statement-expression.js" />
-      <change beforePath="$PROJECT_DIR$/transpiler/statement-history.js" afterPath="$PROJECT_DIR$/transpiler/statement-history.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -592,7 +578,7 @@
       <workItem from="1521456381412" duration="31801000" />
       <workItem from="1521543676547" duration="39255000" />
       <workItem from="1521625554959" duration="42422000" />
-      <workItem from="1521717590618" duration="34123000" />
+      <workItem from="1521717590618" duration="34157000" />
     </task>
     <task id="LOCAL-00001" summary="Compiles contracts, interfaces and library.">
       <created>1520100966579</created>
@@ -881,7 +867,14 @@
       <option name="project" value="LOCAL" />
       <updated>1521745998654</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Pass number_map. Some fixes with map. Still problem with complex maps.">
+      <created>1521765277234</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1521765277234</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -899,7 +892,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="513834000" />
+    <option name="totallyTimeSpent" value="513868000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -912,6 +905,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908913" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2938296" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
