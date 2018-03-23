@@ -6,7 +6,7 @@ module.exports = {
 
     code: function(node, history, parent) {
         assert(node && node.type === "EnumDeclaration");
-
+        history.addIdentifier(node, parent);
         let goCode = "";
         goCode += "type " + node.name;
         goCode += gc.suffixContract ? "_" + parent.name : "";

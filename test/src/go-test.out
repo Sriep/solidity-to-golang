@@ -1,11 +1,24 @@
+# enums
+enums\enums.go:243:31: this.Contract.get("thisDay").(*Day).today undefined (type *Day is pointer to interface, not interface)
+enums\enums.go:243:47: Day.Days undefined (type Day has no method Days)
+enums\enums.go:244:13: Day.Days undefined (type Day has no method Days)
+enums\enums.go:246:39: this.Contract.get("thisDay").(*Day).today undefined (type *Day is pointer to interface, not interface)
+enums\enums.go:246:55: Day.Days undefined (type Day has no method Days)
+enums\enums.go:247:13: Day.Days undefined (type Day has no method Days)
+enums\enums.go:249:39: this.Contract.get("thisDay").(*Day).today undefined (type *Day is pointer to interface, not interface)
+enums\enums.go:249:55: Day.Days undefined (type Day has no method Days)
+enums\enums.go:250:13: Day.Days undefined (type Day has no method Days)
+enums\enums.go:252:39: this.Contract.get("thisDay").(*Day).today undefined (type *Day is pointer to interface, not interface)
+enums\enums.go:252:39: too many errors
 ok  	array_dyncon	(cached)
 ok  	array_members	(cached)
 ok  	array_memory	(cached)
 ok  	array_ofconstarray	(cached)
 ok  	constructor	(cached)
+FAIL	enums [build failed]
 ok  	fibonacci	(cached)
 ok  	linestore	(cached)
-ok  	number_map	5.069s
+ok  	number_map	(cached)
 ok  	polymorphism	(cached)
 ok  	simplearraystore	(cached)
 ok  	simplestore	(cached)

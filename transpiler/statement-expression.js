@@ -107,7 +107,7 @@ module.exports = {
         return goCode;
     },
 
-        codeDeclarativeAssignment: function(node, history, parent, localHistory, statHistory, declarations) {
+    codeDeclarativeAssignment: function(node, history, parent, localHistory, statHistory, declarations) {
         assert(node && node.type === "AssignmentExpression");
 
         let goCode = "\t".repeat(statHistory.depth);
@@ -239,30 +239,35 @@ module.exports = {
         //let right = this.codeExpression(node.right, history, parent, localHistory, statHistory);
 
         //if (node.left.type === "BinaryExpression" || node.left.type === "UnaryExpression" ) {
-         if (this.isLogicalOperation(node.left, history, parent, localHistory)) {
+         if (this.isBigOperation(node.left, history, parent, localHistory, statHistory)) {
+             goCode += this.codeBigBinaryExpression(left, node.operator, right);
+         } else {
             //assert(node.right.type === "BinaryExpression" || node.right.type === "UnaryExpression");
             goCode += left;
             goCode += " " + node.operator + " ";
             goCode += right;
-        } else {
-            goCode += this.codeBigBinaryExpression(left, node.operator, right);
         }
 
         return goCode;
     },
 
-    isLogicalOperation: function(node, history, parent, localHistory) {
+    isBigOperation: function(node, history, parent, localHistory) {
          switch (node.type) {
              case "BinaryExpression":
-                 return ["<", "<=", ">", ">=", "||", "&&", "==", "!=", "!"].indexOf(node.operator) >= 0;
+                 return ["<", "<=", ">", ">=", "||", "&&", "==", "!=", "!"].indexOf(node.operator) === -1;
              case "UnaryExpression":
-                 return false;
+                 return true;
              case "Literal":
-                 return node.value === true || node.value === false;
+                 if (node.value === true || node.value === false)
+                     return false;
+                 if (node.value instanceof String)
+                     return false;
+                 return ture;
              case "Identifier":
-                 return "bool" === history.findIdData(node.name, parent, localHistory).dataType;
+                 return ["bool", "string", "bytes", "address"].indexOf(history.findIdData(node.name, parent, localHistory).dataType) === -1;
              default:
-                 return false;
+
+                return true;
          }
     },
 
@@ -451,6 +456,8 @@ module.exports = {
 
         if (node.object.type === "Identifier") {
             object += this.getGoIdentifier(node.object, history, parent, localHistory, statHistory);
+            if (!statHistory)
+                assert(false);
             statHistory.nestedMembers.push(history.findIdData(node.object.name, parent, localHistory));
         } else if (node.object.type === "MemberExpression") {
             object = this.codeMember(node.object, history, parent, localHistory, statHistory, node.computed, true);
@@ -460,7 +467,14 @@ module.exports = {
             statHistory.nestedMembers.push(statHistory.nestedIds[0]);
         }
         goCode += object;
-
+/*
+        let ObjData;
+        if (!nested) {
+            assert(statHistory.nestedMembers.length > 0);
+            statHistory.lastType = statHistory.nestedMembers[statHistory.nestedMembers.length - 1];
+            typeObj = gf.typeFormat(statHistory.nestedMembers.pop().dataType);
+        }
+*/
         // node.computed true means an array or map, false then a structure
         if (node.computed) {
             //Maps handle memebrs different to arrays. If this is the first memebr of map, then
@@ -497,8 +511,21 @@ module.exports = {
             }
 
         } else if (node.property.name === "length") {
+            if (!nested)
+                gf.typeFormat(statHistory.nestedMembers.pop().dataType);
             return "big.NewInt(int64(len(" + object + ")))";
         } else {
+            if (!nested) {
+                assert(node.property.type === "Identifier");
+                let objData = statHistory.nestedMembers.pop();
+                let ObjParent = objData.type ? objData.node : parent;
+                statHistory.lastPropertyData = history.findIdData(node.property.name, ObjParent, localHistory);
+                statHistory.lastPropertyStorageType = history.getStorageType(node.property.name, ObjParent, localHistory);
+                //If the object is a top level contract then we do not want to reference it as no type members in Go.
+                //if (objData.dataType && history.sourceUnits.has(objData.dataType)) {
+                //   return node.property.name
+                //}
+            }
             goCode += this.codeStructProperty(node.property);
         }
         return goCode;

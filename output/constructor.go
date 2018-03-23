@@ -178,15 +178,21 @@ type _Inbox_pub interface {
 
 }
 type Inbox interface {
-	_Inbox_pub
+	Message ()(string)
+	constructor__Inbox(initialMessage string)
+	SetMessage(newMessage string)
 
 }
 type _Inbox_int interface {
-	_Inbox_pub
+	Message ()(string)
+	constructor__Inbox(initialMessage string)
+	SetMessage(newMessage string)
 
 }
 type _Inbox_pri interface {
-	_Inbox_int
+	Message ()(string)
+	constructor__Inbox(initialMessage string)
+	SetMessage(newMessage string)
 
 }
 func NewInbox(initialMessage string) (*_Inbox_st) {
@@ -199,7 +205,7 @@ func NewInbox(initialMessage string) (*_Inbox_st) {
 }
 
 func (this _Inbox_st) Message ()(string) {
-	return this.get("message").(*string)
+	return this.get("message").(string)
 }
 func (this _Inbox_st) constructor__Inbox(initialMessage string) {
 	this.set("message", initialMessage)

@@ -203,6 +203,10 @@ func NewSimpleStructStore() (*_SimpleStructStore_st) {
 	return p
 }
 
+type Point struct {
+		x *big.Int
+		y *big.Int
+}
 func (this _SimpleStructStore_st) Set(_x *big.Int, _y *big.Int) {
 	this.get("value").(*Point).x= new(big.Int).Set(_x)
 	this.get("value").(*Point).y= new(big.Int).Set(_y)
@@ -212,8 +216,4 @@ func (this _SimpleStructStore_st) GetX()( *big.Int) {
 }
 func (this _SimpleStructStore_st) GetY()( *big.Int) {
 	return this.get("value").(*Point).y
-}
-type Point struct {
-		x *big.Int
-		y *big.Int
 }

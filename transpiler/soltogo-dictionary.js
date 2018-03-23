@@ -49,8 +49,8 @@ module.exports = {
         [ "bytes30", "*big.Int" ],
         [ "bytes31", "*big.Int" ],
         [ "bytes32", "*big.Int" ],
-        [ "fixed", "float64" ], //TODO support fixedMxN
-        [ "ufixed", "float64" ], //TODO support ufixedMxN
+        [ "fixed", "*big.Float" ], //TODO support fixedMxN
+        [ "ufixed", "*big.Float" ], //TODO support ufixedMxN
         [ "address" , "string" ],
         [ "byte" ,"*big.Int" ],
         [ "string" , "string" ],

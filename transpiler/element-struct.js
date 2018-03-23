@@ -16,7 +16,7 @@ module.exports = {
         goCode += gc.suffixContract ? "_" + parent.name : "";
         goCode += " struct {\n";
         for (let body of node.body) {
-            goCode += "\t" + stateVariable.code(body, history, parent) + "\n"
+            goCode += "\t" + stateVariable.code(body, history, parent, node) + "\n"
         }
         goCode += "}\n";
         return goCode;

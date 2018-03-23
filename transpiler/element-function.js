@@ -15,7 +15,7 @@ module.exports = {
         return goCode;
     },
 
-    getSignature: function(node, history, parent) {
+    getSignature: function(node, history, parent, localHistory) {
         let goCode = "";
         if (node.name === parent.name) {
             goCode += gc.constructorPrefix + node.name;
@@ -27,7 +27,7 @@ module.exports = {
         }
 
         //let data = history.findIdData(node.name, parent);
-        let localHistory = history.findIdData(node.name, parent).localHistory;
+        //let localHistory = history.findIdData(node.name, parent).localHistory;
         goCode += this.codeFunctionParameters(node.params, history, parent, localHistory);
         if (node.returnParams)
             goCode += this.codeReturnParameters(node.returnParams, history, parent);
@@ -98,17 +98,16 @@ module.exports = {
         let goCode = "func (this ";
         goCode += gc.structPrefix +  parent.name + gc.structSuffix;
         goCode += ") ";
-        goCode += this.getSignature(node, history, parent);
+        goCode += this.getSignature(node, history, parent, localHistory);
         goCode += " {\n";
-        goCode += this.codeFunctionBody(node, history, parent);
+        goCode += this.codeFunctionBody(node, history, parent, localHistory);
         goCode += "}\n";
+        localHistory.clear();
         return goCode;
     },
 
-    codeFunctionBody: function(node, history, parent) {
-        let goCode = block.codeFunctionBlock(node.body.body, history, parent, localHistory, 1);
-        localHistory.clear();
-        return goCode;
+    codeFunctionBody: function(node, history, parent, localHistory) {
+        return block.codeFunctionBlock(node.body.body, history, parent, localHistory, 1);
     }
 
 };

@@ -199,12 +199,12 @@ func NewAnimal() (*_Animal_st) {
 }
 
 func (this _Animal_st) CountLegs(a Animal)( *big.Int) {
-	return a.Legs()
+	return undefined()
 }
 
 type _Spider_st struct {
 	Contract
-	_Animal_st()
+	_Animal_st
 	this *_Spider_st
 }
 type _Spider_pub interface {
@@ -240,7 +240,7 @@ func (this _Spider_st) Legs()( *big.Int) {
 
 type _Cat_st struct {
 	Contract
-	_Animal_st()
+	_Animal_st
 	this *_Cat_st
 }
 type _Cat_pub interface {
@@ -276,7 +276,7 @@ func (this _Cat_st) Legs()( *big.Int) {
 
 type _Human_st struct {
 	Contract
-	_Animal_st()
+	_Animal_st
 	this *_Human_st
 }
 type _Human_pub interface {

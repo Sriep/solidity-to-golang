@@ -178,15 +178,21 @@ type _SimpleStructStore_pub interface {
 
 }
 type SimpleStructStore interface {
-	_SimpleStructStore_pub
+	Set(_x *big.Int, _y *big.Int)
+	GetX()( *big.Int)
+	GetY()( *big.Int)
 
 }
 type _SimpleStructStore_int interface {
-	_SimpleStructStore_pub
+	Set(_x *big.Int, _y *big.Int)
+	GetX()( *big.Int)
+	GetY()( *big.Int)
 
 }
 type _SimpleStructStore_pri interface {
-	_SimpleStructStore_int
+	Set(_x *big.Int, _y *big.Int)
+	GetX()( *big.Int)
+	GetY()( *big.Int)
 
 }
 func NewSimpleStructStore() (*_SimpleStructStore_st) {
@@ -197,17 +203,17 @@ func NewSimpleStructStore() (*_SimpleStructStore_st) {
 	return p
 }
 
-func (this _SimpleStructStore_st) Set(_x *big.Int, _y *big.Int) {
-	this.get("value").(*Point).x=_x
-	this.get("value").(*Point).y=_y
-}
-func (this _SimpleStructStore_st) GetX()( *big.Int) {
-	return this.get("value").(*Point).x
-}
-func (this _SimpleStructStore_st) GetY()( *big.Int) {
-	return this.get("value").(*Point).y
-}
 type Point struct {
 		x *big.Int
 		y *big.Int
+}
+func (this _SimpleStructStore_st) Set(_x *big.Int, _y *big.Int) {
+	this.get("value").(*Point).x.x= new(big.Int).Set(_x)
+	this.get("value").(*Point).y.y= new(big.Int).Set(_y)
+}
+func (this _SimpleStructStore_st) GetX()( *big.Int) {
+	return this.get("value").(*Point).x.x
+}
+func (this _SimpleStructStore_st) GetY()( *big.Int) {
+	return this.get("value").(*Point).y.y
 }

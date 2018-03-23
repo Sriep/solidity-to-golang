@@ -288,7 +288,7 @@ const gf = {
             return "dynamic array";
         if (trimmedType.substring(0, 1) === "[")
             return "fixed array";
-        return "struct";
+        return "compound";
     },
 
     baseType: function(type) {
@@ -296,8 +296,6 @@ const gf = {
         console.log("base type " + endOf);
         return endOf;
     }
-
-
 
 };
 module.exports = gf;

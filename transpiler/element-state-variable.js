@@ -5,7 +5,7 @@ const gf = require("./gf.js");
 
 module.exports = {
 
-    code: function(node, history, parent) {
+    code: function(node, history, parent, container) {
         assert(node);
         assert(!(node instanceof Array));
 
@@ -13,6 +13,7 @@ module.exports = {
         goCode += gc.hideDataPrefix;
         goCode += node.name + " ";
         goCode += gf.typeOf(node.literal, history, parent);
+        history.addIdentifier(node, parent, container);
         return goCode;
     },
 

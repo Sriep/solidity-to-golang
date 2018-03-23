@@ -11,7 +11,7 @@ module.exports = {
         let goCode = "";
         if (!chained)
             goCode += "\t".repeat(statHistory.depth) + "if ";
-        goCode += expression.codeExpression(node.test, history, parent, localHistory);
+        goCode += expression.codeExpression(node.test, history, parent, localHistory, statHistory);
         if (node.consequent.type === "BlockStatement") {
             goCode += block.codeStatement(node.consequent, history, parent, localHistory, statHistory, declarations);
         } else {

@@ -18,26 +18,7 @@ module.exports = {
 
     stateVariablesInitCode: new Map(),
     sourceUnits: new Map(),
-/*
-    expandType: function(typeName, parent) {
-        if (dic.valueTypes.has(typeName)) {
-            return dic.valueTypes.get(typeName);
-        } else {
-            if (!this.sourceUnits.has(parent.name))
-                assert(this.sourceUnits.has(parent.name));
-            if (this.sourceUnits.get(parent.name).identifiers.has(typeName)) {
-                let typeNode = this.sourceUnits.get(parent.name).identifiers.get(typeName);
-                if (typeNode.type === "EnumDeclaration") {
-                    return "int";
-                } else {
-                    return typeNode.name + "_" + parent.name;
-                }
-            } else {
-                throw(new Error("used unknown type " + typeName + " in " + parent));
-            }
-        }
-    },
-*/
+
     validInheritance: function(bases) {
         assert(bases instanceof Array);
         for ( let i = 0 ; i < bases.length ; i++ ) {
@@ -67,17 +48,17 @@ module.exports = {
         this.sourceUnits.set(node.name, {});
         let contractData = this.sourceUnits.get(node.name);
 
+        contractData.node = node;
+        contractData.goName = node.name;
         contractData.type = "contract";
         contractData.identifiers = new Map();
         contractData.constants = new Map;
         contractData.stateVariables = new Map;
         contractData.functions = new Map;
         contractData.dataTypes = new Map;
-
         contractData.externalInterface = new Map;
         contractData.publicInterface = new Map;
         contractData.internalInterface = new Map;
-
         contractData.bases = []; //var merged = new Map([...map1, ...map2, ...map3])
         for ( let i = 0 ; i < node.is.length ; i++ ) {
             contractData.bases.push(node.is[i].name);
@@ -103,14 +84,14 @@ module.exports = {
         this.sourceUnits.set(node.name, this.emptyLibrary);
     },
 
-    addIdentifier: function(node, parent) {
+    addIdentifier: function(node, parent, container) {
         let dataType;
         if (node.literal && node.literal.type === "Type")
             dataType = gf.typeOf(node.literal, this, parent);
-        return this.addIdName(node, node.name, node.visibility, node.type, parent, dataType);
+        return this.addIdName(node, node.name, node.visibility, node.type, parent, dataType, container);
     },
 
-    addIdName: function(node, name, visibility, nodeType, parent, dataType) {
+    addIdName: function(node, name, visibility, nodeType, parent, dataType, container) {
         assert(parent && this.sourceUnits.has(parent.name));
         assert(this.sourceUnits.get(parent.name).identifiers);
         if (dataType)
@@ -126,7 +107,7 @@ module.exports = {
         }
         this.sourceUnits.get(parent.name).identifiers.set(name, node);
         let goId = "";
-        if (visibility === "public" || visibility === "external") {
+        if (visibility === "public" || visibility === "external" || visibility === undefined) {
             goId = name.charAt(0).toUpperCase() + name.slice(1);
         } else {
             goId = gc.hideFuncPrefix + name;
@@ -185,6 +166,10 @@ module.exports = {
                 break; //todo eventDeclartion
             case "ModifierDeclaration":
                 break; //todo modifier declartion
+            case "DeclarativeExpression":
+                this.sourceUnits.get(parent.name).dataTypes.set(
+                    name, {node: node, parent: parent, goName: goId, container: container, dataType: dataType});
+                break;
             default:
                 assert(false, "unknown identifier type") //todo
         }
@@ -219,6 +204,9 @@ module.exports = {
     },
 
     findIdData: function(id, parent, localHistory) {
+        if (this.sourceUnits.has(id))
+            return this.sourceUnits.get(id);
+
         if (this.publicFunctions.has(id)) {
             return this.publicFunctions.get(id);
         } else if (this.publicTypes.has(id)) {
@@ -243,7 +231,9 @@ module.exports = {
                 return localHistory.constants.get(id)
             }
         }
-        assert(false, "cannot find identifier");
+        //assert(false, "cannot find identifier");
     }
+
+
 
 };

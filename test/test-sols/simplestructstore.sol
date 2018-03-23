@@ -1,5 +1,11 @@
 pragma solidity ^0.4.18;
 contract SimpleStructStore {
+    struct Point {
+        int x;
+        int y;
+    }
+    Point value;
+
     function set(int _x, int _y) public {
         value.x = _x;
         value.y = _y;
@@ -13,9 +19,5 @@ contract SimpleStructStore {
         return value.y;
     }
 
-    struct Point {
-        int x;
-        int y;
-    }
-    Point value;
+
 }

@@ -204,7 +204,7 @@ func NewNumberMap() (*_NumberMap_st) {
 }
 
 func (this _NumberMap_st) Name2 (i0 *big.Int, i1 *big.Int)(*big.Int) {
-	return this.get("name2").( map[*big.Int][]*big.Int)[i0][i1.Uint64()][i0.Uint64()]
+	return this.get("name2").( map[*big.Int][]*big.Int)[i0][i1.Uint64()]
 }
 func (this _NumberMap_st) Name (i0 *big.Int)(string) {
 	return this.get("name").( map[*big.Int]string)[i0]
